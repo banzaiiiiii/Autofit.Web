@@ -9,17 +9,24 @@ using AutoFit.Web.Services;
 using AutoFit.Web.ViewModels;
 
 using Microsoft.AspNetCore.Hosting.Internal;
+using Microsoft.Extensions.Logging;
 
 namespace AutoFit.Web.Controllers
 {
-    public class HomeController : Controller
+    public class HomeController : BaseController
     {
-	    //private readonly HomeService _homeService;
+        //private readonly HomeService _homeService;
 
-	    //public HomeController(HomeService homeService)
-	    //{
-		   // _homeService = homeService;
-	    //}
+        public HomeController(ILogger<HomeController> logger)
+	        :base(logger)
+        {
+			Exception e = new NullReferenceException();
+            HandleError(" hey im an error", e);
+			
+
+        }
+
+
 
         public IActionResult Index()
         {
