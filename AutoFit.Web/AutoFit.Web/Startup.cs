@@ -22,6 +22,7 @@ namespace AutoFit.Web
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc();
+	       
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -43,7 +44,10 @@ namespace AutoFit.Web
             {
                 routes.MapRoute(
                     name: "default",
-                    template: "{controller=Home}/{action=Index}/{id?}");
+                    template: "{controller=Home}/{action=Index}/{id?}")
+                    .MapRoute("AutoFit", "AutoFit/{controller=AutoFit}/{action=Index}/{id?}")
+		           .MapRoute("AutoService", "AutoFit/{controller=AutoService}/{action=Index}/{id?}")
+		           .MapRoute("NaturKinder", "AutoFit/{controller=NaturKinder}/{action=Index}/{id?}");
             });
         }
     }
