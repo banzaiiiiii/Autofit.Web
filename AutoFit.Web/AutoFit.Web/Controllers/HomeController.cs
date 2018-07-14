@@ -5,14 +5,30 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using AutoFit.Web.Models;
+using AutoFit.Web.Services;
+using AutoFit.Web.ViewModels;
+
+using Microsoft.AspNetCore.Hosting.Internal;
 
 namespace AutoFit.Web.Controllers
 {
     public class HomeController : Controller
     {
+	    private readonly HomeService _homeService;
+
+	    public HomeController(HomeService homeService)
+	    {
+		    _homeService = homeService;
+	    }
+
         public IActionResult Index()
         {
-            return View();
+	        var buissnessView = new HomeIndexViewModel()
+	                            {
+		                            FirmenName = "AutoFit",
+		                            Ort = "Rochlitz"
+	                            };
+	        return View(buissnessView);
         }
 
         public IActionResult About()
