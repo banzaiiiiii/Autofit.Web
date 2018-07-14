@@ -14,12 +14,17 @@ namespace AutoFit.Web
     {
         public static void Main(string[] args)
         {
-            BuildWebHost(args).Run();
+	        var host = BuildWebHost(args);
+
+	        host.Run();
         }
 
-        public static IWebHost BuildWebHost(string[] args) =>
-            WebHost.CreateDefaultBuilder(args)
-                .UseStartup<Startup>()
-                .Build();
+	    public static IWebHost BuildWebHost(string[] args) =>
+		    WebHost.CreateDefaultBuilder(args)
+		           .ConfigureAppConfiguration((context, builder) => builder.SetBasePath(context.HostingEnvironment.ContentRootPath)
+		                                                                   .AddJsonFile("appsettings.json")
+		                                                                   .Build())
+		           .UseStartup<Startup>()
+		           .Build();
     }
 }
