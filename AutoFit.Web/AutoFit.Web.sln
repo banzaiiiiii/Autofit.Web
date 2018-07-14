@@ -3,7 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.27703.2026
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AutoFit.Web", "AutoFit.Web\AutoFit.Web.csproj", "{940762D8-E407-45BF-A11A-21A4C009FFC1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AutoFit.Web", "AutoFit.Web\AutoFit.Web.csproj", "{940762D8-E407-45BF-A11A-21A4C009FFC1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AutoFit.Web.Data", "AutoFit.Web.Data\AutoFit.Web.Data.csproj", "{3E307BEB-5DDF-4A8A-BB33-C43A574A89B0}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{940762D8-E407-45BF-A11A-21A4C009FFC1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{940762D8-E407-45BF-A11A-21A4C009FFC1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{940762D8-E407-45BF-A11A-21A4C009FFC1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3E307BEB-5DDF-4A8A-BB33-C43A574A89B0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3E307BEB-5DDF-4A8A-BB33-C43A574A89B0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3E307BEB-5DDF-4A8A-BB33-C43A574A89B0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3E307BEB-5DDF-4A8A-BB33-C43A574A89B0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
