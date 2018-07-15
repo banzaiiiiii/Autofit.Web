@@ -33,8 +33,8 @@ namespace AutoFit.Web
 		                                                => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
 
-	        RegisterStores(Configuration, services);
-	        RegisterManagers(services);
+	        //RegisterStores(Configuration, services);
+	        //RegisterManagers(services);
 	        RegisterControllerServices(services);
 
         }
@@ -44,15 +44,15 @@ namespace AutoFit.Web
 		    services.AddScoped<HomeService>();
 	    }
 
-	    private void RegisterManagers(IServiceCollection services)
-	    {
-		    throw new NotImplementedException();
-	    }
+	    //private void RegisterManagers(IServiceCollection services)
+	    //{
+		   // throw new NotImplementedException();
+	    //}
 
-	    private void RegisterStores(IConfiguration configuration, IServiceCollection services)
-	    {
-		    throw new NotImplementedException();
-	    }
+	    //private void RegisterStores(IConfiguration configuration, IServiceCollection services)
+	    //{
+		   // throw new NotImplementedException();
+	    //}
 
 	    // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)

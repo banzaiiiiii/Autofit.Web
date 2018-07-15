@@ -11,6 +11,10 @@ namespace AutoFit.Web.Services
     {
 		protected ILogger Logger { get; set; }
 
+	    protected BaseService()
+	    {
+	    }
+
 	    protected BaseService(ILogger logger)
 	    {
 		    Logger = logger;

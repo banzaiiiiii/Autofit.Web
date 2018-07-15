@@ -15,27 +15,19 @@ namespace AutoFit.Web.Controllers
 {
     public class HomeController : BaseController
     {
-        //private readonly HomeService _homeService;
+        private readonly HomeService _homeService;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(HomeService homeService, ILogger<HomeController> logger)
 	        :base(logger)
         {
-			Exception e = new NullReferenceException();
-            HandleError(" hey im an error", e);
-			
-
+	        _homeService = homeService;
         }
 
-
-
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-	        var buissnessView = new HomeIndexViewModel()
-	                            {
-		                            FirmenName = "AutoFit",
-		                            Ort = "Rochlitz"
-	                            };
-	        return View(buissnessView);
+	        var testViewUebergabe = await _homeService.LoadAllBuisnesses();
+
+	        return View(testViewUebergabe);
         }
 
         public IActionResult About()
