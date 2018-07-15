@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 
 using AutoFit.Web.Data;
+using AutoFit.Web.Services;
 
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -31,9 +32,29 @@ namespace AutoFit.Web
 	        services.AddDbContext<WebsiteDbContext>(options
 		                                                => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
+
+	        RegisterStores(Configuration, services);
+	        RegisterManagers(services);
+	        RegisterControllerServices(services);
+
         }
 
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
+	    private static void RegisterControllerServices(IServiceCollection services)
+	    {
+		    services.AddScoped<HomeService>();
+	    }
+
+	    private void RegisterManagers(IServiceCollection services)
+	    {
+		    throw new NotImplementedException();
+	    }
+
+	    private void RegisterStores(IConfiguration configuration, IServiceCollection services)
+	    {
+		    throw new NotImplementedException();
+	    }
+
+	    // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
         {
             if (env.IsDevelopment())

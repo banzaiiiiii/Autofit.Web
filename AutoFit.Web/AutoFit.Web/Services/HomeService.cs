@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace AutoFit.Web.Services
 {
-	public class HomeService
+	public class HomeService : BaseService
 	{
-		public HomeIndexViewModel LoadAllBuisnesses() // sollte eine Liste von buissness laden, lädt aber nur das eine hier
+		public async Task<HomeIndexViewModel> LoadAllBuisnesses() // sollte eine Liste von buissness laden, lädt aber nur das eine hier
 		{
 			var buissnessView = new HomeIndexViewModel()
 			                    {
@@ -16,8 +16,11 @@ namespace AutoFit.Web.Services
 				                    Ort = "Rochlitz"
 			                    };
 			return buissnessView;
+		} 
+	
+		
 
-		}
+		
 
 	}
 }
