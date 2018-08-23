@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
-namespace AutoFit.Web.ViewModels
+﻿namespace AutoFit.Web.ViewModels
 {
     public class ContactViewModel
     {
