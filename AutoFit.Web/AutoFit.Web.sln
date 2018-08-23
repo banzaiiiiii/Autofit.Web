@@ -5,7 +5,9 @@ VisualStudioVersion = 15.0.27703.2026
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AutoFit.Web", "AutoFit.Web\AutoFit.Web.csproj", "{940762D8-E407-45BF-A11A-21A4C009FFC1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AutoFit.Web.Data", "AutoFit.Web.Data\AutoFit.Web.Data.csproj", "{3E307BEB-5DDF-4A8A-BB33-C43A574A89B0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AutoFit.Web.Data", "AutoFit.Web.Data\AutoFit.Web.Data.csproj", "{3E307BEB-5DDF-4A8A-BB33-C43A574A89B0}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{0F1135DA-7D25-4B80-B467-0570A92FAEC4}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
+
+using AutoFit.Web.Data;
+
 using Microsoft.AspNetCore.Mvc;
 using AutoFit.Web.Models;
 using AutoFit.Web.Services;
@@ -16,18 +19,19 @@ namespace AutoFit.Web.Controllers
     public class HomeController : BaseController
     {
         private readonly HomeService _homeService;
+	    private readonly ContactService _contactService;
 
-        public HomeController(HomeService homeService, ILogger<HomeController> logger)
+        public HomeController(HomeService homeService, ContactService contactService, ILogger<HomeController> logger)
 	        :base(logger)
         {
 	        _homeService = homeService;
+	        _contactService = contactService;
         }
 
-        public async Task<IActionResult> Index()
+        public IActionResult Index()
         {
-	        var testViewUebergabe = await _homeService.LoadAllBuisnesses();
-
-	        return View(testViewUebergabe);
+	        
+	        return View();
         }
 
         public IActionResult About()
@@ -37,12 +41,25 @@ namespace AutoFit.Web.Controllers
             return View();
         }
 
-        public IActionResult Contact()
+        public async Task<IActionResult> Contact(ContactViewModel contactViewModel)
         {
-            ViewData["Message"] = "Your contact page.";
+	        if (!ModelState.IsValid)
+	        {
+		        return View();
+	        }
 
-            return View();
-        }
+	        var contact = new Contact()
+	                      {
+		                      FirstName = contactViewModel.FirstName
+		                      , LastName = contactViewModel.LastName
+		                      , Email = contactViewModel.Email
+		                      , Message = contactViewModel.Message
+		                      , Subject = contactViewModel.Subject
+						};
+
+	        await _contactService.AddAsync(contact);
+	        return View("Contact", contact);
+        }	
 
         public IActionResult Error()
         {

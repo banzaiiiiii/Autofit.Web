@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
-using AutoFit.Web.Data;
+﻿using AutoFit.Web.Data;
 using AutoFit.Web.Services;
 
 using Microsoft.AspNetCore.Builder;
@@ -42,6 +37,7 @@ namespace AutoFit.Web
 	    private static void RegisterControllerServices(IServiceCollection services)
 	    {
 		    services.AddScoped<HomeService>();
+		    services.AddScoped<ContactService>();
 	    }
 
 	    //private void RegisterManagers(IServiceCollection services)

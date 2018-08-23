@@ -1,17 +1,32 @@
-﻿@{
+﻿using AutoFit.Web.ViewModels
+@model AutoFit.Web.ViewModels.ContactViewModel
+
+@{
     ViewData["Title"] = "Contact";
 }
-<h2>@ViewData["Title"]</h2>
-<h3>@ViewData["Message"]</h3>
 
-<address>
-    One Microsoft Way<br />
-    Redmond, WA 98052-6399<br />
-    <abbr title="Phone">P:</abbr>
-    425.555.0100
-</address>
+<h1> Kontaktformular</h1>
 
-<address>
-    <strong>Support:</strong> <a href="mailto:Support@example.com">Support@example.com</a><br />
-    <strong>Marketing:</strong> <a href="mailto:Marketing@example.com">Marketing@example.com</a>
-</address>
+<form>
+    <div class="form-group">
+        <label for="@Model.FirstName">Firstname</label>
+        <input type="text" class="form-control" id="@Model.FirstName"  placeholder="Enter Name">
+    </div>
+    <div class="form-group">
+        <label for="@Model.LastName">Lastname</label>
+        <input type="text" class="form-control" id="@Model.LastName" placeholder="Enter Name">
+    </div>
+    <div class="form-group">
+        <label for="@Model.Email">Emailtname</label>
+        <input type="email" class="form-control" id="@Model.Email" placeholder="Enter mail">
+    </div>
+    <div class="form-group">
+        <label for="@Model.Subject">Subject</label>
+        <input type="text" class="form-control" id="@Model.Subject" placeholder="Thema eingeben">
+    </div>
+    <div class="form-group">
+    <label for="@Model.Message">Message</label>
+    <input type="text" class="form-control" id="@Model.Message" placeholder="Nachricht eingeben">
+    </div>
+    <button type="submit" class="btn btn-primary">Submit</button>
+</form>
