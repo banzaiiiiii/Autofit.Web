@@ -36,7 +36,7 @@ namespace AutoFit.Web
 
 	    private static void RegisterControllerServices(IServiceCollection services)
 	    {
-		    services.AddScoped<HomeService>();
+		    //services.AddScoped<HomeService>();
 		    services.AddScoped<ContactService>();
 	    }
 

@@ -18,13 +18,12 @@ namespace AutoFit.Web.Controllers
 {
     public class HomeController : BaseController
     {
-        private readonly HomeService _homeService;
+
 	    private readonly ContactService _contactService;
 
-        public HomeController(HomeService homeService, ContactService contactService, ILogger<HomeController> logger)
+        public HomeController(ContactService contactService, ILogger<HomeController> logger)
 	        :base(logger)
         {
-	        _homeService = homeService;
 	        _contactService = contactService;
         }
 
@@ -34,13 +33,7 @@ namespace AutoFit.Web.Controllers
 	        return View();
         }
 
-        public IActionResult About()
-        {
-            ViewData["Message"] = "Your application description page.";
-
-            return View();
-        }
-
+		//[HttpPost]
         public async Task<IActionResult> Contact(ContactViewModel contactViewModel)
         {
 	        if (!ModelState.IsValid)
