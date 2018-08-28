@@ -26,7 +26,7 @@ namespace AutoFit.Web
         {
             services.AddMvc();
 	        services.AddDbContext<WebsiteDbContext>(options
-		                                                => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+		                                                => options.UseSqlServer(Configuration.GetConnectionString("localDB")));
 
 
 	        //RegisterStores(Configuration, services);
