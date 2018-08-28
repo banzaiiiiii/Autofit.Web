@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
@@ -20,11 +21,62 @@ namespace AutoFit.Web
         }
 
 	    public static IWebHost BuildWebHost(string[] args) =>
-		    WebHost.CreateDefaultBuilder(args)
-		           .ConfigureAppConfiguration((context, builder) => builder.SetBasePath(context.HostingEnvironment.ContentRootPath)
-		                                                                   .AddJsonFile("appsettings.json")
-		                                                                   .Build())
+		    //WebHost.CreateDefaultBuilder(args)
+		    //       .ConfigureAppConfiguration((context, builder) => builder.SetBasePath(context.HostingEnvironment.ContentRootPath)
+		    //                                                               .AddJsonFile("appsettings.json")
+		    //                                                               .Build())
+		CreateBuilder(args)
 		           .UseStartup<Startup>()
 		           .Build();
+
+        private static IWebHostBuilder CreateBuilder(string[] args)
+        {
+            var builder = new WebHostBuilder()
+                .UseKestrel()
+                .UseContentRoot(Directory.GetCurrentDirectory())
+                .UseUrls("http://localhost:5001")
+                .ConfigureAppConfiguration((hostingContext, config) =>
+                {
+                    var env = hostingContext.HostingEnvironment;
+
+                    config.AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
+                          .AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true, reloadOnChange: true);
+
+                    if (env.IsDevelopment())
+                    {
+                        var appAssembly = Assembly.Load(new AssemblyName(env.ApplicationName));
+                        if (appAssembly != null)
+                        {
+                            config.AddUserSecrets(appAssembly, optional: true);
+                        }
+                    }
+
+                    config.AddEnvironmentVariables();
+
+                    if (args != null)
+                    {
+                        config.AddCommandLine(args);
+                    }
+                })
+                .ConfigureLogging((hostingContext, logging) =>
+                {
+                    logging.AddConfiguration(hostingContext.Configuration.GetSection("Logging"));
+                    logging.AddConsole();
+                    logging.AddDebug();
+                    logging.AddProvider(new Log4NetProvider(GetLog4NetConfigFile()));
+                })
+                .UseIISIntegration()
+                .UseDefaultServiceProvider((context, options) =>
+                {
+                    options.ValidateScopes = context.HostingEnvironment.IsDevelopment();
+                });
+
+            return builder;
+        }
+
+        private static string GetLog4NetConfigFile()
+        {
+            return Path.Combine(Directory.GetCurrentDirectory(), "log4net.config");
+        }
     }
 }

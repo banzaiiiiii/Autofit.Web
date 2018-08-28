@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
+﻿using System.Diagnostics;
 using System.Threading.Tasks;
 
 using AutoFit.Web.Data;
@@ -11,7 +8,6 @@ using AutoFit.Web.Models;
 using AutoFit.Web.Services;
 using AutoFit.Web.ViewModels;
 
-using Microsoft.AspNetCore.Hosting.Internal;
 using Microsoft.Extensions.Logging;
 
 namespace AutoFit.Web.Controllers
@@ -20,11 +16,13 @@ namespace AutoFit.Web.Controllers
     {
 
 	    private readonly ContactService _contactService;
+	    private readonly MailService _mailService;
 
-        public HomeController(ContactService contactService, ILogger<HomeController> logger)
+        public HomeController(ContactService contactService, MailService mailService, ILogger<HomeController> logger)
 	        :base(logger)
         {
 	        _contactService = contactService;
+	        _mailService = mailService;
         }
 
         public IActionResult Index()
@@ -50,13 +48,22 @@ namespace AutoFit.Web.Controllers
 		                      , Subject = contactViewModel.Subject
 						};
 
-	        await _contactService.AddAsync(contact);
-	        return View("Contact", contact);
+	        string emailBody = "Neue Email von: " + contact.FirstName + contact.LastName + " mit der Adresse: " + contact.Email
+	                         + " die hinterlassene Nachricht lautet: " + contact.Message;
+			
+            await _contactService.AddAsync(contact);
+	        await _mailService.SendEmailAsync(contact.Subject, emailBody);
+
+            return View("Contact", contact);
         }	
 
         public IActionResult Error()
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
+
+	    
+
+		
     }
 }

@@ -1,4 +1,5 @@
 ﻿using AutoFit.Web.Data;
+using AutoFit.Web.Data.Abstractions;
 using AutoFit.Web.Services;
 
 using Microsoft.AspNetCore.Builder;
@@ -31,13 +32,14 @@ namespace AutoFit.Web
 	        //RegisterStores(Configuration, services);
 	        //RegisterManagers(services);
 	        RegisterControllerServices(services);
-
+			
         }
 
 	    private static void RegisterControllerServices(IServiceCollection services)
 	    {
 		    //services.AddScoped<HomeService>();
 		    services.AddScoped<ContactService>();
+			services.AddScoped<MailService>();
 	    }
 
 	    //private void RegisterManagers(IServiceCollection services)
@@ -57,7 +59,6 @@ namespace AutoFit.Web
             {
                 app.UseBrowserLink();
                 app.UseDeveloperExceptionPage();
-
 	            loggerFactory.AddLog4Net();
 
             }
