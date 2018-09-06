@@ -10,7 +10,7 @@ namespace AutoFit.Web.Data
 		
 		public WebsiteDbContext(DbContextOptions<WebsiteDbContext> options) : base(options)
 		{
-			Database.EnsureCreated();
+			Database.Migrate();
 		}
 
 		

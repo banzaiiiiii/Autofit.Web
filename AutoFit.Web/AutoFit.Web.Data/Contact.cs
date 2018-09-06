@@ -18,7 +18,7 @@ namespace AutoFit.Web.Data
 		public string Subject { get; set; }
 		[MaxLength(200)]
 		public string Message { get; set; }
-		public DateTime? TimeSpamp { get; set; }
+		public DateTime? TimeStamp { get; set; }
 
 	}
 }

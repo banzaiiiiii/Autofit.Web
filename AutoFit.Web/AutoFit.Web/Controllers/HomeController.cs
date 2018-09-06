@@ -9,6 +9,8 @@ using AutoFit.Web.Models;
 using AutoFit.Web.Services;
 using AutoFit.Web.ViewModels;
 
+using AutoMapper;
+
 using Microsoft.Extensions.Logging;
 
 namespace AutoFit.Web.Controllers
@@ -28,7 +30,7 @@ namespace AutoFit.Web.Controllers
 
         public IActionResult Index()
         {
-	        
+	        //sd
 	        return View();
         }
 
@@ -40,24 +42,18 @@ namespace AutoFit.Web.Controllers
 		        return View();
 	        }
 
-	        var contact = new Contact()
-	                      {
-		                      FirstName = contactViewModel.FirstName
-		                      , LastName = contactViewModel.LastName
-		                      , Email = contactViewModel.Email
-		                      , Message = contactViewModel.Message
-		                      , Subject = contactViewModel.Subject,
-							  TimeSpamp = DateTime.Today
-						};
+	        var newContact = Mapper.Map<Contact>(contactViewModel);
+	        newContact.TimeStamp = DateTime.Now;
+						
 
-	        string emailBody = "Neue Email von: " + contact.FirstName + contact.LastName + " mit der Adresse: " + contact.Email
-	                         + " die hinterlassene Nachricht lautet: " + contact.Message;
+	        string emailBody = "Neue Email von: " + newContact.FirstName + newContact.LastName + " mit der Adresse: " + newContact.Email
+	                         + " die hinterlassene Nachricht lautet: " + newContact.Message;
 			
-            _contactService.AddAsync(contact);
+            _contactService.AddAsync(newContact);
 	        await _contactService.SaveAsync();
-	        await _mailService.SendEmailAsync(contact.Subject, emailBody);
+	        await _mailService.SendEmailAsync(newContact.Subject, emailBody);
 
-            return View("Contact", contact);
+            return View("Contact", newContact);
         }	
 
         public IActionResult Error()

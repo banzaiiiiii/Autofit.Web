@@ -40,7 +40,7 @@ namespace AutoFit.Web.Data.Migrations
                     b.Property<string>("Subject")
                         .HasMaxLength(50);
 
-                    b.Property<DateTime?>("TimeSpamp");
+                    b.Property<DateTime?>("TimeStamp");
 
                     b.HasKey("Id");
 

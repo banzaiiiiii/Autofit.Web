@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AutoFit.Web.Data.Migrations
 {
     [DbContext(typeof(WebsiteDbContext))]
-    [Migration("20180906124509_sdf")]
-    partial class sdf
+    [Migration("20180906132353_blup")]
+    partial class blup
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -42,7 +42,7 @@ namespace AutoFit.Web.Data.Migrations
                     b.Property<string>("Subject")
                         .HasMaxLength(50);
 
-                    b.Property<DateTime?>("TimeSpamp");
+                    b.Property<DateTime?>("TimeStamp");
 
                     b.HasKey("Id");
 

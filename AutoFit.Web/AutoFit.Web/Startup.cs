@@ -1,6 +1,7 @@
 ﻿using AutoFit.Web.Data;
 using AutoFit.Web.Data.Abstractions;
 using AutoFit.Web.Services;
+using AutoFit.Web.ViewModels;
 
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -67,7 +68,11 @@ namespace AutoFit.Web
 
                 app.UseExceptionHandler("/Home/Error");
             }
+			AutoMapper.Mapper.Initialize(cfg =>
+			{
+				cfg.CreateMap<ContactViewModel, Contact>();
 
+			});
             app.UseStaticFiles();
 
             app.UseMvc(routes =>
