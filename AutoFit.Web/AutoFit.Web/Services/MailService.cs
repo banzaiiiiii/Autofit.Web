@@ -1,13 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
+﻿using System.Net;
 using System.Net.Mail;
 using System.Text;
 using System.Threading.Tasks;
 
 using AutoFit.Web.Abstractions;
-using AutoFit.Web.Data.Abstractions;
 
 using Microsoft.Extensions.Configuration;
 
@@ -27,9 +23,9 @@ namespace AutoFit.Web.Services
         public async Task SendEmailAsync(string subject, string emailBody)
         {
 
-	        string senderEmail = _configuration.GetSection("Email").GetSection("SenderEmail").Value;
-	        string senderPassword = _configuration.GetSection("Email").GetSection("SenderPasswort").Value;
-	        string toEmail = _configuration.GetSection("Email").GetSection("ReceivingEmail").Value;
+	        var senderEmail = _configuration.GetSection("Email").GetSection("SenderEmail").Value;
+	        var senderPassword = _configuration.GetSection("Email").GetSection("SenderPasswort").Value;
+	        var toEmail = _configuration.GetSection("Email").GetSection("ReceivingEmail").Value;
 
             using (var client = new SmtpClient("smtp.gmail.com", 587))
             {

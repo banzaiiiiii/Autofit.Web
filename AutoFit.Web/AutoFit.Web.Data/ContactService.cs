@@ -17,7 +17,7 @@ namespace AutoFit.Web.Data
 		    _dbContext = dbContext;
 	    }
 
-		public void AddAsync(Contact contact)
+		public void Add(Contact contact)
 		{
 			if (contact == null)
 			{

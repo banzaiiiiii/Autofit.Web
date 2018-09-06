@@ -30,31 +30,39 @@ namespace AutoFit.Web.Controllers
 
         public IActionResult Index()
         {
-	        //sd
 	        return View();
         }
 
-		//[HttpPost]
+		[HttpPost]
+		[ValidateAntiForgeryToken]
         public async Task<IActionResult> Contact(ContactViewModel contactViewModel)
         {
-	        if (!ModelState.IsValid)
+	        if (ModelState.IsValid)
 	        {
-		        return View();
-	        }
-
-	        var newContact = Mapper.Map<Contact>(contactViewModel);
+		         var newContact = Mapper.Map<Contact>(contactViewModel);
 	        newContact.TimeStamp = DateTime.Now;
 						
 
 	        string emailBody = "Neue Email von: " + newContact.FirstName + newContact.LastName + " mit der Adresse: " + newContact.Email
 	                         + " die hinterlassene Nachricht lautet: " + newContact.Message;
-			
-            _contactService.AddAsync(newContact);
+
+			 _contactService.Add(newContact);
 	        await _contactService.SaveAsync();
+
 	        await _mailService.SendEmailAsync(newContact.Subject, emailBody);
 
-            return View("Contact", newContact);
-        }	
+		    return View();
+			}
+
+	        return View();
+
+        }
+
+		[HttpGet]
+	    public IActionResult Contact()
+	    {
+		    return View();
+	    }
 
         public IActionResult Error()
         {

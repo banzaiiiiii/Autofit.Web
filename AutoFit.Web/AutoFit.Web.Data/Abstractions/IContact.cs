@@ -7,7 +7,7 @@ namespace AutoFit.Web.Data.Abstractions
 {
     public interface IContact
     {
-	    void AddAsync(Contact contact);
+	    void Add(Contact contact);
 	    Task SaveAsync();
     }
 }
