@@ -1,5 +1,4 @@
 ﻿using AutoFit.Web.Data;
-using AutoFit.Web.Data.Abstractions;
 using AutoFit.Web.Services;
 using AutoFit.Web.ViewModels;
 
@@ -74,6 +73,7 @@ namespace AutoFit.Web
 
 			});
             app.UseStaticFiles();
+	        app.UseNodeModules(env.ContentRootPath);
 
             app.UseMvc(routes =>
             {
