@@ -23,15 +23,5 @@ namespace AutoFit.Web.Services
 		    Logger = logger;
 	    }
 
-	    protected void ThrowIfNull(params object[] parameters)
-	    {
-		    for (var i = 0; i < parameters.Length; i++)
-		    {
-			    if (parameters[i] == null)
-			    {
-					throw new NullReferenceException();
-			    }
-		    }
-	    }
     }
 }

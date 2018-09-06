@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace AutoFit.Web.Data.Abstractions
+namespace AutoFit.Web.Abstractions
 {
    public interface IMail
    {

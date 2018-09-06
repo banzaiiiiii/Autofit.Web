@@ -3,12 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-using AutoFit.Web.Data;
 using AutoFit.Web.Data.Abstractions;
 
-namespace AutoFit.Web.Services
+
+namespace AutoFit.Web.Data
 {
-    public class ContactService : BaseService, IContact
+    public class ContactService : IContact
     {
 	    private readonly WebsiteDbContext _dbContext;
 
@@ -17,10 +17,18 @@ namespace AutoFit.Web.Services
 		    _dbContext = dbContext;
 	    }
 
-		public Task AddAsync(Contact contact)
+		public void AddAsync(Contact contact)
 		{
+			if (contact == null)
+			{
+				throw new ArgumentNullException(nameof(contact));
+			}
 			_dbContext.Contacts.Add(contact);
-			return _dbContext.SaveChangesAsync();
 		}
-	}
+
+	    public async Task SaveAsync()
+	    {
+		    await _dbContext.SaveChangesAsync();
+	    }
+    }
 }

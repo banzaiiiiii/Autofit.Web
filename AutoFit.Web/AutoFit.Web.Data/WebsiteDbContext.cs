@@ -7,22 +7,13 @@ namespace AutoFit.Web.Data
 {
 	public class WebsiteDbContext : DbContext
 	{
+		
 		public WebsiteDbContext(DbContextOptions<WebsiteDbContext> options) : base(options)
 		{
-
+			Database.EnsureCreated();
 		}
 
-		//protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-		//{
-		//	IConfigurationRoot configuration = new ConfigurationBuilder()
-		//	                                  .SetBasePath(AppDomain.CurrentDomain.BaseDirectory)
-		//	                                  .AddJsonFile("appsettings.json")
-		//	                                  .Build();
-		//	optionsBuilder.UseSqlServer(configuration.GetConnectionString("DefaultConnection"));
-		//}
-
-
-
+		
 		public DbSet<Contact> Contacts { get; set; }
 
 	}

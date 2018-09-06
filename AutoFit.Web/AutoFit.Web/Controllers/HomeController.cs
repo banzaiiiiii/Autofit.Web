@@ -1,4 +1,5 @@
-﻿using System.Diagnostics;
+﻿using System;
+using System.Diagnostics;
 using System.Threading.Tasks;
 
 using AutoFit.Web.Data;
@@ -21,8 +22,8 @@ namespace AutoFit.Web.Controllers
         public HomeController(ContactService contactService, MailService mailService, ILogger<HomeController> logger)
 	        :base(logger)
         {
-	        _contactService = contactService;
-	        _mailService = mailService;
+	        _contactService = contactService ?? throw new ArgumentNullException(nameof(contactService));
+	        _mailService = mailService ?? throw new ArgumentNullException(nameof(mailService));
         }
 
         public IActionResult Index()
@@ -45,13 +46,15 @@ namespace AutoFit.Web.Controllers
 		                      , LastName = contactViewModel.LastName
 		                      , Email = contactViewModel.Email
 		                      , Message = contactViewModel.Message
-		                      , Subject = contactViewModel.Subject
+		                      , Subject = contactViewModel.Subject,
+							  TimeSpamp = DateTime.Today
 						};
 
 	        string emailBody = "Neue Email von: " + contact.FirstName + contact.LastName + " mit der Adresse: " + contact.Email
 	                         + " die hinterlassene Nachricht lautet: " + contact.Message;
 			
-            await _contactService.AddAsync(contact);
+            _contactService.AddAsync(contact);
+	        await _contactService.SaveAsync();
 	        await _mailService.SendEmailAsync(contact.Subject, emailBody);
 
             return View("Contact", contact);

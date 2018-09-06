@@ -6,6 +6,7 @@ using System.Net.Mail;
 using System.Text;
 using System.Threading.Tasks;
 
+using AutoFit.Web.Abstractions;
 using AutoFit.Web.Data.Abstractions;
 
 using Microsoft.Extensions.Configuration;
@@ -15,14 +16,15 @@ namespace AutoFit.Web.Services
     public class MailService : IMail
     {
 
-        //private SmtpClient _client;
-	    private IConfiguration _configuration;
+       
+	    private readonly IConfiguration _configuration;
+
         public MailService(IConfiguration configuration)
         {
 	        _configuration = configuration;
         }
 
-        public Task SendEmailAsync(string subject, string emailBody)
+        public async Task SendEmailAsync(string subject, string emailBody)
         {
 
 	        string senderEmail = _configuration.GetSection("Email").GetSection("SenderEmail").Value;
@@ -41,11 +43,11 @@ namespace AutoFit.Web.Services
                 mailMessage.IsBodyHtml = true;
                 mailMessage.BodyEncoding = Encoding.UTF8;
 
-                client.Send(mailMessage);
+               client.Send(mailMessage);
             }
               
 
-		    return Task.FromResult(0);
+		    await Task.FromResult(0);
 	    }
     }
 }
