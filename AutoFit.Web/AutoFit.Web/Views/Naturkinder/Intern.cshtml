@@ -1,0 +1,19 @@
+﻿@{
+    ViewBag.Title = "NaturKinder Weißbach";
+    Layout = "~/Views/Shared/_LayoutNaturKinder.cshtml";
+     
+}
+<div>
+
+    <h1>Bilder DownloadSeite</h1>
+    <p>Nutzer loggen sich ein und können bilder downloaden</p>
+</div>
+
+<div>
+    <form asp-controller="Naturkinder" asp-action="UploadFile" method="post"
+          enctype="multipart/form-data">
+    
+        <input type="file" name="file" />
+        <button type="submit">Upload File</button>
+    </form>
+</div>

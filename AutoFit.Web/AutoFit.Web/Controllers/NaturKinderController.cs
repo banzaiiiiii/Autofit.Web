@@ -1,7 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 
@@ -19,5 +22,12 @@ namespace AutoFit.Web.Controllers
         {
             return View();
         }
-    }
+
+	    public IActionResult Intern()
+	    {
+
+		    return View();
+	    }
+
+	}
 }

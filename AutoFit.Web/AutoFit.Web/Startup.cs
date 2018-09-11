@@ -1,4 +1,6 @@
-﻿using AutoFit.Web.Data;
+﻿using System.IO;
+
+using AutoFit.Web.Data;
 using AutoFit.Web.Services;
 using AutoFit.Web.ViewModels;
 
@@ -7,6 +9,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.FileProviders;
 using Microsoft.Extensions.Logging;
 
 
@@ -27,6 +30,7 @@ namespace AutoFit.Web
             services.AddMvc();
 	        services.AddDbContext<WebsiteDbContext>(options
 		                                                => options.UseSqlServer(Configuration.GetConnectionString("localDB")));
+	        services.AddSingleton<IFileProvider>(new PhysicalFileProvider(Path.Combine(Directory.GetCurrentDirectory(), "wwwroot")));
 
 
 	        //RegisterStores(Configuration, services);
