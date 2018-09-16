@@ -61,7 +61,7 @@ namespace AutoFit.Web
         {
             if (env.IsDevelopment())
             {
-                app.UseBrowserLink();
+	            app.UseBrowserLink();
                 app.UseDeveloperExceptionPage();
 	            loggerFactory.AddLog4Net();
 
