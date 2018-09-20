@@ -21,9 +21,9 @@ namespace AutoFit.Web.Controllers
 	    private readonly ContactService _contactService;
 	    private readonly MailService _mailService;
 
-        public HomeController(ContactService contactService, MailService mailService, ILogger<HomeController> logger)
-	        :base(logger)
-        {
+        public HomeController(ContactService contactService, MailService mailService, ILoggerFactory loggerFactory)
+	        : base(loggerFactory)
+		{
 	        _contactService = contactService ?? throw new ArgumentNullException(nameof(contactService));
 	        _mailService = mailService ?? throw new ArgumentNullException(nameof(mailService));
         }
@@ -40,18 +40,26 @@ namespace AutoFit.Web.Controllers
 	        if (ModelState.IsValid)
 	        {
 		         var newContact = Mapper.Map<Contact>(contactViewModel);
-	        newContact.TimeStamp = DateTime.Now;
+	             newContact.TimeStamp = DateTime.Now;
 						
 
 	        string emailBody = "Neue Email von: " + newContact.FirstName + newContact.LastName + " mit der Adresse: " + newContact.Email
 	                         + " die hinterlassene Nachricht lautet: " + newContact.Message;
 
-			 _contactService.Add(newContact);
-	        await _contactService.SaveAsync();
+			 
+		        try
+		        {
+			        _contactService.Add(newContact);
+			        await _contactService.SaveAsync();
+			        await _mailService.SendEmailAsync(newContact.Subject, emailBody);
 
-	        await _mailService.SendEmailAsync(newContact.Subject, emailBody);
-
-		    return View();
+		    return View("SuccessView");
+		        }
+		        catch (Exception ex)
+		        {
+					_logger.LogError(ex, "Failed sending or saving contact");
+		        }
+	        
 			}
 
 	        return View();
@@ -69,8 +77,17 @@ namespace AutoFit.Web.Controllers
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
 
-	    
+	    public IActionResult Jobs()
+	    {
+		    return View();
+	    }
 
-		
-    }
+	    public IActionResult Cars()
+	    {
+		    return View();
+	    }
+
+
+
+	}
 }

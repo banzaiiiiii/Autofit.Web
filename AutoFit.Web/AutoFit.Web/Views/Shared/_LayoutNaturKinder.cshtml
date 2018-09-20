@@ -10,13 +10,13 @@
 
     <link href="~/node_modules/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
     @*https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css*@
-    <link href="~/css/site.css" rel="stylesheet" />
+    <link href="~/node_modules/site.css" rel="stylesheet" />
     <link href="~/node_modules/font-awesome/css/font-awesome.min.css" rel="stylesheet" />
     <link href="~/node_modules/font-awesome/css/font-awesome.css" rel="stylesheet" />
 
 </head>
 <body>
-<div class="container-fluid" >
+<div class="container-fluid">
     <div class="row">
         <div class="col-12">
             <nav class="navbar fixed-top navbar-expand-lg navbar-light" id="naturkinderNavbar">
@@ -29,11 +29,11 @@
                 </button>
                 <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
                     <div class="navbar-nav">
-                        <a class="nav-item nav-link active" href="#">Home <span class="sr-only">(current)</span></a>
-                        <a class="nav-item nav-link" asp-controller="Home" asp-action="Contact">Kontakt</a>
-                        <a class="nav-item nav-link" href="#">Aktuelles</a>
-                        <a class="nav-item nav-link" href="#">Verein</a>
-                        <a class="nav-item nav-link" href="#">Stellenangebote</a>
+                        <a class="nav-item nav-link active" asp-controller="Naturkinder" asp-action="Index">Home <span class="sr-only">(current)</span></a>
+                        <a class="nav-item nav-link" asp-controller="Naturkinder" asp-action="Contact">Kontakt</a>
+                        <a class="nav-item nav-link" asp-controller="Naturkinder" asp-action="BlogPost">Aktuelles</a>
+                        <a class="nav-item nav-link" asp-controller="Naturkinder" asp-action="Verein">Verein</a>
+                        <a class="nav-item nav-link" asp-controller="Naturkinder" asp-action="Jobs">Stellenangebote</a>
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
                             Aktionen
                         </a>
@@ -47,14 +47,15 @@
                     </div>
                 </div>
             </nav>
-        </div> 
+        </div>
     </div>
 </div>
 
 
     @RenderBody()
-<div class="container-fluid fixed-bottom" id="naturkinderFooter">
-    <div class="container">
+
+<footer class="footer">
+    <div class="container-fluid " id="naturkinderFooter">
         <div class="row">
             <div class="col-9">
                 <span class="bottomaddress">Naturkinder Weißbach | 09306 Weißbach | Dorfstraße 25 | Tel: <a href="tel:+493737149224">+49 (0)3737 - 149224</a></span>
@@ -62,20 +63,18 @@
             <div class="col-3 zeiten">
                 <h4>Öffnungszeiten</h4>
                 <p>Mo. - Fr. | 9:00 - 18:00 Uhr</p>
-                <a asp-controller="Home" asp-action="Contact" class="badge badge-light">Kontakt</a>
-                <a href="#" class="badge badge-light">Impressum</a>
-                <a href="#" class="badge badge-light">Datenschutz</a>
+                <a asp-controller="Naturkinder" asp-action="Contact" class="badge badge-light">Kontakt</a>
+                <a asp-controller="Naturkinder" asp-action="Impressum" class="badge badge-light">Impressum</a>
+                <a asp-controller="Naturkinder" asp-action="Datenschutz" class="badge badge-light">Datenschutz</a>
             </div>
         </div>
-    </div>
-    
-</div>
+ </div>
+</footer>
 
-
-<script src="~/node_modules/jquery/dist/jquery.min.js"></script>
-<script src="~/node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
-<script src="~/node_modules/jquery-validation/dist/jquery.validate.min.js"></script>
-<script src="~/node_modules/jquery-validation-unobtrusive/dist/jquery.validate.unobtrusive.min.js"></script>
+    <script src="~/node_modules/jquery/dist/jquery.min.js"></script>
+    <script src="~/node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="~/node_modules/jquery-validation/dist/jquery.validate.min.js"></script>
+    <script src="~/node_modules/jquery-validation-unobtrusive/dist/jquery.validate.unobtrusive.min.js"></script>
 
 
 </body>

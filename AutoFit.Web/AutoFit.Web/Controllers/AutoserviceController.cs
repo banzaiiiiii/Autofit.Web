@@ -9,9 +9,9 @@ namespace AutoFit.Web.Controllers
 {
     public class AutoServiceController : BaseController
     {
-	    public AutoServiceController(ILogger<AutoServiceController> logger)
-		    : base(logger)
-	    {
+	    public AutoServiceController(ILoggerFactory loggerFactory)
+		    : base(loggerFactory)
+		{
 
 	    }
 

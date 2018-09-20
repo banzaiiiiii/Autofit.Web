@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using AutoFit.Web.Data;
 using AutoFit.Web.Data.Abstractions;
 
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 
 namespace AutoFit.Web.Services
