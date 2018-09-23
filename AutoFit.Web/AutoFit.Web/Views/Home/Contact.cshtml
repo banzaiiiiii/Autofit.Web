@@ -3,38 +3,81 @@
 @{
     ViewData["Title"] = "Contact";
 }
-
-<h1> Kontaktformular</h1>
-
-<div>
-    <form method="post">
-        <div class="form-group">
-            <label asp-for="FirstName">Vorname</label>
-            <input asp-for="FirstName" class="form-control" placeholder="Vorname">
-            <span asp-validation-for="FirstName"></span>
-        </div>
-        <div class="form-group">
-            <label asp-for="LastName">Nachname</label>
-            <input asp-for="LastName" class="form-control" placeholder="Nachname">
-            <span asp-validation-for="LastName"></span>
-        </div>
-        <div class="form-group">
-            <label asp-for="Email">Email Adresse</label>
-            <input asp-for="Email" class="form-control" placeholder="Email">
-            <span asp-validation-for="Email"></span>
-        </div>
-        <div class="form-group">
-            <label asp-for="Subject">Thema</label>
-            <input asp-for="Subject" class="form-control" placeholder="Thema eingeben">
-            <span asp-validation-for="Subject"></span>
-        </div>
-        <div class="form-group">
-            <label asp-for="Message">Nachricht</label>
-            <input asp-for="Message" class="form-control" placeholder="Ihre Nachricht eingeben">
-            <span asp-validation-for="Message"></span>
-        </div>
-        <button type="submit" class="btn btn-primary">Senden</button>
-    </form>
+<body>
+   
     
+<div class="container">
+    <div class="row">
+        <div class="col">
+            <h1> Kontakt</h1>
+            <br />
+        </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <h3>Wichtig!</h3>
+                <p> hier Bitte Nachricht hinterlassen und noch irgendeinen text</p>
+                <hr>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <h3>AutoFit Seidel Rochlitz</h3>
+                <p> 09306 Rochlitz</p>
+                <p> Leipziger Straße 51</p>
+                <p>Telefon</p>
+                <p>Email</p>
+                <hr>
+            </div>
+            </div>
+        <div class="row">
+            <div class="col">
+                <h3>AutoService Burgstädt</h3>
+                <p>Adresse hier</p>
+                <p>telefon</p>
+                <p>Email</p>
+                <hr>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <h3>Kontaktformular</h3>
+            </div>
+            </div>
 
-</div>
+        </div>
+
+<div class="container">
+        <form method="post">
+            <div class="form-group">
+                <label asp-for="FirstName">Vorname</label>
+                <input asp-for="FirstName" class="form-control" placeholder="Vorname">
+                <span asp-validation-for="FirstName"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="LastName">Nachname</label>
+                <input asp-for="LastName" class="form-control" placeholder="Nachname">
+                <span asp-validation-for="LastName"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Email">Email Adresse</label>
+                <input asp-for="Email" class="form-control" placeholder="Email">
+                <span asp-validation-for="Email"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Subject">Thema</label>
+                <input asp-for="Subject" class="form-control" placeholder="Thema eingeben">
+                <span asp-validation-for="Subject"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Message">Nachricht</label>
+                <input asp-for="Message" class="form-control" placeholder="Ihre Nachricht eingeben">
+                <span asp-validation-for="Message"></span>
+            </div>
+            <button type="submit" class="btn btn-primary">Senden</button>
+        </form>
+
+
+    </div>
+
+</body>
