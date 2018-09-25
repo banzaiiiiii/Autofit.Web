@@ -1,6 +1,8 @@
 ﻿using System.IO;
 
+using AutoFit.Web.Abstractions;
 using AutoFit.Web.Data;
+using AutoFit.Web.Data.Abstractions;
 using AutoFit.Web.Services;
 using AutoFit.Web.ViewModels;
 
@@ -35,6 +37,9 @@ namespace AutoFit.Web
 		                                                => options.UseSqlServer(Configuration.GetConnectionString("localDB")));
 	        services.AddSingleton<IFileProvider>(new PhysicalFileProvider(Path.Combine(Directory.GetCurrentDirectory(), "wwwroot")));
 
+			services.AddScoped<IContact, ContactService>();
+	        services.AddScoped<IMail, MailService>();
+	        services.AddScoped<IFileService, AzureFileService>();
 
 	        services.AddAuthentication(options =>
 	                 {
@@ -44,26 +49,9 @@ namespace AutoFit.Web
 	                .AddOpenIdConnect("B2C_1_sign_in", options => SetOptionsForOpenIdConnectPolicy("B2C_1_sign_in", options))
 	                .AddCookie();
 
-	        RegisterControllerServices(services);
 			
-        }
 
-	    private static void RegisterControllerServices(IServiceCollection services)
-	    {
-		    //services.AddScoped<HomeService>();
-		    services.AddScoped<ContactService>();
-			services.AddScoped<MailService>();
-	    }
-
-	    //private void RegisterManagers(IServiceCollection services)
-	    //{
-		   // throw new NotImplementedException();
-	    //}
-
-	    //private void RegisterStores(IConfiguration configuration, IServiceCollection services)
-	    //{
-		   // throw new NotImplementedException();
-	    //}
+		}
 
 	    // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)

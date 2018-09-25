@@ -4,7 +4,9 @@ using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 
+using AutoFit.Web.Abstractions;
 using AutoFit.Web.Data;
+using AutoFit.Web.Data.Abstractions;
 using AutoFit.Web.Services;
 using AutoFit.Web.ViewModels;
 
@@ -19,10 +21,10 @@ namespace AutoFit.Web.Controllers
     public class NaturkinderController : BaseController
     {
 
-	    private readonly ContactService _contactService;
-	    private readonly MailService _mailService;
+	    private readonly IContact _contactService;
+	    private readonly IMail _mailService;
 
-		public NaturkinderController(ContactService contactService, MailService mailService, ILoggerFactory loggerFactory)
+		public NaturkinderController(IContact contactService, IMail mailService, ILoggerFactory loggerFactory)
 			: base(loggerFactory)
 		{
 			_contactService = contactService;

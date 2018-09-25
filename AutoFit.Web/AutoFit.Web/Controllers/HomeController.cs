@@ -2,7 +2,9 @@
 using System.Diagnostics;
 using System.Threading.Tasks;
 
+using AutoFit.Web.Abstractions;
 using AutoFit.Web.Data;
+using AutoFit.Web.Data.Abstractions;
 
 using Microsoft.AspNetCore.Mvc;
 using AutoFit.Web.Models;
@@ -18,10 +20,10 @@ namespace AutoFit.Web.Controllers
     public class HomeController : BaseController
     {
 
-	    private readonly ContactService _contactService;
-	    private readonly MailService _mailService;
+	    private readonly IContact _contactService;
+	    private readonly IMail _mailService;
 
-        public HomeController(ContactService contactService, MailService mailService, ILoggerFactory loggerFactory)
+        public HomeController(IContact contactService, IMail mailService, ILoggerFactory loggerFactory)
 	        : base(loggerFactory)
 		{
 	        _contactService = contactService ?? throw new ArgumentNullException(nameof(contactService));

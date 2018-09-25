@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 
+using AutoFit.Web.Abstractions;
 using AutoFit.Web.ViewModels.Files;
 
 using Microsoft.AspNetCore.Http;
@@ -14,11 +15,11 @@ namespace AutoFit.Web.Controllers
 {
     public class FilesController : Controller
     {
-		private readonly IFileProvider fileProvider;
+	    private readonly IFileService _fileService;
 
-		public FilesController(IFileProvider fileProvider)
+		public FilesController(IFileService fileService)
 		{
-			this.fileProvider = fileProvider;
+			_fileService = fileService;
 		}
 
 		public IActionResult Index()
@@ -32,13 +33,12 @@ namespace AutoFit.Web.Controllers
 			if (file == null || file.Length == 0)
 				return Content("file not selected");
 
-			var path = Path.Combine(
-						Directory.GetCurrentDirectory(), "wwwroot",
-						file.GetFilename());
+			var fileName = file.FileName;
 
-			using (var stream = new FileStream(path, FileMode.Create))
+			using (var stream = new FileStream(fileName, FileMode.Create))
 			{
 				await file.CopyToAsync(stream);
+				await _fileService.UploadFileAsync(stream, fileName, "bild");
 			}
 
 			return RedirectToAction("Files");
@@ -52,45 +52,41 @@ namespace AutoFit.Web.Controllers
 
 			foreach (var file in files)
 			{
-				var path = Path.Combine(
-						Directory.GetCurrentDirectory(), "wwwroot",
-						file.GetFilename());
+				var fileName = file.FileName;
 
-				using (var stream = new FileStream(path, FileMode.Create))
+				using (var stream = new FileStream(fileName, FileMode.Create))
 				{
 					await file.CopyToAsync(stream);
+					await _fileService.UploadFileAsync(stream, fileName, "bild");
 				}
 			}
 
 			return RedirectToAction("Files");
 		}
 
-		[HttpPost]
-		public async Task<IActionResult> UploadFileViaModel(FileInputModel model)
+		public async Task<IActionResult> Files()
 		{
-			if (model == null ||
-				model.FileToUpload == null || model.FileToUpload.Length == 0)
-				return Content("file not selected");
-
-			var path = Path.Combine(
-						Directory.GetCurrentDirectory(), "wwwroot",
-						model.FileToUpload.GetFilename());
-
-			using (var stream = new FileStream(path, FileMode.Create))
-			{
-				await model.FileToUpload.CopyToAsync(stream);
-			}
-
-			return RedirectToAction("Files");
-		}
-
-		public IActionResult Files()
-		{
+			var containerList = await _fileService.ListContainersAsync();
+			var blobList = await _fileService.GetBlobsFromContainer("bild");
+			
 			var model = new FilesViewModel();
-			foreach (var item in this.fileProvider.GetDirectoryContents(""))
+			foreach (var item in blobList)
 			{
+				
+				var blobName = Path.GetFileName(item.Uri.ToString());
+				var blobSize = _fileService.ResolveCloudBlockBlob("bilder", blobName).Properties.Length;
+				
 				model.Files.Add(
-					new FileDetails { Name = item.Name, Path = item.PhysicalPath });
+					new FileDetails
+					{
+						Name = blobName,
+						Size = blobSize
+					});
+			}
+			foreach (var item in containerList)
+			{
+				model.Container.Add(
+				                new AzureContainerDetails() { Name = item.Name });
 			}
 			return View(model);
 		}

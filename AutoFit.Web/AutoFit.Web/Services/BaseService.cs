@@ -1,28 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
-using AutoFit.Web.Data;
-using AutoFit.Web.Data.Abstractions;
-
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
+﻿using Microsoft.Extensions.Logging;
 
 namespace AutoFit.Web.Services
 {
-    public class BaseService 
+	public class BaseService 
     {
-		protected ILogger Logger { get; set; }
-	  
-	    protected BaseService()
+		protected ILoggerFactory _LoggerFactory { get; }
+	    protected ILogger _logger { get; }
+
+	    protected BaseService(ILoggerFactory loggerFactory)
 	    {
+		    _LoggerFactory = loggerFactory;
+		    _logger = _LoggerFactory.CreateLogger(GetType());
 	    }
 
-	    protected BaseService(ILogger logger)
-	    {
-		    Logger = logger;
-	    }
-
-    }
+	}
 }

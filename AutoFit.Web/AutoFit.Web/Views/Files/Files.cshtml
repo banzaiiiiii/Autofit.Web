@@ -4,12 +4,18 @@
 <p>List of Files</p>
 
 <ul>
+    @foreach (var item in Model.Container)
+    {
+        <li>
+            @item.Name
+        </li>
+    }
     @foreach (var item in Model.Files)
     {
         <li>
             <a asp-action="Download"
                asp-route-filename="@item.Name">
-                @item.Name
+                @item.Name Größe: @item.Size
             </a>
         </li>
     }
