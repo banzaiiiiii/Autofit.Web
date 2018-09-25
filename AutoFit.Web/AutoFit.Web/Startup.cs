@@ -4,6 +4,8 @@ using AutoFit.Web.Data;
 using AutoFit.Web.Services;
 using AutoFit.Web.ViewModels;
 
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authentication.OpenIdConnect;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
@@ -11,6 +13,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.FileProviders;
 using Microsoft.Extensions.Logging;
+using Microsoft.IdentityModel.Protocols.OpenIdConnect;
 
 
 namespace AutoFit.Web
@@ -33,8 +36,14 @@ namespace AutoFit.Web
 	        services.AddSingleton<IFileProvider>(new PhysicalFileProvider(Path.Combine(Directory.GetCurrentDirectory(), "wwwroot")));
 
 
-	        //RegisterStores(Configuration, services);
-	        //RegisterManagers(services);
+	        services.AddAuthentication(options =>
+	                 {
+		                 options.DefaultSignInScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+		                 options.DefaultAuthenticateScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+	                 })
+	                .AddOpenIdConnect("B2C_1_sign_in", options => SetOptionsForOpenIdConnectPolicy("B2C_1_sign_in", options))
+	                .AddCookie();
+
 	        RegisterControllerServices(services);
 			
         }
@@ -79,6 +88,8 @@ namespace AutoFit.Web
             app.UseStaticFiles();
 	        app.UseNodeModules(env.ContentRootPath);
 
+	        app.UseAuthentication();
+
             app.UseMvc(routes =>
             {
                 routes.MapRoute(
@@ -89,5 +100,16 @@ namespace AutoFit.Web
 		           .MapRoute("NaturKinder", "AutoFit/{controller=NaturKinder}/{action=Index}/{id?}");
             });
         }
+
+	    public void SetOptionsForOpenIdConnectPolicy(string policy, OpenIdConnectOptions options)
+	    {
+		    options.MetadataAddress = "https://banzaii.b2clogin.com/banzaii.onmicrosoft.com/v2.0/.well-known/openid-configuration?p=" + policy;
+		    options.ClientId = "efaae8de-ad2e-4a9f-9c41-a55244d2d5f1";
+		    options.ResponseType = OpenIdConnectResponseType.IdToken;
+		    options.CallbackPath = "/signin/" + policy;
+		    options.SignedOutCallbackPath = "/signout/" + policy;
+		    options.SignedOutRedirectUri = "/";
+		    options.TokenValidationParameters.NameClaimType = "name";
+	    }
     }
 }

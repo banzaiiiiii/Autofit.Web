@@ -24,7 +24,7 @@
                         <span class="navbar-toggler-icon"></span>
                     </button>
                     <div class="collapse navbar-collapse" id="navbarCollapse">
-                        <div class="navbar-nav">
+                        <div class="navbar-nav mr-auto">
                             <a class="nav-item nav-link active" asp-controller="Home" asp-action="Index">Home <span class="sr-only">(current)</span></a>
                             <a class="nav-item nav-link" asp-controller="Home" asp-action="Contact">Kontakt</a>
                             <a class="nav-item nav-link" asp-controller="Home" asp-action="Jobs">Stellenangebote</a>
@@ -40,6 +40,22 @@
                                 </div>
                             </div>
                         </div>
+                            <div class="navbar-nav">
+                                @if (User.Identity.IsAuthenticated)
+                                {
+                                    <a class="nav-item nav-link" asp-controller="Files" asp-action="Index">Admin</a>
+
+                                    <form class="form-inline " method="post" asp-controller="Auth" asp-action="SignOut">
+                                        <button type="submit" class="btn btn-primary">Sign Out</button>
+                                    </form>
+
+                                }
+                                else
+                                {
+                                    <a class="nav-item nav-link" asp-controller="Auth" asp-action="SignIn">Sign In</a>
+                                }
+                            </div>
+                       
                     </div>
                 </nav>
         </div>  
