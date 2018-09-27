@@ -10,7 +10,7 @@ namespace AutoFit.Web.Abstractions
 {
 	public interface IFileService
 	{
-		Task UploadFileAsync(FileStream fileStream, string userEmail, string documentType);
+		Task UploadFileAsync(Byte[] byteArray, string userEmail, string documentType);
 		Task<Stream> DownloadToStream(string fileName, string documentType);
 		Task DeleteAsync(string documentType, string fileName);
 		Task<List<IListBlobItem>> GetBlobsFromContainer(string documentType);

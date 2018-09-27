@@ -77,15 +77,13 @@ namespace AutoFit.Web.Services
 			return stream;
 		}
 
-		public async Task UploadFileAsync(FileStream fileStream, string fileName, string contentType)
+		public async Task UploadFileAsync(Byte[] byteArray, string fileName, string contentType)
 		{
 			try
 			{
-				//FileStream fileStream = new FileStream(path, FileMode.Open, FileAccess.Read);
-
 				var blockBlob = ResolveCloudBlockBlob(SetContainerName(contentType), fileName);
-				
-				await blockBlob.UploadFromStreamAsync(fileStream);
+
+				await blockBlob.UploadFromByteArrayAsync(byteArray, 0, byteArray.Length);
 			}
 			catch (Exception e)
 			{
