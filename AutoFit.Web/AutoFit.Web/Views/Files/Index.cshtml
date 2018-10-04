@@ -1,20 +1,69 @@
-﻿
-<h1>hey hallo</h1>
+﻿@model AutoFit.Web.ViewModels.Files.FilesViewModel
+@{
+    ViewData["Title"] = "Admin";
+}
+
+<
+
+<div class="container">
+    <div class="row">
+        <h1>Bilder Verwaltung</h1>
+    </div>
+    <div class="row">
+
+        <ul>
+            @foreach (var container in Model.Container)
+            {
+
+            <li>
+                <h5>@container.ContainerName</h5>
+                <a type="button" class="btn btn-danger" asp-controller="Files" asp-action="DeleteContainer"
+                   asp-route-containerName="@container.ContainerName" >Ordner Löschen! </a>
+                <h5>Neue Dateien hochloaden: </h5>
+
+               
+
+                <div class="col-8">
+                    <form asp-controller="Files" asp-action="UploadFile" asp-route-containerName="@container.ContainerName" method="post"
+                          enctype="multipart/form-data">
+
+                        <input type="file" name="file" />
+                        <button type="submit">Upload File</button>
+                    </form>
+
+                    <form asp-controller="Files" asp-action="UploadFiles" asp-route-containerName="@container.ContainerName" method="post"
+                          enctype="multipart/form-data">
+
+                        <input type="file" name="files" multiple />
+                        <button type="submit">Upload Files</button>
+                    </form>
+                </div>
+
+                <h5>Dateien die sich in diesen Ordner befinden: </h5>
+                @foreach (var item in container.FileNameList)
+
+                {
+<li>
+                            <p>@System.IO.Path.GetFileName(item.Uri.ToString())</p>
+                            <a type="button" class="btn btn-danger" asp-controller="Files" asp-action="DeleteFile" asp-route-containerName="@container.ContainerName" asp-route-fileName="@System.IO.Path.GetFileName(item.Uri.ToString())">Datei Löschen</a>
+                            <a type="button" class="btn btn-primary" asp-action="Download" asp-route-filename="@System.IO.Path.GetFileName(item.Uri.ToString())" asp-route-containerName="@container.ContainerName">Download</a>
+                        </li>
+                    }
+                </li>
+                }
+        </ul>
 
 
-<div>
-    <form asp-controller="Files" asp-action="UploadFile" method="post"
-          enctype="multipart/form-data">
+        <div class="col-4">
+            <h6>Neuen Ordner hinzufügen:</h6>
 
-        <input type="file" name="file" />
-        <button type="submit">Upload File</button>
-    </form>
-
-    <form asp-controller="Files" asp-action="UploadFiles" method="post"
-          enctype="multipart/form-data">
-
-        <input type="file" name="files" multiple />
-        <button type="submit">Upload Files</button>
-    </form>
+            <form asp-controller="Files" asp-action="CreateContainer" asp-route-containerName="containerInput" method="post">
+                <label for="containerInput">Ordner Name: </label>
+                <input type="text" name="ContainerName" id="containerInput"/>
+            </form>
+        </div>
+    </div>
+    
 
 </div>
+

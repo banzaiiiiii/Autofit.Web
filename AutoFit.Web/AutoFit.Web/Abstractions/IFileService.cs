@@ -10,11 +10,12 @@ namespace AutoFit.Web.Abstractions
 {
 	public interface IFileService
 	{
-		Task UploadFileAsync(Byte[] byteArray, string userEmail, string documentType);
-		Task<Stream> DownloadToStream(string fileName, string documentType);
-		Task DeleteAsync(string documentType, string fileName);
-		Task<List<IListBlobItem>> GetBlobsFromContainer(string documentType);
+		Task UploadFileAsync(Byte[] byteArray, string userEmail, string containerName);
+		Task<Stream> DownloadToStream(string fileName, string containerName);
+		Task DeleteAsync(string containerName, string fileName);
+		Task DeleteContainerAsync(string containerName);
+		Task<List<IListBlobItem>> GetBlobsFromContainer(string containerName);
 		Task<List<CloudBlobContainer>> ListContainersAsync();
-		CloudBlockBlob ResolveCloudBlockBlob(string containerName, string fileName);
+		Task CreateFolder(string containername);
 	}
 }

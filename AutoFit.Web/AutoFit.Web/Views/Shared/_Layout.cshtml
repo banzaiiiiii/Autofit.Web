@@ -15,9 +15,9 @@
 </head>
 <body>
 
-<div class="container-fluid">
-    <div class="row">
-       <div class="col-12">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12">
                 <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark">
                     <a class="navbar-brand" href="#">AutoFit Seidel</a>
                     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
@@ -40,54 +40,55 @@
                                 </div>
                             </div>
                         </div>
-                            <div class="navbar-nav">
-                                @if (User.Identity.IsAuthenticated)
-                                {
-                                    <a class="nav-item nav-link" asp-controller="Files" asp-action="Index">Admin</a>
+                        <div class="navbar-nav">
+                            @if (User.Identity.IsAuthenticated)
+                            {
+                                <a class="nav-item nav-link" asp-controller="Files" asp-action="Index">Admin</a>
 
-                                    <form class="form-inline " method="post" asp-controller="Auth" asp-action="SignOut">
-                                        <button type="submit" class="btn btn-primary">Sign Out</button>
-                                    </form>
+                                <form class="form-inline " method="post" asp-controller="Auth" asp-action="SignOut">
+                                    <button type="submit" class="btn btn-primary">Sign Out</button>
+                                </form>
 
-                                }
-                                else
-                                {
-                                    <a class="nav-item nav-link" asp-controller="Auth" asp-action="SignIn">Sign In</a>
-                                }
-                            </div>
-                       
+                            }
+                            else
+                            {
+                                <a class="nav-item nav-link" asp-controller="Auth" asp-action="SignIn">Sign In</a>
+                            }
+                        </div>
+
                     </div>
                 </nav>
-        </div>  
-    </div>
-</div>
-
-   
-@RenderBody()
-
-
-<footer class="footer">
-    <div class="container-fluid " id="naturkinderFooter">
-        <div class="row">
-            <div class="col-9">
-                <span class="bottomaddress">AutoFit Seidel | 09306 Rochlitz | Leipziger Straße 51 | Tel: <a href="tel:+49373742580">+49 (0)3737 - 42580</a></span>
-            </div>
-            <div class="col-3 zeiten">
-                <h4>Öffnungszeiten</h4>
-                <p>Mo. - Fr. | 8:00 - 18:00 Uhr</p>
-                <p>Sa.       | 8:00 - 12:00 Uhr</p>
-                <a asp-controller="Naturkinder" asp-action="Contact" class="badge badge-light">Kontakt</a>
-                <a asp-controller="Naturkinder" asp-action="Impressum" class="badge badge-light">Impressum</a>
-                <a asp-controller="Naturkinder" asp-action="Datenschutz" class="badge badge-light">Datenschutz</a>
             </div>
         </div>
     </div>
-</footer>
 
+
+
+    @RenderBody()
+
+
+    <footer class="footer">
+        <div class="container-fluid " id="naturkinderFooter">
+            <div class="row">
+                <div class="col-9">
+                    <span class="bottomaddress">AutoFit Seidel | 09306 Rochlitz | Leipziger Straße 51 | Tel: <a href="tel:+49373742580">+49 (0)3737 - 42580</a></span>
+                </div>
+                <div class="col-3 zeiten">
+                    <h4>Öffnungszeiten</h4>
+                    <p>Mo. - Fr. | 8:00 - 18:00 Uhr</p>
+                    <p>Sa.       | 8:00 - 12:00 Uhr</p>
+                    <a asp-controller="Naturkinder" asp-action="Contact" class="badge badge-light">Kontakt</a>
+                    <a asp-controller="Naturkinder" asp-action="Impressum" class="badge badge-light">Impressum</a>
+                    <a asp-controller="Naturkinder" asp-action="Datenschutz" class="badge badge-light">Datenschutz</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.4/popper.min.js"></script>
     <script src="~/node_modules/jquery/dist/jquery.min.js"></script>
     <script src="~/node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
     <script src="~/node_modules/jquery-validation/dist/jquery.validate.min.js"></script>
-<script src="~/node_modules/jquery-validation-unobtrusive/dist/jquery.validate.unobtrusive.min.js"></script>
+    <script src="~/node_modules/jquery-validation-unobtrusive/dist/jquery.validate.unobtrusive.min.js"></script>
 
     @RenderSection("Scripts", required: false)
 </body>

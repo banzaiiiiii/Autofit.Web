@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
+using Microsoft.WindowsAzure.Storage.Blob;
+
 namespace AutoFit.Web.ViewModels.Files
 {
 	public class FileDetails
@@ -13,7 +15,8 @@ namespace AutoFit.Web.ViewModels.Files
 
 	public class AzureContainerDetails
 	{
-		public string  Name { get; set; }
+		public string ContainerName { get; set; }
+		public List<IListBlobItem> FileNameList { get; set; } = new List<IListBlobItem>();
 
 	}
 

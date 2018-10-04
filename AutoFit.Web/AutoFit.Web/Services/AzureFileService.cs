@@ -23,15 +23,24 @@ namespace AutoFit.Web.Services
 			_configuration = configuration;
 		}
 
+		public async Task CreateFolder(string containername)
+		{
+			var storageAccount = GetCloudStorageAccount();
+			var blobClient = storageAccount.CreateCloudBlobClient();
+			var container = blobClient.GetContainerReference(containername);
+			await container.CreateAsync();
+		}
 
-		public async Task<List<IListBlobItem>> GetBlobsFromContainer(string documentType)
+		
+
+		public async Task<List<IListBlobItem>> GetBlobsFromContainer(string containername)
 		{
 
 			List<IListBlobItem> blobs = new List<IListBlobItem>();
 
 			BlobContinuationToken blobContinuationToken = null;
 
-			var containerName = ResolveCloudBlobContainer(SetContainerName(documentType));
+			var containerName = ResolveCloudBlobContainer(containername);
 
 			do
 			{
@@ -62,26 +71,31 @@ namespace AutoFit.Web.Services
 			return results;
 		}
 
-		public async Task DeleteAsync(string documentType, string fileName)
+		public async Task DeleteAsync(string containerName, string fileName)
 		{
-			var blockBlob = ResolveCloudBlockBlob(SetContainerName(documentType), fileName);
+			var blockBlob = ResolveCloudBlockBlob(containerName, fileName);
 			await blockBlob.DeleteAsync();
 		}
 
-
-		public async Task<Stream> DownloadToStream(string fileName, string documentType)
+		public async Task DeleteContainerAsync(string containerName)
 		{
-			var cloudBlockBlob = ResolveCloudBlockBlob(SetContainerName(documentType), fileName);
+			var container = ResolveCloudBlobContainer(containerName);
+			await container.DeleteAsync();
+		}
+
+		public async Task<Stream> DownloadToStream(string fileName, string containerName)
+		{
+			var cloudBlockBlob = ResolveCloudBlockBlob(containerName, fileName);
 			var stream = await cloudBlockBlob.OpenReadAsync();
 
 			return stream;
 		}
 
-		public async Task UploadFileAsync(Byte[] byteArray, string fileName, string contentType)
+		public async Task UploadFileAsync(Byte[] byteArray, string fileName, string containerName)
 		{
 			try
 			{
-				var blockBlob = ResolveCloudBlockBlob(SetContainerName(contentType), fileName);
+				var blockBlob = ResolveCloudBlockBlob(containerName, fileName);
 
 				await blockBlob.UploadFromByteArrayAsync(byteArray, 0, byteArray.Length);
 			}
@@ -105,6 +119,7 @@ namespace AutoFit.Web.Services
 			var blobClient = storageAccount.CreateCloudBlobClient();
 			var container = blobClient.GetContainerReference(containerName);
 			return container;
+	
 		}
 
 		private CloudStorageAccount GetCloudStorageAccount()
@@ -119,23 +134,6 @@ namespace AutoFit.Web.Services
 			return storageConnectionString;
 		}
 
-		public string SetContainerName(string documentType)
-		{
-			string containerName = null;
-			switch (documentType)
-			{
-				case "bild":
-					containerName = "bilder";
-					break;
-				case "fuehrerschein":
-					containerName = "fuehrerscheine";
-					break;
-				default:
-					_logger.LogError($"Dokumententyp {documentType} not found");
-					throw new Exception($"{documentType} not found");
-			}
-
-			return containerName;
-		}
+		
 	}
 }

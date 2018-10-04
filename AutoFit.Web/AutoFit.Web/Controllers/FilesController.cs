@@ -10,6 +10,7 @@ using AutoFit.Web.ViewModels.Files;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.FileProviders;
+using Microsoft.WindowsAzure.Storage.Blob;
 
 namespace AutoFit.Web.Controllers
 {
@@ -22,13 +23,27 @@ namespace AutoFit.Web.Controllers
 			_fileService = fileService;
 		}
 
-		public IActionResult Index()
+		public async Task<IActionResult> Index()
 		{
-			return View();
+			var containerList = await _fileService.ListContainersAsync();
+
+			var model = new FilesViewModel();
+			foreach (var container in containerList)
+			{
+				model.Container.Add(
+				                    new AzureContainerDetails()
+				                    {
+					                    ContainerName = container.Name,
+					                    FileNameList = await _fileService.GetBlobsFromContainer(container.Name)
+				                    });
+
+
+			}
+			return View(model);
 		}
 
 		[HttpPost]
-		public async Task<IActionResult> UploadFile(IFormFile file)
+		public async Task<IActionResult> UploadFile(IFormFile file, string containerName)
 		{
 			if (file == null || file.Length == 0)
 				return Content("file not selected");
@@ -39,14 +54,14 @@ namespace AutoFit.Web.Controllers
 			{
 				await file.CopyToAsync(stream);
 				var byteArray = stream.ToArray();
-				await _fileService.UploadFileAsync(byteArray, fileName, "bild");
+				await _fileService.UploadFileAsync(byteArray, fileName, containerName);
 			}
 
-			return RedirectToAction("Files");
+			return RedirectToAction("Index");
 		}
 
 		[HttpPost]
-		public async Task<IActionResult> UploadFiles(List<IFormFile> files)
+		public async Task<IActionResult> UploadFiles(List<IFormFile> files, string containerName)
 		{
 			if (files == null || files.Count == 0)
 				return Content("files not selected");
@@ -59,54 +74,47 @@ namespace AutoFit.Web.Controllers
 				{
 					await file.CopyToAsync(stream);
 					var byteArray = stream.ToArray();
-					await _fileService.UploadFileAsync(byteArray, fileName, "bild");
+					await _fileService.UploadFileAsync(byteArray, fileName, containerName);
 				}
 			}
 
-			return RedirectToAction("Files");
+			return RedirectToAction("Index");
 		}
 
-		public async Task<IActionResult> Files()
-		{
-			var containerList = await _fileService.ListContainersAsync();
-			var blobList = await _fileService.GetBlobsFromContainer("bild");
-			
-			var model = new FilesViewModel();
-			foreach (var item in blobList)
-			{
-				
-				var blobName = Path.GetFileName(item.Uri.ToString());
-				var blobSize = _fileService.ResolveCloudBlockBlob("bilder", blobName).Properties.Length;
-				
-				model.Files.Add(
-					new FileDetails
-					{
-						Name = blobName,
-						Size = blobSize
-					});
-			}
-			foreach (var item in containerList)
-			{
-				model.Container.Add(
-				                new AzureContainerDetails() { Name = item.Name });
-			}
-			return View(model);
-		}
-
-		public async Task<IActionResult> Download(string filename)
+		public async Task<IActionResult> Download(string filename, string containerName)
 		{
 			if (filename == null)
 				return Content("filename not found");
 
-			var fileStream = await _fileService.DownloadToStream(filename, "bild");
+			var fileStream = await _fileService.DownloadToStream(filename, containerName);
 
-			using (var memory = new MemoryStream())
-			{
+			var memory = new MemoryStream();
+			
 				await fileStream.CopyToAsync(memory);memory.Position = 0;
 				return File(memory, "application/octet-stream", filename);
-			}
+			
 
 		}
 
+	    public async Task<IActionResult> CreateContainer(string containerName)
+	    {
+		    await _fileService.CreateFolder(containerName);
+
+			return RedirectToAction("Index");
+	    }
+
+	    public async Task<IActionResult> DeleteContainer(string containerName)
+	    {
+		    await _fileService.DeleteContainerAsync(containerName);
+
+		    return RedirectToAction("Index");
+		}
+
+	    public async Task<IActionResult> DeleteFile(string containerName, string fileName)
+	    {
+		    await _fileService.DeleteAsync(containerName, fileName);
+
+		    return RedirectToAction("Index");
+		}
 	}
 }
