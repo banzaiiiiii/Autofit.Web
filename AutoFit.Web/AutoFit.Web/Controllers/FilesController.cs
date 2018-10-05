@@ -116,5 +116,14 @@ namespace AutoFit.Web.Controllers
 
 		    return RedirectToAction("Index");
 		}
+
+	    //public async Task<IActionResult> GetUrls(string containerName)
+	    //{
+		   // var list = await _fileService.GetBlobsFromContainer(containerName);
+		   // foreach (var item in list)
+		   // {
+			  //  item.Uri
+		   // }
+	    //}
 	}
 }

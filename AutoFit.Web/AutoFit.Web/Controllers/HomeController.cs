@@ -10,6 +10,7 @@ using Microsoft.AspNetCore.Mvc;
 using AutoFit.Web.Models;
 using AutoFit.Web.Services;
 using AutoFit.Web.ViewModels;
+using AutoFit.Web.ViewModels.Files;
 
 using AutoMapper;
 
@@ -22,10 +23,12 @@ namespace AutoFit.Web.Controllers
 
 	    private readonly IContact _contactService;
 	    private readonly IMail _mailService;
+	    private readonly IFileService _fileService;
 
-        public HomeController(IContact contactService, IMail mailService, ILoggerFactory loggerFactory)
+        public HomeController(IFileService fileService, IContact contactService, IMail mailService, ILoggerFactory loggerFactory)
 	        : base(loggerFactory)
-		{
+        {
+	        _fileService = fileService ?? throw new ArgumentNullException(nameof(fileService));
 	        _contactService = contactService ?? throw new ArgumentNullException(nameof(contactService));
 	        _mailService = mailService ?? throw new ArgumentNullException(nameof(mailService));
         }
@@ -84,10 +87,24 @@ namespace AutoFit.Web.Controllers
 		    return View();
 	    }
 
-	    public IActionResult Cars()
+	    public async Task<IActionResult> Cars()
 	    {
-		    return View();
-	    }
+			var containerList = await _fileService.ListContainersAsync();
+
+		    var model = new FilesViewModel();
+		    foreach (var container in containerList)
+		    {
+			    model.Container.Add(
+			                        new AzureContainerDetails()
+			                        {
+				                        ContainerName = container.Name,
+				                        FileNameList = await _fileService.GetBlobsFromContainer(container.Name)
+			                        });
+
+
+		    }
+		    return View(model);
+		}
 
 
 
