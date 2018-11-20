@@ -35,6 +35,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Include="node_modules\delete.js" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\AutoFit.Web.Data\AutoFit.Web.Data.csproj" />
   </ItemGroup>
 

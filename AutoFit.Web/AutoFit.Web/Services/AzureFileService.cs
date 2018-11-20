@@ -118,6 +118,8 @@ namespace AutoFit.Web.Services
 			var storageAccount = GetCloudStorageAccount();
 			var blobClient = storageAccount.CreateCloudBlobClient();
 			var container = blobClient.GetContainerReference(containerName);
+
+			
 			return container;
 	
 		}

@@ -12,8 +12,8 @@
             {
                 foreach (var file in item.FileNameList)
                 {
-            <a asp-controller="Files" asp-action="Index"> <img src="@file.Uri" class="img-fluid" alt="image" /> </a>
-                   
+                    <a asp-controller="Files" asp-action="Index"> <img src="@file"  /> </a>
+                   <img src="@file"/>
                 }
             }
 
