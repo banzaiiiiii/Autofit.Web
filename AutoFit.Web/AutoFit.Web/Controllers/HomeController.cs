@@ -54,8 +54,8 @@ namespace AutoFit.Web.Controllers
 			 
 		        try
 		        {
-			        _contactService.Add(newContact);
-			        await _contactService.SaveAsync();
+			        //_contactService.Add(newContact);
+			        //await _contactService.SaveAsync();
 			        await _mailService.SendEmailAsync(newContact.Subject, emailBody);
 
 		    return View("SuccessView");

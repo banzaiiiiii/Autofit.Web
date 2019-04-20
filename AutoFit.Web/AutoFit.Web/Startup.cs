@@ -18,7 +18,7 @@ using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Protocols.OpenIdConnect;
 
 
-namespace AutoFit.Web
+namespace AutoFit.Webf
 {
     public class Startup
     {
@@ -33,9 +33,9 @@ namespace AutoFit.Web
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc();
-	        services.AddDbContext<WebsiteDbContext>(options
-		                                                => options.UseSqlServer(Configuration.GetConnectionString("localDB")));
-	        services.AddSingleton<IFileProvider>(new PhysicalFileProvider(Path.Combine(Directory.GetCurrentDirectory(), "wwwroot")));
+			services.AddDbContext<WebsiteDbContext>(options
+														=> options.UseSqlServer(Configuration.GetConnectionString("localDB")));
+			services.AddSingleton<IFileProvider>(new PhysicalFileProvider(Path.Combine(Directory.GetCurrentDirectory(), "wwwroot")));
 
 			services.AddScoped<IContact, ContactService>();
 	        services.AddScoped<IMail, MailService>();
