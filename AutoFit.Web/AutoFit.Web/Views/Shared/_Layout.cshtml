@@ -8,7 +8,7 @@
     <title>@ViewData["Title"] - AutoFit Seidel</title>
 
     <link href="~/node_modules/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
-    
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
     <link href="~/node_modules/font-awesome/css/font-awesome.min.css" rel="stylesheet" />
     <link href="~/node_modules/font-awesome/css/font-awesome.css" rel="stylesheet" />
     <link href="~/node_modules/site.css" rel="stylesheet" />
@@ -67,28 +67,54 @@
     @RenderBody()
 
 
-    <footer class="footer">
-        <div class="container-fluid " id="autofitFooter">
-            <div class="row">
-                <div class="col-9">
-                    <span class="bottomaddress">AutoFit Seidel | 09306 Rochlitz | Leipziger Straße 51 | Tel: <a href="tel:+49373742580">+49 (0)3737 - 42580</a></span>
-                </div>
-                <div class="col-3 zeiten">
-                    <h4>Öffnungszeiten</h4>
-                    <p>Mo. - Fr. | 8:00 - 18:00 Uhr</p>
-                    <p>Sa.       | 8:00 - 12:00 Uhr</p>
-                    <a asp-controller="Home" asp-action="Contact" class="badge badge-light">Kontakt</a>
-                    <a asp-controller="Home" asp-action="Impressum" class="badge badge-light">Impressum</a>
-                    <a asp-controller="Home" asp-action="Datenschutz" class="badge badge-light">Datenschutz</a>
-                </div>
+<footer class="footer">
+    <div class="container-fluid " id="autofitFooter">
+        <div class="row">
+            <div class="col-4">
+                <i class="fas fa-car"></i>
+            </div>
+            <div class="col-4">
+                <i class="fas fa-biohazard"></i>
+            </div>
+            <div class="col-4">
+                <i class="fas fa-car"></i>
             </div>
         </div>
-    </footer>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.4/popper.min.js"></script>
+
+        <hr id="FooterDivider"/>
+
+        <div class="row">
+            <div class=col-4>
+                <p>Service Hotline</p>
+                <hr width="60%" align="left" id="FooterRedline"/>
+                <span > Tel: 123123213213213123</span>
+            </div>
+            <div class="col-4">
+                <p>Öffnungszeiten</p>
+                <hr width="60%" align="left" id="FooterRedline"/>
+                <p>Mo. - Fr. | 8:00 - 18:00 Uhr</p>
+                <p>Sa.       | 8:00 - 12:00 Uhr</p>
+            </div>
+            <div class="col-4">
+                <p>Informationen</p>
+                <hr width="60%" align="left" id="FooterRedline" />
+                <a asp-controller="Home" asp-action="Impressum" class="badge badge-light">Impressum</a>
+                <a asp-controller="Home" asp-action="Contact" class="badge badge-light">Kontakt</a>
+                <a asp-controller="Home" asp-action="Datenschutz" class="badge badge-light">Datenschutz</a>
+            </div>
+        </div>
+    </div>
+</footer>
+
+
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.4/popper.min.js"></script>
     <script src="~/node_modules/jquery/dist/jquery.min.js"></script>
     <script src="~/node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
     <script src="~/node_modules/jquery-validation/dist/jquery.validate.min.js"></script>
-    <script src="~/node_modules/jquery-validation-unobtrusive/dist/jquery.validate.unobtrusive.min.js"></script>
+<script src="~/node_modules/jquery-validation-unobtrusive/dist/jquery.validate.unobtrusive.min.js"></script>
+<script src=""></script>
 
     @RenderSection("Scripts", required: false)
 </body>
