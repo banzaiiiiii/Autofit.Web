@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.Azure.Storage.Blob;
 
-using Microsoft.WindowsAzure.Storage.Blob;
 
 namespace AutoFit.Web.Abstractions
 {

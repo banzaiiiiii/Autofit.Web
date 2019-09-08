@@ -9,9 +9,7 @@ using AutoFit.Web.ViewModels.Files;
 
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore.Metadata.Conventions.Internal;
-using Microsoft.Extensions.FileProviders;
-using Microsoft.WindowsAzure.Storage.Blob;
+
 
 namespace AutoFit.Web.Controllers
 {

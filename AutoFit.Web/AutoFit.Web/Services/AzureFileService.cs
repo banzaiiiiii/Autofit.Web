@@ -5,11 +5,11 @@ using System.Linq;
 using System.Threading.Tasks;
 
 using AutoFit.Web.Abstractions;
-
+using Microsoft.Azure.Storage;
+using Microsoft.Azure.Storage.Blob;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
-using Microsoft.WindowsAzure.Storage;
-using Microsoft.WindowsAzure.Storage.Blob;
+
 
 namespace AutoFit.Web.Services
 {
