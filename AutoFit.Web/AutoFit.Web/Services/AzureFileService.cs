@@ -33,26 +33,44 @@ namespace AutoFit.Web.Services
 
 
 
-        public async Task<List<IListBlobItem>> GetBlobsFromContainer(string containername)
+        //public async Task<List<IListBlobItem>> GetBlobsFromContainer(string containername)
+        //{
+
+        //    List<IListBlobItem> blobs = new List<IListBlobItem>();
+
+        //    BlobContinuationToken blobContinuationToken = null;
+
+        //    var containerName = ResolveCloudBlobContainer(containername);
+
+        //    do
+        //    {
+        //        var response = await containerName.ListBlobsSegmentedAsync(blobContinuationToken);
+        //        blobContinuationToken = response.ContinuationToken;
+        //        blobs.AddRange(response.Results);
+
+        //    } while (blobContinuationToken != null);
+
+        //    return blobs;
+        //}
+
+        public IEnumerable<CloudBlockBlob> GetBlobsFromContainer(string containername)
         {
-
-            List<IListBlobItem> blobs = new List<IListBlobItem>();
-
             BlobContinuationToken blobContinuationToken = null;
 
             var containerName = ResolveCloudBlobContainer(containername);
 
             do
             {
-                var response = await containerName.ListBlobsSegmentedAsync(blobContinuationToken);
+                var response =  containerName.ListBlobsSegmented(blobContinuationToken);
                 blobContinuationToken = response.ContinuationToken;
-                blobs.AddRange(response.Results);
-
+                foreach (var blob in response.Results.OfType<CloudBlockBlob>())
+                {
+                    blob.FetchAttributes();
+                    yield return blob;
+                }
             } while (blobContinuationToken != null);
-
-            return blobs;
-
         }
+
 
         public async Task<List<CloudBlobContainer>> ListContainersAsync()
         {
@@ -111,7 +129,7 @@ namespace AutoFit.Web.Services
         {
             var container = ResolveCloudBlobContainer(containerName);
             var blockBlob = container.GetBlockBlobReference(fileName);
-
+            blockBlob.FetchAttributes();
 
             return blockBlob;
         }
@@ -157,6 +175,13 @@ namespace AutoFit.Web.Services
             cloudBlockBlob.SetMetadata();
         }
 
+        // wahrscheinlich unnötig da in resolve schon vorhanden
+        //public CloudBlockBlob GetMetaData(string fileName, string containerName, string itemName, string preis)
+        //{
+        //    var blob = ResolveCloudBlockBlob(containerName, fileName);
+        //    blob.FetchAttributes();
+        //    return blob;
+        //}
 
     }
 }

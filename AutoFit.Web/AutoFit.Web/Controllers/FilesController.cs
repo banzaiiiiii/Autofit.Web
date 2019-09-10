@@ -33,7 +33,7 @@ namespace AutoFit.Web.Controllers
                                     new AzureContainerDetails()
                                     {
                                         ContainerName = container.Name,
-                                        FileNameList = await _fileService.GetBlobsFromContainer(container.Name)
+                                        FileNameList =  _fileService.GetBlobsFromContainer(container.Name)
 
                                     });
 
