@@ -24,7 +24,7 @@
 
 
                     <div class="col-9">
-                        
+
                         <form asp-controller="Files" asp-action="UploadFiles" asp-route-containerName="@container.ContainerName" method="post"
                               enctype="multipart/form-data">
 
@@ -37,15 +37,22 @@
                     @foreach (var item in container.FileNameList)
 
                     {
-                        <li>
-                            <p>@System.IO.Path.GetFileName(item.Uri.ToString())</p>
-                            <a type="button" class="btn btn-danger" asp-controller="Files" asp-action="DeleteFile" asp-route-containerName="@container.ContainerName" asp-route-fileName="@System.IO.Path.GetFileName(item.Uri.ToString())"
-                               onclick="return confirm('Sure?');"> Datei Löschen </a>
-                            <a type="button" class="btn btn-primary" asp-action="Download" asp-route-filename="@System.IO.Path.GetFileName(item.Uri.ToString())" asp-route-containerName="@container.ContainerName">Download</a>
-                        </li>
-                    }
+                <li>
+                    <p>@System.IO.Path.GetFileName(item.Uri.ToString())</p>
+                    
+                    <h6>Informationen hinzufügen:</h6>
+
+                    <form asp-controller="Files" asp-action="AddMetaData" asp-route-filename="@System.IO.Path.GetFileName(item.Uri.ToString())" asp-route-containerName="@container.ContainerName" asp-route-itemName="itemName" method="post">
+                        <label for="itemName">Bezeichnung: </label>
+                        <input type="text" name="itemName" id="itemName" />
+                    </form>
+                    <a type="button" class="btn btn-danger" asp-controller="Files" asp-action="DeleteFile" asp-route-containerName="@container.ContainerName" asp-route-fileName="@System.IO.Path.GetFileName(item.Uri.ToString())"
+                       onclick="return confirm('Sure?');"> Datei Löschen </a>
+                    <a type="button" class="btn btn-primary" asp-action="Download" asp-route-filename="@System.IO.Path.GetFileName(item.Uri.ToString())" asp-route-containerName="@container.ContainerName">Download</a>
                 </li>
-            }
+                }
+                    </li>
+                }
         </ul>
 
 
@@ -58,8 +65,8 @@
             </form>
         </div>
     </div>
-    
-   
+
+
 
 </div>
 

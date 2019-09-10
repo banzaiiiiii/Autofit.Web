@@ -106,7 +106,5 @@ namespace AutoFit.Web.Controllers
 		    return View(model);
 		}
 
-
-
 	}
 }
