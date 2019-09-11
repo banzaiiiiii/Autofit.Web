@@ -103,7 +103,7 @@ namespace AutoFit.Web.Controllers
 
 
 		    }
-		    return View(model);
+		    return View("_cars", model);
 		}
 
 	}
