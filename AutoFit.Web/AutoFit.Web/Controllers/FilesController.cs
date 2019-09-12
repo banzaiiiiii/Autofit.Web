@@ -24,18 +24,19 @@ namespace AutoFit.Web.Controllers
 
         public async Task<IActionResult> Index()
         {
-            var containerList = await _fileService.ListContainersAsync();
+           
 
             var model = new FilesViewModel();
-            foreach (var container in containerList)
+            model.ContainerList = _fileService.ListContainersAsync();
+            foreach (var container in model.ContainerList)
             {
-                model.Container.Add(
+                model.ContainerDetailsList.Add(
                                     new AzureContainerDetails()
                                     {
                                         ContainerName = container.Name,
-                                        FileNameList =  _fileService.GetBlobsFromContainer(container.Name)
+                                        FileNameList = _fileService.GetBlobsFromContainer(container.Name)
 
-                                    });
+                                    }); ;
 
             }
             return View(model);

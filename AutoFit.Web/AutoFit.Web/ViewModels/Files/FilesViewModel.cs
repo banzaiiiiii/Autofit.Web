@@ -15,16 +15,21 @@ namespace AutoFit.Web.ViewModels.Files
 
 	public class AzureContainerDetails
 	{
-		public string ContainerName { get; set; }
+        public string ContainerName { get; set; }
 		public IEnumerable<CloudBlockBlob> FileNameList { get; set; } = new List<CloudBlockBlob>();
     }
 
 	public class FilesViewModel
 	{
-		public List<FileDetails> Files { get; set; }
+        public IEnumerable<CloudBlobContainer> ContainerList { get; set; } = new List<CloudBlobContainer>();
+
+        public List<FileDetails> Files { get; set; }
 			= new List<FileDetails>();
 
-		public List<AzureContainerDetails> Container { get; set; }
+		public List<AzureContainerDetails> ContainerDetailsList { get; set; }
 			= new List<AzureContainerDetails>();
 	}
+
+   
+   
 }

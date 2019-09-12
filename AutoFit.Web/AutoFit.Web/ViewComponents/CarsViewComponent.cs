@@ -20,12 +20,13 @@ namespace AutoFit.Web.ViewComponents
 
         public async Task<IViewComponentResult> InvokeAsync()
         {
-            var containerList = await _fileService.ListContainersAsync();
+           
 
             var model = new FilesViewModel();
-            foreach (var container in containerList)
+            model.ContainerList =  _fileService.ListContainersAsync();
+            foreach (var container in model.ContainerList)
             {
-                model.Container.Add(
+                model.ContainerDetailsList.Add(
                                     new AzureContainerDetails()
                                     {
                                         ContainerName = container.Name,

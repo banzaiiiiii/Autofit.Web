@@ -32,7 +32,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach (var container in Model.Container)
+                    @foreach (var container in Model.ContainerDetailsList)
                     {
                         <tr>
                             <th scope="row">@container.ContainerName</th>
@@ -82,7 +82,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach (var container in Model.Container)
+                    @foreach (var container in Model.ContainerDetailsList)
                     {
                         @foreach (var item in container.FileNameList)
                         {

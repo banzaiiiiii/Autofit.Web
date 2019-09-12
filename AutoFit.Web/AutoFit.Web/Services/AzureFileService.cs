@@ -28,7 +28,7 @@ namespace AutoFit.Web.Services
             var storageAccount = GetCloudStorageAccount();
             var blobClient = storageAccount.CreateCloudBlobClient();
             var container = blobClient.GetContainerReference(containername);
-            await container.CreateAsync();
+            container.CreateIfNotExists(BlobContainerPublicAccessType.Blob);
         }
 
 
@@ -72,21 +72,26 @@ namespace AutoFit.Web.Services
         }
 
 
-        public async Task<List<CloudBlobContainer>> ListContainersAsync()
+        public IEnumerable<CloudBlobContainer> ListContainersAsync()
         {
             BlobContinuationToken continuationToken = null;
-            List<CloudBlobContainer> results = new List<CloudBlobContainer>();
+          
             do
             {
                 var storageAccount = GetCloudStorageAccount();
                 var blobClient = storageAccount.CreateCloudBlobClient();
 
-                var response = await blobClient.ListContainersSegmentedAsync(continuationToken);
+                var response = blobClient.ListContainersSegmented(continuationToken);
                 continuationToken = response.ContinuationToken;
-                results.AddRange(response.Results);
+                //results.AddRange(response.Results);
+                foreach(var container in response.Results.OfType<CloudBlobContainer>())
+                {
+                    container.FetchAttributes();
+                    yield return container;
+                }
             }
             while (continuationToken != null);
-            return results;
+          
         }
 
         public async Task DeleteAsync(string containerName, string fileName)
