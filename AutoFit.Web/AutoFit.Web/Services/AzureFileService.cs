@@ -129,7 +129,7 @@ namespace AutoFit.Web.Services
         {
             var container = ResolveCloudBlobContainer(containerName);
             var blockBlob = container.GetBlockBlobReference(fileName);
-            blockBlob.FetchAttributes();
+            
 
             return blockBlob;
         }
@@ -160,28 +160,24 @@ namespace AutoFit.Web.Services
         public void SetMetaBlobMetaData(string fileName, string containerName, string itemName, string preis)
         {
             var cloudBlockBlob = ResolveCloudBlockBlob(containerName, fileName);
+
+            cloudBlockBlob.Metadata["LastUpdated"] =$"Einstelldatum= {DateTime.Now.ToString()}" ;
             if (fileName != null)
             {
                 cloudBlockBlob.Metadata.Remove("Name");
-                cloudBlockBlob.Metadata.Add("Name", itemName);
+                cloudBlockBlob.Metadata.Add("Name", $"Bezeichnung= {itemName}");
             }
             if (preis != null)
             {
                 cloudBlockBlob.Metadata.Remove("Preis");
-                cloudBlockBlob.Metadata.Add("Preis", preis);
+                cloudBlockBlob.Metadata.Add("Preis",$"Preis= {preis}");
 
             }
-            cloudBlockBlob.Metadata["LastUpdated"] = DateTime.Now.ToString();
+          
             cloudBlockBlob.SetMetadata();
         }
 
-        // wahrscheinlich unnötig da in resolve schon vorhanden
-        //public CloudBlockBlob GetMetaData(string fileName, string containerName, string itemName, string preis)
-        //{
-        //    var blob = ResolveCloudBlockBlob(containerName, fileName);
-        //    blob.FetchAttributes();
-        //    return blob;
-        //}
+        
 
     }
 }

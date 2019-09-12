@@ -2,29 +2,31 @@
 @model AutoFit.Web.ViewModels.Files.FilesViewModel
 
 @{
-	   
+
 }
 
 
-    <h1> Hier Fahrzeugbestandliste</h1>
+<h1> Hier Fahrzeugbestandliste</h1>
 
-    <div class="container">
+<div class="container">
 
-        @foreach (var item in Model.Container)
+    @foreach (var item in Model.Container)
+    {
+        foreach (var file in item.FileNameList)
         {
-            foreach (var file in item.FileNameList)
+            @*<a asp-controller="Files" asp-action="Index"> <img src="@file"  /> </a>*@
+            <div class="container fahrzeugBilderDiv">
+                <img id="fahrzeugsBestandlisteIMG" src="@file.Uri" />
+            </div>
+
+            foreach (var data in file.Metadata.Values)
             {
-                @*<a asp-controller="Files" asp-action="Index"> <img src="@file"  /> </a>*@
-                <img src="@file.Uri" />
-
-                foreach (var data in file.Metadata.Values)
-                {
-                    <h1>@data</h1>
-                }
-
-
+                <h1>@data.Replace("=", ":").Replace("Euro","€").Replace("euro", "€")</h1>
             }
-        }
 
-    </div>
+
+        }
+    }
+
+</div>
 
