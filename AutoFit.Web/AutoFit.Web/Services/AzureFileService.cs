@@ -177,6 +177,26 @@ namespace AutoFit.Web.Services
             cloudBlockBlob.SetMetadata();
         }
 
+        public void SetContainerMetaData(string containerName, string discription, string price)
+        {
+            var container = ResolveCloudBlobContainer(containerName);
+
+            container.Metadata["LastUpdated"] = $"Einstelldatum= {DateTime.Now.ToString()}";
+            if (containerName != null)
+            {
+                container.Metadata.Remove("Name");
+                container.Metadata.Add("Name", $"Bezeichnung= {discription}");
+            }
+            if (price != null)
+            {
+                container.Metadata.Remove("Preis");
+                container.Metadata.Add("Preis", $"Preis= {price}");
+
+            }
+
+            container.SetMetadata();
+        }
+
         
 
     }

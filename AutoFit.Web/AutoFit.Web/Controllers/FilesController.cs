@@ -98,7 +98,7 @@ namespace AutoFit.Web.Controllers
         {
             try
             {
-                _fileService.SetMetaBlobMetaData(filename, containerName, itemName, preis);
+                _fileService.SetContainerMetaData(containerName, itemName, preis);
                 return RedirectToAction("Index");
             }
             catch (Exception ex)
