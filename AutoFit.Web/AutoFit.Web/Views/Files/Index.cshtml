@@ -3,83 +3,109 @@
     ViewData["Title"] = "Admin";
 }
 
-<
 
-<div class="container-fluid">
-    <div class="row">
-        <h1>Bilder Verwaltung</h1>
-    </div>
-    <div class="row">
-        <ul>
+    <div class="container-fluid">
+        <div class="row">
+            <h1>Bilder Verwaltung</h1>
+        </div>
 
-            @foreach (var container in Model.Container)
-            {
-                <li>
-                    <h5>@container.ContainerName</h5>
-                    <a type="button" class="btn btn-danger" id="btnDelete" asp-controller="Files" asp-action="DeleteContainer"
-                       asp-route-containerName="@container.ContainerName" onclick="return confirm('Sure?');">Ordner Löschen!</a>
-                    <h5>Neue Dateien hochloaden: </h5>
+        <div>
+            <h6>Neuen Ordner hinzufügen:</h6>
 
-                    <div class="col-9">
+            <form asp-controller="Files" asp-action="CreateContainer" asp-route-containerName="containerInput" method="post">
+                <label for="containerInput">Ordner Name: </label>
+                <input type="text" name="ContainerName" id="containerInput" />
+            </form>
+        </div>
 
-                        <form asp-controller="Files" asp-action="UploadFiles" asp-route-containerName="@container.ContainerName" method="post"
-                              enctype="multipart/form-data">
+        <div class="row">
 
-                            <input type="file" name="files" multiple />
-                            <button type="submit">Upload Files</button>
-                        </form>
-                    </div>
 
-                    <h5>Dateien die sich in diesen Ordner befinden: </h5>
-                    </li>
-                    @foreach (var item in container.FileNameList)
-
+            <h2>Ordner</h2>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">Ordnername</th>
+                        <th scope="col">Delete</th>
+                        <th scope="col">Upload</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var container in Model.Container)
                     {
-                    <li>
-                        <p>@System.IO.Path.GetFileName(item.Uri.ToString())</p>
-                        <a type="button" class="btn btn-danger" asp-controller="Files" asp-action="DeleteFile" asp-route-containerName="@container.ContainerName" asp-route-fileName="@System.IO.Path.GetFileName(item.Uri.ToString())"
-                           onclick="return confirm('Sure?');"> Datei Löschen </a>
-                        <a type="button" class="btn btn-primary" asp-action="Download" asp-route-filename="@System.IO.Path.GetFileName(item.Uri.ToString())" asp-route-containerName="@container.ContainerName">Download</a>
-                        <br />
-                        <br />
-                        <h6>Informationen hinzufügen:</h6>
+                        <tr>
+                            <th scope="row">@container.ContainerName</th>
+                            <td>
+                                <a type="button" class="btn btn-danger" id="btnDelete" asp-controller="Files" asp-action="DeleteContainer"
+                                   asp-route-containerName="@container.ContainerName" onclick="return confirm('Sure?');">@container.ContainerName Löschen!</a>
+                            </td>
+                            <td>
+                                <div class="uploadForm">
+                                    <form asp-controller="Files" asp-action="UploadFiles" asp-route-containerName="@container.ContainerName" method="post"
+                                          enctype="multipart/form-data">
 
-                        <div class="container">
-                            <form asp-controller="Files" asp-action="AddMetaData" asp-route-filename="@System.IO.Path.GetFileName(item.Uri.ToString())" asp-route-containerName="@container.ContainerName" asp-route-itemName="itemName" asp-route-preis="preis" method="post">
-                                <div class="form-group">
-                                    <label for="itemName">Bezeichnung: </label>
-                                    <input class="form-control" type="text" name="itemName" id="itemName" />
+                                        <input type="file" name="files" multiple />
+                                        <button type="submit">Upload Files</button>
+                                    </form>
                                 </div>
-                                <div class="form-group">
-                                    <label for="preis">Preis: </label>
-                                    <input class="form-control" type="text" name="preis" id="preis" />
-                                </div>
-                                
-                                <button type="submit" class="btn btn-primary">Send</button>
-                            </form>
-                        </div>
-                        
-                        <br />
-
-                    </li>
-                }
-
+                            </td>
+                        </tr>
                     }
-                </ul>
+                </tbody>
+            </table>
 
+            <h2>Dateien</h2>
 
-                <div class="col-3">
-                    <h6>Neuen Ordner hinzufügen:</h6>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">Dateiname</th>
+                        <th scope="col">Delete/Download</th>
+                        <th scope="col">Informationen hinzufügen</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var container in Model.Container)
+                    {
+                        @foreach (var item in container.FileNameList)
+                        {
+                            <tr>
+                                <td>
+                                    <p>@System.IO.Path.GetFileName(item.Uri.ToString())</p>
+                                </td>
+                                <td>
+                                    <a type="button" class="btn btn-danger" asp-controller="Files" asp-action="DeleteFile" asp-route-containerName="@container.ContainerName" asp-route-fileName="@System.IO.Path.GetFileName(item.Uri.ToString())"
+                                       onclick="return confirm('Sure?');"> Datei Löschen </a>
+                                    <a type="button" class="btn btn-primary" asp-action="Download" asp-route-filename="@System.IO.Path.GetFileName(item.Uri.ToString())" asp-route-containerName="@container.ContainerName">Download</a>
+                                </td>
+                                <td>
+                                    <div class="container">
+                                        <form asp-controller="Files" asp-action="AddMetaData" asp-route-filename="@System.IO.Path.GetFileName(item.Uri.ToString())" asp-route-containerName="@container.ContainerName" asp-route-itemName="itemName" asp-route-preis="preis" method="post">
+                                            <div class="form-group">
+                                                <label for="itemName">Bezeichnung: </label>
+                                                <input class="form-control" type="text" name="itemName" id="itemName" />
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="preis">Preis: </label>
+                                                <input class="form-control" type="text" name="preis" id="preis" />
+                                            </div>
 
-                    <form asp-controller="Files" asp-action="CreateContainer" asp-route-containerName="containerInput" method="post">
-                        <label for="containerInput">Ordner Name: </label>
-                        <input type="text" name="ContainerName" id="containerInput" />
-                    </form>
-                </div>
-            </div>
+                                            <button type="submit" class="btn btn-primary">Send</button>
+                                        </form>
+                                    </div>
+                                </td>
+                            </tr>
+                        }
+                    }
+                </tbody>
+            </table>
 
 
 
         </div>
+
+
+
+    </div>
 
 
