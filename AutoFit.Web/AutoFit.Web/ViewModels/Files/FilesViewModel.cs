@@ -23,6 +23,10 @@ namespace AutoFit.Web.ViewModels.Files
 	{
         public IEnumerable<CloudBlobContainer> ContainerList { get; set; } = new List<CloudBlobContainer>();
 
+        public CloudBlobContainer RochlitzCarousselContainer { get; set; }
+        public CloudBlobContainer BurgstädtCarousselContainer { get; set; }
+
+
         public List<FileDetails> Files { get; set; }
 			= new List<FileDetails>();
 

@@ -87,26 +87,6 @@ namespace AutoFit.Web.Controllers
 		    return View();
 	    }
 
-        //no need right?
-	 //   public async Task<IActionResult> Cars()
-	 //   {
-			
-		//    var model = new FilesViewModel();
-  //          model.ContainerList = await _fileService.ListContainersAsync();
-  //          foreach (var container in containerList)
-		//    {
-		//	    model.ContainerDetailsList.Add(
-		//	                        new AzureContainerDetails()
-		//	                        {
-		//		                        ContainerName = container.Name,
-		//		                        FileNameList = _fileService.GetBlobsFromContainer(container.Name)
-		//	                        });
-
-
-		//    }
-		//    return View("_cars", model);
-		//}
-
 	}
 }
 
