@@ -50,8 +50,11 @@ namespace AutoFit.Webf
 	                 })
 	                .AddOpenIdConnect("B2C_1_sign_in", options => SetOptionsForOpenIdConnectPolicy("B2C_1_sign_in", options))
 	                .AddCookie();
+			services.AddHttpsRedirection(options =>
+			{
+				options.HttpsPort = 443;
+			});
 
-			
 
 		}
 
@@ -67,10 +70,11 @@ namespace AutoFit.Webf
             }
             else
             {
-				app.UseRewriter(new RewriteOptions().AddRedirectToHttps(StatusCodes.Status301MovedPermanently, 443));
-
 				app.UseExceptionHandler("/Home/Error");
+				app.UseHsts();
             }
+			app.UseHttpsRedirection();
+
 			AutoMapper.Mapper.Initialize(cfg =>
 			{
 				cfg.CreateMap<ContactViewModel, Contact>();
