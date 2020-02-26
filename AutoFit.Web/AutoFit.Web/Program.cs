@@ -35,6 +35,9 @@ namespace AutoFit.Web
         private static IWebHostBuilder CreateBuilder(string[] args)
         {
             var builder = new WebHostBuilder()
+
+                .UseSetting("https_port", "443")
+
                 .UseKestrel()
                 .UseContentRoot(Directory.GetCurrentDirectory())
                 .UseUrls("http://localhost:5001")
