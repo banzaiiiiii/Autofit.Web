@@ -55,6 +55,15 @@ namespace AutoFit.Webf
 				options.HttpsPort = 443;
 			});
 
+			services.Configure<CookiePolicyOptions>(options =>
+			{
+				// This lambda determines whether user consent for non-essential 
+				// cookies is needed for a given request.
+				options.CheckConsentNeeded = context => true;
+				// requires using Microsoft.AspNetCore.Http;
+				options.MinimumSameSitePolicy = SameSiteMode.None;
+			});
+
 
 		}
 
@@ -94,6 +103,7 @@ namespace AutoFit.Webf
 		           .MapRoute("AutoService", "AutoFit/{controller=AutoService}/{action=Index}/{id?}")
 		           .MapRoute("NaturKinder", "AutoFit/{controller=NaturKinder}/{action=Index}/{id?}");
             });
+			app.UseCookiePolicy();
         }
 
 	    public void SetOptionsForOpenIdConnectPolicy(string policy, OpenIdConnectOptions options)
