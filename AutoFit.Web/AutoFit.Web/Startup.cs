@@ -57,10 +57,7 @@ namespace AutoFit.Webf
 
 			services.Configure<CookiePolicyOptions>(options =>
 			{
-				// This lambda determines whether user consent for non-essential 
-				// cookies is needed for a given request.
 				options.CheckConsentNeeded = context => true;
-				// requires using Microsoft.AspNetCore.Http;
 				options.MinimumSameSitePolicy = SameSiteMode.None;
 			});
 
@@ -81,9 +78,10 @@ namespace AutoFit.Webf
             {
 				app.UseExceptionHandler("/Home/Error");
 				app.UseHsts();
+				app.UseHttpsRedirection();
             }
-			app.UseHttpsRedirection();
 
+			app.UseCookiePolicy();
 			AutoMapper.Mapper.Initialize(cfg =>
 			{
 				cfg.CreateMap<ContactViewModel, Contact>();
@@ -103,7 +101,7 @@ namespace AutoFit.Webf
 		           .MapRoute("AutoService", "AutoFit/{controller=AutoService}/{action=Index}/{id?}")
 		           .MapRoute("NaturKinder", "AutoFit/{controller=NaturKinder}/{action=Index}/{id?}");
             });
-			app.UseCookiePolicy();
+			
         }
 
 	    public void SetOptionsForOpenIdConnectPolicy(string policy, OpenIdConnectOptions options)

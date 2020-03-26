@@ -87,6 +87,16 @@ namespace AutoFit.Web.Controllers
 		    return View();
 	    }
 
+		public IActionResult Datenschutz()
+		{
+			return View();
+		}
+
+		public IActionResult Impressum()
+		{
+			return View();
+		}
+
 	}
 }
 

@@ -76,6 +76,7 @@ namespace AutoFit.Web
                 {
                     options.ValidateScopes = context.HostingEnvironment.IsDevelopment();
                 });
+                
 
             return builder;
         }

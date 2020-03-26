@@ -11,14 +11,15 @@
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
     <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
     <link href="~/node_modules/font-awesome/css/font-awesome.css" rel="stylesheet" />
-    <link href="~/node_modules/site.css" rel="stylesheet" />
+    <link href="~/css/site.css" rel="stylesheet" />
+
 </head>
 <body>
+   <partial name="_CookieConsentPartial" />
 
     <div class="container-fluid">
         <div class="row">
             <div class="col-12">
-                <partial name="_CookieConsentPartial" />
                 <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark">
                     <a class="navbar-brand" href="#">AutoFit Seidel</a>
                     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
@@ -60,6 +61,7 @@
 
                     </div>
                 </nav>
+
             </div>
         </div>
     </div>
@@ -68,54 +70,54 @@
 
     @RenderBody()
 
-<footer class="footer">
-    <div class="container-fluid " id="autofitFooter">
-        <div class="row">
-            <div class="col-4">
-                <i class="fas fa-car"></i>
+    <footer class="footer">
+        <div class="container-fluid " id="autofitFooter">
+            <div class="row">
+                <div class="col-4">
+                    <i class="fas fa-car"></i>
+                </div>
+                <div class="col-4">
+                    <i class="fas fa-biohazard"></i>
+                </div>
+                <div class="col-4">
+                    <i class="fas fa-car"></i>
+                </div>
             </div>
-            <div class="col-4">
-                <i class="fas fa-biohazard"></i>
-            </div>
-            <div class="col-4">
-                <i class="fas fa-car"></i>
+
+            <hr id="FooterDivider" />
+
+            <div class="row">
+                <div class=col-4>
+                    <p>Service Hotline</p>
+                    <hr width="60%" align="left" id="FooterRedline" />
+                    <span> Tel: 123123213213213123</span>
+                </div>
+                <div class="col-4">
+                    <p>Öffnungszeiten</p>
+                    <hr width="60%" align="left" id="FooterRedline" />
+                    <p>Mo. - Fr. | 8:00 - 18:00 Uhr</p>
+                    <p>Sa.       | 8:00 - 12:00 Uhr</p>
+                </div>
+                <div class="col-4">
+                    <p>Informationen</p>
+                    <hr width="60%" align="left" id="FooterRedline" />
+                    <a asp-controller="Home" asp-action="Impressum" class="badge badge-light">Impressum</a>
+                    <a asp-controller="Home" asp-action="Contact" class="badge badge-light">Kontakt</a>
+                    <a asp-controller="Home" asp-action="Datenschutz" class="badge badge-light">Datenschutz</a>
+                </div>
             </div>
         </div>
-
-        <hr id="FooterDivider"/>
-
-        <div class="row">
-            <div class=col-4>
-                <p>Service Hotline</p>
-                <hr width="60%" align="left" id="FooterRedline"/>
-                <span > Tel: 123123213213213123</span>
-            </div>
-            <div class="col-4">
-                <p>Öffnungszeiten</p>
-                <hr width="60%" align="left" id="FooterRedline"/>
-                <p>Mo. - Fr. | 8:00 - 18:00 Uhr</p>
-                <p>Sa.       | 8:00 - 12:00 Uhr</p>
-            </div>
-            <div class="col-4">
-                <p>Informationen</p>
-                <hr width="60%" align="left" id="FooterRedline" />
-                <a asp-controller="Home" asp-action="Impressum" class="badge badge-light">Impressum</a>
-                <a asp-controller="Home" asp-action="Contact" class="badge badge-light">Kontakt</a>
-                <a asp-controller="Home" asp-action="Datenschutz" class="badge badge-light">Datenschutz</a>
-            </div>
-        </div>
-    </div>
-</footer>
+    </footer>
 
 
 
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.4/popper.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.4/popper.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.1/jquery.validate.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validation-unobtrusive/3.2.11/jquery.validate.unobtrusive.min.js"></script>
-<script src=""></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validation-unobtrusive/3.2.11/jquery.validate.unobtrusive.min.js"></script>
+    <script src=""></script>
 
     @RenderSection("Scripts", required: false)
 </body>
