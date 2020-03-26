@@ -35,6 +35,8 @@ namespace AutoFit.Webf
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc();
+			services.AddSession();
+
 			services.AddDbContext<WebsiteDbContext>(options
 														=> options.UseSqlServer(Configuration.GetConnectionString("localDB")));
 			services.AddSingleton<IFileProvider>(new PhysicalFileProvider(Path.Combine(Directory.GetCurrentDirectory(), "wwwroot")));
@@ -58,7 +60,7 @@ namespace AutoFit.Webf
 			services.Configure<CookiePolicyOptions>(options =>
 			{
 				options.CheckConsentNeeded = context => true;
-				options.MinimumSameSitePolicy = SameSiteMode.None;
+				options.MinimumSameSitePolicy = SameSiteMode.Strict;
 			});
 
 
@@ -80,7 +82,7 @@ namespace AutoFit.Webf
 				app.UseHsts();
 				app.UseHttpsRedirection();
             }
-
+			app.UseSession();
 			app.UseCookiePolicy();
 			AutoMapper.Mapper.Initialize(cfg =>
 			{

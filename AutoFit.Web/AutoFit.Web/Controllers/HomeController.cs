@@ -15,6 +15,7 @@ using AutoFit.Web.ViewModels.Files;
 using AutoMapper;
 
 using Microsoft.Extensions.Logging;
+using Microsoft.AspNetCore.Http;
 
 namespace AutoFit.Web.Controllers
 {
@@ -35,6 +36,7 @@ namespace AutoFit.Web.Controllers
 
         public IActionResult Index()
         {
+			RecordInSession("home");
 	        return View();
         }
 
@@ -42,6 +44,7 @@ namespace AutoFit.Web.Controllers
 		[ValidateAntiForgeryToken]
         public async Task<IActionResult> Contact(ContactViewModel contactViewModel)
         {
+			RecordInSession("contact");
 	        if (ModelState.IsValid)
 	        {
 		         var newContact = Mapper.Map<Contact>(contactViewModel);
@@ -79,24 +82,33 @@ namespace AutoFit.Web.Controllers
 
         public IActionResult Error()
         {
+			RecordInSession("Error");
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
 
 	    public IActionResult Jobs()
 	    {
-		    return View();
+			RecordInSession("Jobs");
+			return View();
 	    }
 
 		public IActionResult Datenschutz()
 		{
+			RecordInSession("Datenschutz");
 			return View();
 		}
 
 		public IActionResult Impressum()
 		{
+			RecordInSession("Impressum");
 			return View();
 		}
 
+		private void RecordInSession(string action)
+		{
+			var paths = HttpContext.Session.GetString("actions") ?? string.Empty;
+			HttpContext.Session.SetString("actions", paths + ";" + action);
+		}
 	}
 }
 

@@ -88,5 +88,7 @@ body {
 }
 
 #cookieConsent {
-    height: 1000px;
+    height: 200px;
+    position: sticky;
+    background-color:aliceblue;
 }
