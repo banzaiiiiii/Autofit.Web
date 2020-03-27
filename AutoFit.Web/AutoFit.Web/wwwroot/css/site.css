@@ -73,7 +73,7 @@ body {
 
 #autofitFooter {
     background-color: #1C1C1C;
-    color:white;
+    color: white;
 }
 
 #naturkinderNavbar {
@@ -90,5 +90,60 @@ body {
 #cookieConsent {
     height: 200px;
     position: sticky;
-    background-color:aliceblue;
+    background-color: aliceblue;
+}
+
+#scroll_top_div {
+    position: fixed;
+    background: #171719;
+    top: 0px;
+    bottom: 0px;
+    left: 0px;
+    width: 100px;
+    color: #A5A9B3;
+    font-weight: bold;
+}
+
+
+/*#scroll_top_wrap {
+    opacity: 0.5;
+    background: #f1f1f1;
+    top: auto;
+    bottom: 0px;
+    width: 100px;
+    right: 0px;
+    height: 26px;
+    text-align: center;
+    z-index: 5;
+}*/
+
+#scroll_top_wrap {
+    display: none;
+    cursor: pointer;
+    position: fixed;
+    top: 0px;
+    bottom: 0px;
+    left: 0px;
+    right: 50%;
+}
+
+.scrtoptit {
+    display: inline-block;
+    font-size: 15px;
+    margin-left: 8px;
+}
+
+.rotate {
+    -webkit-transform: rotate(90deg);
+    -moz-transform: rotate(90deg);
+    -o-transform: rotate(90deg);
+    -ms-transform: rotate(90deg);
+    transform: rotate(90deg);
+    display: inline-block;
+    font-size: 22px;
+    margin-left: 4px;
+}
+
+main_nav_container{
+    padding-left: 50px;
 }

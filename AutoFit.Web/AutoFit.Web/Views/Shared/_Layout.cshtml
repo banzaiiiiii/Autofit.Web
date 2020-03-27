@@ -15,10 +15,11 @@
 
 </head>
 <body>
-   <partial name="_CookieConsentPartial" />
+    @*<a name="top"></a>*@
+    <partial name="_CookieConsentPartial" />
 
-    <div class="container-fluid">
-        <div class="row">
+    <div class="container">
+        @*<div class="row">
             <div class="col-12">
                 <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark">
                     <a class="navbar-brand" href="#">AutoFit Seidel</a>
@@ -63,9 +64,14 @@
                 </nav>
 
             </div>
+        </div>*@
+        <div class="row" id="scroll_top_wrap" style="display:block" onclick="location.href = '#top';">
+            <div id="scroll_top_div">
+                <span  onclick="location.href = '#top';" class="scrtoptit">TO TOP <i class="fas fa-angle-double-up"></i></span>
+            </div>
         </div>
     </div>
-
+    
 
 
     @RenderBody()
