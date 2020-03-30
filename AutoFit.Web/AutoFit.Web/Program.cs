@@ -24,10 +24,6 @@ namespace AutoFit.Web
         }
 
 	    public static IWebHost BuildWebHost(string[] args) =>
-		    //WebHost.CreateDefaultBuilder(args)
-		    //       .ConfigureAppConfiguration((context, builder) => builder.SetBasePath(context.HostingEnvironment.ContentRootPath)
-		    //                                                               .AddJsonFile("appsettings.json")
-		    //                                                               .Build())
 		CreateBuilder(args)
 		           .UseStartup<Startup>()
 		           .Build();

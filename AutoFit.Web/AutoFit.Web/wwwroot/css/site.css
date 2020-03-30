@@ -59,7 +59,7 @@ body {
     text-align: center;
     color: #fff;
     padding: 5em inherit;
-    background-color: #047ab4;
+    background-color: #990000;
 }
 
 /* Carousel Styling */
@@ -105,21 +105,10 @@ body {
 }
 
 
-/*#scroll_top_wrap {
-    opacity: 0.5;
-    background: #f1f1f1;
-    top: auto;
-    bottom: 0px;
-    width: 100px;
-    right: 0px;
-    height: 26px;
-    text-align: center;
-    z-index: 5;
-}*/
+
 
 #scroll_top_wrap {
     display: none;
-    cursor: pointer;
     position: fixed;
     top: 0px;
     bottom: 0px;
@@ -133,18 +122,10 @@ body {
     margin-left: 8px;
 }
 
-.rotate {
-    -webkit-transform: rotate(90deg);
-    -moz-transform: rotate(90deg);
-    -o-transform: rotate(90deg);
-    -ms-transform: rotate(90deg);
-    transform: rotate(90deg);
-    display: inline-block;
-    font-size: 22px;
-    margin-left: 4px;
-}
+
 
 #main_header{
     padding-left: 200px;
     padding-right: 200px;
 }
+
