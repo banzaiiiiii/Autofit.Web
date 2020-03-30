@@ -63,10 +63,11 @@ body {
 }
 
 /* Carousel Styling */
-.setImageHeight {
-    width: auto;
+.setImageSize {
+    width: 1250px;
     height: 500px;
     max-height: 500px;
+    left:50%;
 }
 
 /*Naturkinder Styles*/
@@ -122,10 +123,7 @@ body {
     margin-left: 8px;
 }
 
-
-
-#main_header{
-    padding-left: 200px;
-    padding-right: 200px;
+#main_home_body {
+    left: 60%;
+   
 }
-

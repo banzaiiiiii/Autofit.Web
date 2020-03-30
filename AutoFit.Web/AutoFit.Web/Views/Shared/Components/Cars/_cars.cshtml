@@ -6,29 +6,9 @@
 }
 
 
-<h1> Hier Fahrzeugbestandliste</h1>
-
-@*<div class="container">
-
-        @foreach (var item in Model.ContainerDetailsList)
-        {
-            foreach (var file in item.FileNameList)
-            {
-                <a asp-controller="Files" asp-action="Index"> <img src="@file"  /> </a>
-                <div class="container fahrzeugBilderDiv">
-                    <img id="fahrzeugsBestandlisteIMG" src="@file.Uri" />
-                </div>
-
-                foreach (var data in file.Metadata.Values)
-                {
-                    <h1>@data.Replace("=", ":").Replace("Euro", "€").Replace("euro", "€")</h1>
-                }
+<h1> Unsere Fahrzeuge</h1>
 
 
-            }
-        }
-
-    </div>*@
 @{int j = 0; }
 
 @foreach (var item in Model.ContainerDetailsList)
@@ -49,7 +29,7 @@
                         i++;
                         var active = i == 1 ? "active" : "";
                         <div class="carousel-item @active">
-                            <img class="d-block img-fluid setImageHeight" src="@file.Uri">
+                            <img class="d-block img-fluid setImageSize" src="@file.Uri">
                         </div>
                     }
                     }
