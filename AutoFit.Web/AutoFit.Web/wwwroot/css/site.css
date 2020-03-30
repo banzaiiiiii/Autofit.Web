@@ -144,6 +144,7 @@ body {
     margin-left: 4px;
 }
 
-main_nav_container{
-    padding-left: 50px;
+#main_header{
+    padding-left: 200px;
+    padding-right: 200px;
 }

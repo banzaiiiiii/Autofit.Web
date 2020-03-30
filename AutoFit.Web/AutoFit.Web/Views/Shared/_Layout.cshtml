@@ -19,9 +19,18 @@
     <partial name="_CookieConsentPartial" />
 
     <div class="container">
-        @*<div class="row">
-            <div class="col-12">
-                <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark">
+        <div class="row">
+
+            <div class="col-3">
+                <div id="scroll_top_wrap" style="display:block" onclick="location.href = '#top';">
+                    <div id="scroll_top_div">
+                        <span onclick="location.href = '#top';" class="scrtoptit">TO TOP <i class="fas fa-angle-double-up"></i></span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-6">
+                <nav id="main_header" class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark">
                     <a class="navbar-brand" href="#">AutoFit Seidel</a>
                     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
                         <span class="navbar-toggler-icon"></span>
@@ -62,16 +71,14 @@
 
                     </div>
                 </nav>
+            </div>
 
-            </div>
-        </div>*@
-        <div class="row" id="scroll_top_wrap" style="display:block" onclick="location.href = '#top';">
-            <div id="scroll_top_div">
-                <span  onclick="location.href = '#top';" class="scrtoptit">TO TOP <i class="fas fa-angle-double-up"></i></span>
-            </div>
+
+
         </div>
+
     </div>
-    
+
 
 
     @RenderBody()
