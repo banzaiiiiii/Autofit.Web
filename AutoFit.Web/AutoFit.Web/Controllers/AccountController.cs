@@ -43,25 +43,27 @@ namespace AutoFit.Web.Controllers
             var userNameFromAppsettings = _configuration.GetSection("UserManagement").GetSection("username").Value;
             var passwordFromAppsettings = _configuration.GetSection("UserManagement").GetSection("password").Value;
 
-           
-                if (inputModel.Username.Equals(userNameFromAppsettings) && inputModel.Password.Equals(passwordFromAppsettings))
-                {
 
-                    var claims = new List<Claim>
+            if (inputModel.Username.Equals(userNameFromAppsettings) && inputModel.Password.Equals(passwordFromAppsettings))
+            {
+
+                var claims = new List<Claim>
                 {
                     new Claim(ClaimTypes.Name, userNameFromAppsettings),
                     new Claim(ClaimTypes.Role, "Administrator" )
                 };
-                    var claimsIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
-                    await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(claimsIdentity));
-                }
+                var claimsIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
+                await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(claimsIdentity));
+                return RedirectToAction("index", "home");
+            }
 
-                else
-                {
-                    ModelState.AddModelError(string.Empty, "Invalid Login Attempt");
-                }
-                return RedirectToAction("index", "home", inputModel);
-            
+            else
+            {
+                ModelState.AddModelError(string.Empty, "Invalid Login Attempt");
+
+            }
+            return View(inputModel);
+
         }
 
 
