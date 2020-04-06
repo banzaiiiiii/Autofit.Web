@@ -6,17 +6,18 @@ using System.Threading.Tasks;
 
 using AutoFit.Web.Abstractions;
 using AutoFit.Web.ViewModels.Files;
-
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 
 namespace AutoFit.Web.Controllers
 {
+    [Authorize]
     public class FilesController : BaseController
     {
         private readonly IFileService _fileService;
-
+       
         public FilesController(IFileService fileService, ILoggerFactory loggerFactory) : base(loggerFactory)
         {
             _fileService = fileService;

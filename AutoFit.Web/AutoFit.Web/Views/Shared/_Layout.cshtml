@@ -28,49 +28,9 @@
                 </div>
             </div>
 
-
-            <div class="col-6">
-                <nav id="main_header" class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark">
-                    <a class="navbar-brand" href="#">AutoFit Seidel</a>
-                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
-                        <span class="navbar-toggler-icon"></span>
-                    </button>
-                    <div class="collapse navbar-collapse" id="navbarCollapse">
-                        <div class="navbar-nav mr-auto">
-                            <a class="nav-item nav-link active" asp-controller="Home" asp-action="Index">Home <span class="sr-only">(current)</span></a>
-                            <a class="nav-link dropdown-toggle" asp-controller="Home" asp-action="Index" asp-fragment="leistungenView" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                                Leistungen
-                            </a>
-                            <div class="dropdown">
-                                <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                                    <a class="dropdown-item" asp-controller="Home" asp-action="Index" asp-fragment="leistungenView">Scheiben austauschen</a>
-                                    <a class="dropdown-item" asp-controller="Home" asp-action="Index" asp-fragment="leistungenView">Reparaturen aller Art</a>
-                                    <a class="dropdown-item" asp-controller="Home" asp-action="Index" asp-fragment="leistungenView">bla</a>
-                                </div>
-                            </div>
-                            <a class="nav-item nav-link" asp-controller="Home" asp-action="Index" asp-fragment="carView">Gebrauchtwagen</a>
-                            <a class="nav-item nav-link" asp-controller="Home" asp-action="Contact">Kontakt</a>
-                            <a class="nav-item nav-link" asp-controller="Home" asp-action="Jobs">Stellenangebote</a>
-
-                        </div>
-                        <div class="navbar-nav">
-                            @if (User.Identity.IsAuthenticated)
-                            {
-                                <a class="nav-item nav-link" asp-controller="Files" asp-action="Index">Admin</a>
-
-                                <form class="form-inline " method="post" asp-controller="Auth" asp-action="SignOut">
-                                    <button type="submit" class="btn btn-primary">Sign Out</button>
-                                </form>
-
-                            }
-                            else
-                            {
-                                <a class="nav-item nav-link" asp-controller="Auth" asp-action="SignIn">Sign In</a>
-                            }
-                        </div>
-
-                    </div>
-                </nav>
+            <div id="navbar">
+                @await Html.PartialAsync("_navbar");
+                @*@await Component.InvokeAsync("Navbar");*@
             </div>
 
 

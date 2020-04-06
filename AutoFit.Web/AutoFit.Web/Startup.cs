@@ -11,6 +11,7 @@ using Microsoft.AspNetCore.Authentication.OpenIdConnect;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Rewrite;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -33,7 +34,7 @@ namespace AutoFit.Webf
 
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddMvc();
+			services.AddMvc();
 			services.AddSession();
 
 			services.AddDbContext<WebsiteDbContext>(options
@@ -44,13 +45,8 @@ namespace AutoFit.Webf
 	        services.AddScoped<IMail, MailService>();
 	        services.AddScoped<IFileService, AzureFileService>();
 
-	        services.AddAuthentication(options =>
-	                 {
-		                 options.DefaultSignInScheme = CookieAuthenticationDefaults.AuthenticationScheme;
-		                 options.DefaultAuthenticateScheme = CookieAuthenticationDefaults.AuthenticationScheme;
-	                 })
-	                .AddOpenIdConnect("B2C_1_sign_in", options => SetOptionsForOpenIdConnectPolicy("B2C_1_sign_in", options))
-	                .AddCookie();
+			//services.AddIdentity<IdentityUser, IdentityRole>();
+
 			services.AddHttpsRedirection(options =>
 			{
 				options.HttpsPort = 443;
@@ -59,7 +55,11 @@ namespace AutoFit.Webf
 			services.Configure<CookiePolicyOptions>(options =>
 			{
 				options.CheckConsentNeeded = context => true;
-				options.MinimumSameSitePolicy = SameSiteMode.Strict;
+				options.MinimumSameSitePolicy = SameSiteMode.None;
+			});
+			services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme).AddCookie(cookieOptions =>
+			{
+				cookieOptions.LoginPath = "/";
 			});
 
 
@@ -81,13 +81,15 @@ namespace AutoFit.Webf
 				app.UseHsts();
 				app.UseHttpsRedirection();
             }
-			app.UseSession();
+			//app.UseSession();
 			app.UseCookiePolicy();
+
 			AutoMapper.Mapper.Initialize(cfg =>
 			{
 				cfg.CreateMap<ContactViewModel, Contact>();
 
 			});
+
             app.UseStaticFiles();
 	        app.UseNodeModules(env.ContentRootPath);
 
@@ -104,16 +106,5 @@ namespace AutoFit.Webf
             });
 			
         }
-
-	    public void SetOptionsForOpenIdConnectPolicy(string policy, OpenIdConnectOptions options)
-	    {
-		    options.MetadataAddress = "https://banzaii.b2clogin.com/banzaii.onmicrosoft.com/v2.0/.well-known/openid-configuration?p=" + policy;
-		    options.ClientId = "efaae8de-ad2e-4a9f-9c41-a55244d2d5f1";
-		    options.ResponseType = OpenIdConnectResponseType.IdToken;
-		    options.CallbackPath = "/signin/" + policy;
-		    options.SignedOutCallbackPath = "/signout/" + policy;
-		    options.SignedOutRedirectUri = "/";
-		    options.TokenValidationParameters.NameClaimType = "name";
-	    }
     }
 }
