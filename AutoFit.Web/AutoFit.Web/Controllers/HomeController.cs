@@ -22,82 +22,77 @@ namespace AutoFit.Web.Controllers
     public class HomeController : BaseController
     {
 
-	    private readonly IContact _contactService;
-	    private readonly IMail _mailService;
-	    private readonly IFileService _fileService;
+        private readonly IContact _contactService;
+        private readonly IMail _mailService;
+        private readonly IFileService _fileService;
 
         public HomeController(IFileService fileService, IContact contactService, IMail mailService, ILoggerFactory loggerFactory)
-	        : base(loggerFactory)
+            : base(loggerFactory)
         {
-	        _fileService = fileService ?? throw new ArgumentNullException(nameof(fileService));
-	        _contactService = contactService ?? throw new ArgumentNullException(nameof(contactService));
-	        _mailService = mailService ?? throw new ArgumentNullException(nameof(mailService));
+            _fileService = fileService ?? throw new ArgumentNullException(nameof(fileService));
+            _contactService = contactService ?? throw new ArgumentNullException(nameof(contactService));
+            _mailService = mailService ?? throw new ArgumentNullException(nameof(mailService));
         }
 
         public IActionResult Index()
         {
-	        return View();
+            return View();
         }
 
-		[HttpPost]
-		[ValidateAntiForgeryToken]
+        [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Contact(ContactViewModel contactViewModel)
         {
-	        if (ModelState.IsValid)
-	        {
-		         var newContact = Mapper.Map<Contact>(contactViewModel);
-	             newContact.TimeStamp = DateTime.Now;
-						
+            if (ModelState.IsValid)
+            {
+                var newContact = Mapper.Map<Contact>(contactViewModel);
+                newContact.TimeStamp = DateTime.Now;
 
-	        string emailBody = "Neue Email von: " + newContact.FirstName + newContact.LastName + " mit der Adresse: " + newContact.Email
-	                         + " die hinterlassene Nachricht lautet: " + newContact.Message;
 
-			 
-		        try
-		        {
-			        //_contactService.Add(newContact);
-			        //await _contactService.SaveAsync();
-			        await _mailService.SendEmailAsync(newContact.Subject, emailBody);
+                string emailBody = "Neue Email von: " + newContact.FirstName + newContact.LastName + " mit der Adresse: " + newContact.Email
+                                 + " die hinterlassene Nachricht lautet: " + newContact.Message;
 
-		    return View("SuccessView");
-		        }
-		        catch (Exception ex)
-		        {
-					_logger.LogError(ex, "Failed sending or saving contact");
-		        }
-			}
 
-	        return View();
+                try
+                {
+                    //_contactService.Add(newContact);
+                    //await _contactService.SaveAsync();
+                    await _mailService.SendEmailAsync(newContact.Subject, emailBody);
+
+                    return View("MessageSendSuccessView");
+                }
+                catch (Exception ex)
+                {
+                    _logger.LogError(ex, "Failed sending or saving contact");
+                }
+            }
+
+            return View("MessageSendFailedView");
 
         }
 
-		[HttpGet]
-	    public IActionResult Contact()
-	    {
-		    return View();
-	    }
+        [HttpGet]
+        public IActionResult Contact()
+        {
+            return View();
+        }
 
         public IActionResult Error()
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
 
-	    public IActionResult Jobs()
-	    {
-			return View();
-	    }
+        public IActionResult Datenschutz()
+        {
+            return View();
+        }
 
-		public IActionResult Datenschutz()
-		{
-			return View();
-		}
+        public IActionResult Impressum()
+        {
+            return View();
+        }
 
-		public IActionResult Impressum()
-		{
-			return View();
-		}
 
-		
-	}
+    }
 }
 

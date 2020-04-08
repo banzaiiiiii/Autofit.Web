@@ -1,19 +1,22 @@
 ﻿@using Microsoft.AspNetCore.Http;
-@model AutoFit.Web.ViewModels.HomeIndexViewModel
+@model AutoFit.Web.ViewModels.ContactViewModel
 @{
     ViewBag.Title = "AutoFit Seidel";
 }
 <div class="jumbotron">
-    <h1>Willkommen bei  Autofit Seidel </h1>
-    <p>placeholder</p>
+    <h1>Herzlich Willkommen bei Autofit Seidel </h1>
 </div>
 <div id="main_home_body" class="container">
 
 
-    <div id="carView">@await Component.InvokeAsync("BurgstädtCaroussel")</div>
-    <div id="leistungenView">@await Html.PartialAsync("_leistungen")</div>
-    <div id="carView">@await Component.InvokeAsync("Cars")</div>
-
-
+    <div class="container" id="carView">@await Component.InvokeAsync("BurgstädtCaroussel")</div>
+    <hr id="GraueTrennlinie" />
+    <div class="container" id="newsView">@await Html.PartialAsync("_news")</div>
+    <hr id="GraueTrennlinie" />
+    <div class="container" id="leistungenView">@await Html.PartialAsync("_leistungen")</div>
+    <hr id="GraueTrennlinie" />
+    <div class="container" id="jobsView">@await Html.PartialAsync("_jobs")</div>
+    <hr id="GraueTrennlinie" />
+    <div class="container" id="carView">@await Component.InvokeAsync("Cars")</div>
 
 </div>

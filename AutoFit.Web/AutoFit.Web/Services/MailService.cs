@@ -11,8 +11,6 @@ namespace AutoFit.Web.Services
 {
     public class MailService : IMail
     {
-
-       
 	    private readonly IConfiguration _configuration;
 
         public MailService(IConfiguration configuration)
@@ -35,11 +33,11 @@ namespace AutoFit.Web.Services
                 client.UseDefaultCredentials = false;
                 client.Credentials = new NetworkCredential(senderEmail, senderPassword);
 
-                MailMessage mailMessage = new MailMessage(senderEmail, toEmail, subject, emailBody);
+                var mailMessage = new MailMessage(senderEmail, toEmail, subject, emailBody);
                 mailMessage.IsBodyHtml = true;
                 mailMessage.BodyEncoding = Encoding.UTF8;
 
-               client.Send(mailMessage);
+               client.Send(mailMessage); 
             }
               
 

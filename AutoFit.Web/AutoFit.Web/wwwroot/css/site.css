@@ -27,8 +27,13 @@ body {
     height: 8px;
 }
 
+
 #FooterRedline {
     background-color: red;
+}
+
+#GraueTrennlinie{
+    background-color: darkslategray;
 }
 /* Carousel */
 .carousel-caption p {
@@ -115,6 +120,7 @@ body {
     bottom: 0px;
     left: 0px;
     right: 50%;
+    width: 5px;  /*not sure, why but fixed that to top doesnt trigger everywhere*/
 }
 
 .scrtoptit {
@@ -124,6 +130,40 @@ body {
 }
 
 #main_home_body {
-    left: 60%;
+    /*left: 60%;*/
    
+}
+
+#leistungs_div{
+    background-color:aliceblue;
+    padding-top:10px;
+    padding-left:20px;
+    padding-right:10px;
+    padding-bottom:5px;
+   opacity:0.6;
+
+}
+
+#überschrift{
+    text-align:center;
+
+}
+
+i {
+    font-size: 30px;
+}
+
+/*bootstrap containers have padding, this should overwrite it, so container fluid is always 100% width
+.container-fluid {
+    padding-right: 0;
+    padding-left: 0;
+    margin-right: auto;
+    margin-left: auto
+}*/
+
+#images_centered {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 40%;
 }
