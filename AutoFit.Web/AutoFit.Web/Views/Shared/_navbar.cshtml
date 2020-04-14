@@ -32,7 +32,8 @@
 
             @if (User.Identity.IsAuthenticated)
             {
-                <a class="nav-item nav-link" asp-controller="Files" asp-action="Index">Admin</a>
+                <a class="nav-item nav-link" asp-controller="Admin" asp-action="Shop">Shop</a>
+                <a class="nav-item nav-link" asp-controller="Admin" asp-action="Index">Admin</a>
 
                 <form class="form-inline " method="post" asp-controller="Account" asp-action="Logout">
                     <button type="submit" class="btn btn-primary">Sign Out</button>

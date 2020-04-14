@@ -14,11 +14,11 @@ using Microsoft.Extensions.Logging;
 namespace AutoFit.Web.Controllers
 {
     [Authorize]
-    public class FilesController : BaseController
+    public class AdminController : BaseController
     {
         private readonly IFileService _fileService;
 
-        public FilesController(IFileService fileService, ILoggerFactory loggerFactory) : base(loggerFactory)
+        public AdminController(IFileService fileService, ILoggerFactory loggerFactory) : base(loggerFactory)
         {
             _fileService = fileService;
         }
@@ -44,7 +44,7 @@ namespace AutoFit.Web.Controllers
                 TempData.Remove("errorMessage");
             }
 
-            return View("admin", model);
+            return View(model);
         }
 
         [HttpPost]
@@ -145,6 +145,27 @@ namespace AutoFit.Web.Controllers
             await _fileService.DeleteAsync(containerName, fileName);
 
             return RedirectToAction("Index");
+        }
+
+        public IActionResult Shop()
+        {
+
+            var model = new FilesViewModel();
+            model.ContainerList = _fileService.ListContainersAsync();
+            foreach (var container in model.ContainerList)
+            {
+                model.ContainerDetailsList.Add(
+                                    new AzureContainerDetails()
+                                    {
+                                        ContainerMetadata = container.Metadata,
+                                        ContainerName = container.Name,
+                                        FileNameList = _fileService.GetBlobsFromContainer(container.Name)
+                                    });
+
+
+            }
+
+            return View(model);
         }
 
         //public async Task<IActionResult> GetUrls(string containerName)
