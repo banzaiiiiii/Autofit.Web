@@ -12,58 +12,65 @@
     <p>Hier finden sie unsere aktuellen Angebote!</p>
     <br />
 
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col"></th>
+                <th scope="col">Artikel Bezeichnung</th>
+                <th scope="col">Beschreibung</th>
+                <th scope="col">Preis und Bezahlung</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.ContainerDetailsList)
+            {
+                if (item.ContainerName.Contains("shop"))
+                {
+                    <tr>
+                        <th scope="row">
+                            <div id="carouselExample" class="carousel slide" data-ride="carousel">
+                                <ul class="carousel-indicators">
+                                    <li data-target="#carouselExample" data-slide-to="0" class="active"></li>
+                                    <li data-target="#carouselExample" data-slide-to="1"></li>
+                                    <li data-target="#carouselExample" data-slide-to="2"></li>
+                                </ul>
 
-    @foreach (var item in Model.ContainerDetailsList)
-    {if (item.ContainerName.Contains("shop"))
-        {
-        <div class="row">
-            <div class="col-3">
-                <div class="container">
-                    <div id="carouselExample" class="carousel slide" data-ride="carousel">
-                        <ul class="carousel-indicators">
-                            <li data-target="#carouselExample" data-slide-to="0" class="active"></li>
-                            <li data-target="#carouselExample" data-slide-to="1"></li>
-                            <li data-target="#carouselExample" data-slide-to="2"></li>
-                        </ul>
+                                <div class="carousel-inner">
+                                    @{int i = 0;}
 
-                        <div class="carousel-inner">
-                            @{int i = 0;}
-
-                            @foreach (var file in item.FileNameList)
-                            {
-                                i++;
-                                var active = i == 1 ? "active" : "";
-                                <div class="carousel-item @active">
-                                    <img class="d-block img-fluid setImageSize" src="@file.Uri">
+                                    @foreach (var file in item.FileNameList)
+                                    {
+                                        i++;
+                                        var active = i == 1 ? "active" : "";
+                                        <div class="carousel-item @active">
+                                            <img class="d-block img-fluid setImageSize" src="@file.Uri">
+                                        </div>
+                                    }
                                 </div>
-                            }
-                        </div>
-                        <a class="carousel-control-prev" href="#carouselExample" role="button" data-slide="prev">
-                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                            <span class="sr-only">Previous</span>
-                        </a>
-                        <a class="carousel-control-next" href="#carouselExample" role="button" data-slide="next">
-                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                            <span class="sr-only">Next</span>
-                        </a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-3">
-                <h1>@item.ContainerName.Replace("shop","")</h1>
-            </div>
-            <div class="col-3">
-                <h1>@item.ContainerMetadata["Name"]</h1>
-            </div>
-            <div class="col-3">
-                <h1>"€@item.ContainerMetadata["Preis"]</h1>
-            </div>
-        </div>
-            <br />
-        }
-    }
+                                <a class="carousel-control-prev" href="#carouselExample" role="button" data-slide="prev">
+                                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                    <span class="sr-only">Previous</span>
+                                </a>
+                                <a class="carousel-control-next" href="#carouselExample" role="button" data-slide="next">
+                                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                    <span class="sr-only">Next</span>
+                                </a>
+                            </div>
+                        </th>
+                        <td>
+                            <h1>@item.ContainerName.Replace("shop", "")</h1>
+                        </td>
 
+                        <td>
+                            <h1>@item.ContainerMetadata["Name"]</h1>
+                        </td>
 
-
-
+                        <td>
+                            <h1>€@item.ContainerMetadata["Preis"]</h1>
+                        </td>
+                    </tr>
+                }
+            }
+        </tbody>
+    </table>
 </div>

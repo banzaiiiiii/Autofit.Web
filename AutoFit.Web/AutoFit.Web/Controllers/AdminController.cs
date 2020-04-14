@@ -126,7 +126,7 @@ namespace AutoFit.Web.Controllers
             catch (Exception e)
             {
                 _logger.LogError(e, "could not create folder");
-                TempData["errorMessage"] = "!!nur Kleinbuchstaben erlaubt!!";
+                TempData["errorMessage"] = "!!nur Kleinbuchstaben und Zahlen erlaubt!!";
                 return RedirectToAction("Index");
             }
 

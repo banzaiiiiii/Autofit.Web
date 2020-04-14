@@ -13,6 +13,5 @@ function HideShowFilesInContainer() {
     } else {
         $(".FolderFiles").show();
     }
-    
 }
 
