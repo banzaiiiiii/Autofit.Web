@@ -193,3 +193,8 @@ i {
     font-weight: bold;
     color: white;
 }
+
+/*Dateien aus Ordnern werden erst durch button function angezeigt*/
+.FolderFiles{
+    display: none;
+}

@@ -23,11 +23,12 @@
     <div class="row">
 
 
-        <h2>Ordner</h2>
+        <h2>Ordner <button class="btn btn-info" onclick="HideShowFilesInContainer()">Dateien in Ordner anzeigen!</button> </h2>      
         <table class="table">
             <thead>
                 <tr>
                     <th scope="col">Ordnername</th>
+                    <th scope="col" class="FolderFiles" >Dateien</th>
                     <th scope="col">Löschen</th>
                     <th scope="col">Hochladen</th>
                     <th scope="col">Informationen hinzufügen</th>
@@ -38,6 +39,23 @@
                 {
                     <tr>
                         <th scope="row">@container.ContainerName</th>
+                        <td class="FolderFiles">
+                            <ul>
+                                @foreach (var item in container.FileNameList)
+                                {
+                                <li>
+                                    @System.IO.Path.GetFileName(item.Uri.ToString())
+                                </li>
+                                <li>
+                                    <a type="button" class="btn btn-danger" asp-controller="Admin" asp-action="DeleteFile" asp-route-containerName="@container.ContainerName" asp-route-fileName="@System.IO.Path.GetFileName(item.Uri.ToString())"
+                                       onclick="return confirm('Sure?');"> Datei Löschen </a>
+                                    <a type="button" class="btn btn-primary" asp-action="Download" asp-route-filename="@System.IO.Path.GetFileName(item.Uri.ToString())" asp-route-containerName="@container.ContainerName">Download</a>
+                                </li>
+                                }
+
+                            </ul>
+
+                        </td>
                         <td>
                             <a type="button" class="btn btn-danger" id="btnDelete" asp-controller="Admin" asp-action="DeleteContainer"
                                asp-route-containerName="@container.ContainerName" onclick="return confirm('Sure?');">@container.ContainerName Löschen!</a>
@@ -72,54 +90,6 @@
                 }
             </tbody>
         </table>
-
-        <h2>Dateien</h2>
-
-        <table class="table">
-            <thead>
-                <tr>
-                    <th scope="col">Dateiname</th>
-                    <th scope="col">Löschen/Download</th>
-                    <th scope="col">Informationen hinzufügen</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach (var container in Model.ContainerDetailsList)
-                {
-                    @foreach (var item in container.FileNameList)
-                    {
-                        <tr>
-                            <td>
-                                <p>@System.IO.Path.GetFileName(item.Uri.ToString())</p>
-                            </td>
-                            <td>
-                                <a type="button" class="btn btn-danger" asp-controller="Admin" asp-action="DeleteFile" asp-route-containerName="@container.ContainerName" asp-route-fileName="@System.IO.Path.GetFileName(item.Uri.ToString())"
-                                   onclick="return confirm('Sure?');"> Datei Löschen </a>
-                                <a type="button" class="btn btn-primary" asp-action="Download" asp-route-filename="@System.IO.Path.GetFileName(item.Uri.ToString())" asp-route-containerName="@container.ContainerName">Download</a>
-                            </td>
-                            @*<td>
-                                    <div class="container">
-                                        <form asp-controller="Files" asp-action="AddMetaData" asp-route-filename="@System.IO.Path.GetFileName(item.Uri.ToString())" asp-route-containerName="@container.ContainerName" asp-route-itemName="itemName" asp-route-preis="preis" method="post">
-                                            <div class="form-group">
-                                                <label for="itemName">Bezeichnung: </label>
-                                                <input class="form-control" type="text" name="itemName" id="itemName" />
-                                            </div>
-                                            <div class="form-group">
-                                                <label for="preis">Preis: </label>
-                                                <input class="form-control" type="text" name="preis" id="preis" />
-                                            </div>
-
-                                            <button type="submit" class="btn btn-primary">Send</button>
-                                        </form>
-                                    </div>
-                                </td>*@
-                        </tr>
-                    }
-                }
-            </tbody>
-        </table>
-
-
 
     </div>
 
