@@ -1,12 +1,15 @@
 ﻿@model AutoFit.Web.ViewModels.Files.FilesViewModel
 @{
-    ViewData["Title"] = "Admin";
+//ViewData["Title"] = "Admin";
 }
+    <script type="text/javascript">
+ 
+    </script>
 
-
-    <div class="container-fluid">
+    <div class="container">
         <div class="row">
             <h1>Bilder Verwaltung</h1>
+          
         </div>
 
         <div>
@@ -16,6 +19,7 @@
                 <label for="containerInput">Ordner Name: </label>
                 <input type="text" name="ContainerName" id="containerInput" />
             </form>
+            <h1 id="viewbagErrorMessage">@ViewBag.Message</h1>
         </div>
 
         <div class="row">
@@ -95,7 +99,7 @@
                                        onclick="return confirm('Sure?');"> Datei Löschen </a>
                                     <a type="button" class="btn btn-primary" asp-action="Download" asp-route-filename="@System.IO.Path.GetFileName(item.Uri.ToString())" asp-route-containerName="@container.ContainerName">Download</a>
                                 </td>
-                                <td>
+                                @*<td>
                                     <div class="container">
                                         <form asp-controller="Files" asp-action="AddMetaData" asp-route-filename="@System.IO.Path.GetFileName(item.Uri.ToString())" asp-route-containerName="@container.ContainerName" asp-route-itemName="itemName" asp-route-preis="preis" method="post">
                                             <div class="form-group">
@@ -110,7 +114,7 @@
                                             <button type="submit" class="btn btn-primary">Send</button>
                                         </form>
                                     </div>
-                                </td>
+                                </td>*@
                             </tr>
                         }
                     }

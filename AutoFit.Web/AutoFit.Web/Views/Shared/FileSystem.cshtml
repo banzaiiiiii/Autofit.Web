@@ -1,0 +1,20 @@
+﻿@model AutoFit.Web.Controllers.FileSystemModel
+@{
+    ViewData["Title"] = "FileSystem";
+
+}
+
+<h1>FileSystem</h1>
+@foreach (var path in Model.FolderList)
+{
+    <p>"@Url.Content(path)"</p>
+
+}
+
+
+<h1>Bilder</h1>
+@foreach (var image in Model.FileList)
+{
+    <img class="img" src="@Url.Content(image)" />
+}
+<img class="img" src="~/images/autofit rochlitz.jpg" />

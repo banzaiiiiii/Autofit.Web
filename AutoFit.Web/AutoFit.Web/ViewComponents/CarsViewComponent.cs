@@ -29,9 +29,10 @@ namespace AutoFit.Web.ViewComponents
                 model.ContainerDetailsList.Add(
                                     new AzureContainerDetails()
                                     {
+                                        ContainerMetadata = container.Metadata,
                                         ContainerName = container.Name,
                                         FileNameList = _fileService.GetBlobsFromContainer(container.Name)
-                                    });
+                                    }); 
 
 
             }

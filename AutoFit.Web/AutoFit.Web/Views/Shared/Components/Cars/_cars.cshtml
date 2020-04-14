@@ -5,11 +5,8 @@
 
 }
 
-<hr id="GraueTrennlinie" />
+
 <h1> Unsere Fahrzeuge</h1>
-
-
-@{int j = 0; }
 
 @foreach (var item in Model.ContainerDetailsList)
 {
@@ -22,8 +19,10 @@
                     <li data-target="#carouselExample" data-slide-to="1"></li>
                     <li data-target="#carouselExample" data-slide-to="2"></li>
                 </ul>
+
                 <div class="carousel-inner">
                     @{int i = 0;}
+
                     @foreach (var file in item.FileNameList)
                     {
                         i++;
@@ -32,19 +31,14 @@
                             <img class="d-block img-fluid setImageSize" src="@file.Uri">
                         </div>
                     }
-                    }
-
                 </div>
-                <p>
+                <div id="azureMetadata">
+                    <p>@item.ContainerMetadata["LastUpdated"].Replace("=", ":")</p>
+                    <p>@item.ContainerMetadata["Name"].Replace("=", ":")</p>
+                    <p>@item.ContainerMetadata["Preis"].Replace("=", ":").Replace("Euro", "€")</p>
+                </div>
+               
 
-
-                    @foreach (var data in @Model.ContainerList.ToList()[j].Metadata.Values)
-                    {
-                        <h1>@data.Replace("=", ":").Replace("Euro", "€")</h1>
-                    }
-
-
-                </p>
                 <a class="carousel-control-prev" href="#carouselExample" role="button" data-slide="prev">
                     <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                     <span class="sr-only">Previous</span>
@@ -54,7 +48,6 @@
                     <span class="sr-only">Next</span>
                 </a>
             </div>
-            @{j++;}
         </div>
     }
 }

@@ -181,3 +181,14 @@ i {
     left: 50%;
     /*transform: translate(-50%, -50%);*/
 }
+
+#viewbagErrorMessage{
+    color:#ff0000;
+}
+
+#azureMetadata {
+    padding-top: 10px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: bold;
+    color: white;
+}

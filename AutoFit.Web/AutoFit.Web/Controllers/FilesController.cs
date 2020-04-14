@@ -17,16 +17,14 @@ namespace AutoFit.Web.Controllers
     public class FilesController : BaseController
     {
         private readonly IFileService _fileService;
-       
+
         public FilesController(IFileService fileService, ILoggerFactory loggerFactory) : base(loggerFactory)
         {
             _fileService = fileService;
         }
 
-        public async Task<IActionResult> Index()
+        public IActionResult Index()
         {
-           
-
             var model = new FilesViewModel();
             model.ContainerList = _fileService.ListContainersAsync();
             foreach (var container in model.ContainerList)
@@ -40,7 +38,13 @@ namespace AutoFit.Web.Controllers
                                     }); ;
 
             }
-            return View(model);
+            if (TempData["errorMessage"] != null)
+            {
+                ViewBag.Message = TempData["errorMessage"].ToString();
+                TempData.Remove("errorMessage");
+            }
+
+            return View("admin", model);
         }
 
         [HttpPost]
@@ -108,12 +112,23 @@ namespace AutoFit.Web.Controllers
                 _logger.LogError(ex, "wrong format for metadata");
                 return RedirectToAction("Index");
             }
-           
+
         }
 
         public async Task<IActionResult> CreateContainer(string containerName)
         {
-            await _fileService.CreateFolder(containerName);
+            try
+            {
+                await _fileService.CreateFolder(containerName);
+
+            }
+            catch (Exception e)
+            {
+                _logger.LogError(e, "could not create folder");
+                TempData["errorMessage"] = "!!nur Kleinbuchstaben erlaubt!!";
+                return RedirectToAction("Index");
+            }
+
 
             return RedirectToAction("Index");
         }

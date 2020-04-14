@@ -16,6 +16,7 @@ namespace AutoFit.Web.ViewModels.Files
 	public class AzureContainerDetails
 	{
         public string ContainerName { get; set; }
+		public IDictionary<string, string> ContainerMetadata { get; set; }
 		public IEnumerable<CloudBlockBlob> FileNameList { get; set; } = new List<CloudBlockBlob>();
     }
 
