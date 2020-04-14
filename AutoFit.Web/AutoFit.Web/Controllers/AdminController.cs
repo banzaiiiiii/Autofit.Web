@@ -110,6 +110,7 @@ namespace AutoFit.Web.Controllers
             catch (Exception ex)
             {
                 _logger.LogError(ex, "wrong format for metadata");
+                TempData["errorMessage"] = "Beschreibung konnte nicht hinzugefügt werden. Falsches Format!";
                 return RedirectToAction("Index");
             }
 

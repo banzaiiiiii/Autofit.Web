@@ -166,16 +166,16 @@ namespace AutoFit.Web.Services
         {
             var cloudBlockBlob = ResolveCloudBlockBlob(containerName, fileName);
 
-            cloudBlockBlob.Metadata["LastUpdated"] =$"Einstelldatum= {DateTime.Now.ToString()}" ;
+            cloudBlockBlob.Metadata["LastUpdated"] = DateTime.Now.ToString();
             if (fileName != null)
             {
                 cloudBlockBlob.Metadata.Remove("Name");
-                cloudBlockBlob.Metadata.Add("Name", $"Bezeichnung= {itemName}");
+                cloudBlockBlob.Metadata.Add("Name", itemName);
             }
             if (preis != null)
             {
                 cloudBlockBlob.Metadata.Remove("Preis");
-                cloudBlockBlob.Metadata.Add("Preis",$"Preis= {preis}");
+                cloudBlockBlob.Metadata.Add("Preis", preis);
 
             }
           
@@ -186,16 +186,16 @@ namespace AutoFit.Web.Services
         {
             var container = ResolveCloudBlobContainer(containerName);
 
-            container.Metadata["LastUpdated"] = $"Einstelldatum= {DateTime.Now.ToString()}";
+            container.Metadata["LastUpdated"] =DateTime.Now.ToString();
             if (containerName != null)
             {
                 container.Metadata.Remove("Name");
-                container.Metadata.Add("Name", $"Bezeichnung= {discription}");
+                container.Metadata.Add("Name", discription);
             }
             if (price != null)
             {
                 container.Metadata.Remove("Preis");
-                container.Metadata.Add("Preis", $"Preis= {price}");
+                container.Metadata.Add("Preis", price);
 
             }
 
