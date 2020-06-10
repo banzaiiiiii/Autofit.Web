@@ -12,11 +12,13 @@ namespace AutoFit.Web.Controllers
     public class ShopController : BaseController
     {
         private readonly IFileService _fileService;
-        public ShopController(IFileService fileService, ILoggerFactory loggerFactory) :base(loggerFactory)
+        private readonly IShopService _shopService;
+        public ShopController(IFileService fileService, IShopService shopService, ILoggerFactory loggerFactory) : base(loggerFactory)
         {
             _fileService = fileService;
+            _shopService = shopService;
         }
-       
+
         public IActionResult Index()
         {
             var model = new FilesViewModel();
@@ -30,8 +32,6 @@ namespace AutoFit.Web.Controllers
                                         ContainerName = container.Name,
                                         FileNameList = _fileService.GetBlobsFromContainer(container.Name)
                                     });
-
-
             }
 
             return View(model);
@@ -40,6 +40,50 @@ namespace AutoFit.Web.Controllers
         public IActionResult Kaufabwicklung()
         {
             return View();
+        }
+
+
+        [HttpGet]
+        [Route("/api/create")]
+        public async Task<IActionResult> CreatePayment()
+        {
+            _logger.LogInformation($"Creating payment against paypal api");
+
+            // create a payment for a virtuell product, that is created in service method atm
+            var result = await _shopService.CreatePayment();
+
+
+            foreach (var link in result.links)
+            {
+                if (link.rel.Equals("approval_url"))
+                {
+                    _logger.LogInformation($"Found approvel url {link.href} from response");
+                    return Redirect(link.href);
+                }
+            }
+            return NotFound();
+        }
+
+        [HttpGet]
+        [Route("Shop/Success")]
+        public async Task<IActionResult> ExecutePayment(string paymentID, string token, string PayerID)
+        {
+            _logger.LogInformation($"Executing payment against paypal api");
+
+            // create a payment for a virtuell product, that is created in service method atm
+            var result = await _shopService.ExecutePayment(PayerID, paymentID);
+
+            _logger.LogInformation($"new result from paypal api: '{result}'");
+
+            return Ok(result);
+
+        }
+
+        [HttpGet]
+        [Route("cancel")]
+        public async Task<IActionResult> CancelPayment()
+        {
+            return NotFound("Ops something went wrong with your paypal payment");
         }
     }
 }

@@ -18,7 +18,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.FileProviders;
 using Microsoft.Extensions.Logging;
-using Microsoft.IdentityModel.Protocols.OpenIdConnect;
+
+
 
 
 namespace AutoFit.Webf
@@ -44,6 +45,7 @@ namespace AutoFit.Webf
 			services.AddScoped<IContact, ContactService>();
 	        services.AddScoped<IMail, MailService>();
 	        services.AddScoped<IFileService, AzureFileService>();
+			services.AddScoped<IShopService, PayPalService>();
 
 			//services.AddIdentity<IdentityUser, IdentityRole>();
 
@@ -62,6 +64,7 @@ namespace AutoFit.Webf
 				cookieOptions.LoginPath = "/";
 			});
 
+			//services.Configure<PayPal>(Configuration.GetSection("PayPal"));
 
 		}
 
