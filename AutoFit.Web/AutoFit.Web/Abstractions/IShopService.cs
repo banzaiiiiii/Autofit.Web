@@ -1,4 +1,5 @@
-﻿using PayPal.Api;
+﻿using AutoFit.Web.ViewModels.Shop;
+using PayPal.Api;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,7 +9,7 @@ namespace AutoFit.Web.Abstractions
 {
     public interface IShopService
     {
-        Task<Payment> CreatePayment();
+        Task<Payment> CreatePayment(ShoppingCartModel shoppingCart);
         Task<Payment> ExecutePayment(string payerID, string paymentID);
     }
 }

@@ -1,23 +1,22 @@
-﻿
+﻿@model AutoFit.Web.ViewModels.Shop.ShoppingCartModel
 @{
-//ViewData["Title"] = "Kaufabwicklung";
+    //ViewData["Title"] = "Kaufabwicklung";
 }
 
 
-    <div class="container">
-        <h1>Kaufabwicklung</h1>
+<div class="container">
+    <h1>Kaufabwicklung</h1>
 
-        <p>Sie wollen also den Artikel ... kaufen</p>
-
-
-        <p>Versandinfos eingeben..</p>
+    <p>Sie wollen also den Artikel @Model.ProduktName für @Model.Value € kaufen</p>
 
 
-        <div id="paypal-button-container">
+   
 
-            <a asp-controller="Shop" asp-action="CreatePayment" class="btn btn-primary" role="button">Mit paypal bezahlen!</a>
-        </div>
+    <div id="paypal-button-container">
 
-        
-
+        <a asp-controller="Shop" asp-action="CreatePayment" asp-route-productName="@Model.ProduktName" asp-route-productPrice="@Model.Value" class="btn btn-primary" role="button">Mit paypal bezahlen!</a>
     </div>
+
+
+
+</div>

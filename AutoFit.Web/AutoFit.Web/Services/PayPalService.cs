@@ -1,11 +1,10 @@
 ﻿using AutoFit.Web.Abstractions;
-using Microsoft.AspNetCore.Mvc;
+using AutoFit.Web.ViewModels.Shop;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using PayPal.Api;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace AutoFit.Web.Services
@@ -28,7 +27,7 @@ namespace AutoFit.Web.Services
 
         }
 
-        public async Task<Payment> CreatePayment()
+        public async Task<Payment> CreatePayment(ShoppingCartModel shoppingCart)
         {
             var createdPayment = new Payment();
 
@@ -39,6 +38,7 @@ namespace AutoFit.Web.Services
 
             try
             {
+               
                 var payment = new Payment
                 {
                     intent = "sale",
@@ -51,9 +51,9 @@ namespace AutoFit.Web.Services
                             amount = new Amount
                             {
                                 currency = "EUR",
-                                total = "100"
+                                total = shoppingCart.Value
                             },
-                            description = "Test product"
+                            description = shoppingCart.ProduktName
                         }
                     },
                     redirect_urls = new RedirectUrls

@@ -1,9 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using AutoFit.Web.Abstractions;
 using AutoFit.Web.ViewModels.Files;
+using AutoFit.Web.ViewModels.Shop;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 
@@ -37,20 +35,33 @@ namespace AutoFit.Web.Controllers
             return View(model);
         }
 
-        public IActionResult Kaufabwicklung()
+        //this is shitty as fuck 
+        public IActionResult Kaufabwicklung(string productName, string productPrice)
         {
-            return View();
+            var shoppingCart = new ShoppingCartModel
+            {
+                ProduktName = productName,
+                Currency = "EUR",
+                Value = productPrice
+            };
+            return View(shoppingCart);
         }
 
 
         [HttpGet]
         [Route("/api/create")]
-        public async Task<IActionResult> CreatePayment()
+        public async Task<IActionResult> CreatePayment(string productName, string productPrice)
         {
             _logger.LogInformation($"Creating payment against paypal api");
 
             // create a payment for a virtuell product, that is created in service method atm
-            var result = await _shopService.CreatePayment();
+            var shoppingCart = new ShoppingCartModel
+            {
+                ProduktName = productName,
+                Currency = "EUR",
+                Value = productPrice
+            };
+            var result = await _shopService.CreatePayment(shoppingCart);
 
 
             foreach (var link in result.links)
@@ -75,7 +86,9 @@ namespace AutoFit.Web.Controllers
 
             _logger.LogInformation($"new result from paypal api: '{result}'");
 
-            return Ok(result);
+            var paymentDetails = result.ToString();
+            ViewBag.testing = paymentDetails;
+            return View("Success");
 
         }
 
