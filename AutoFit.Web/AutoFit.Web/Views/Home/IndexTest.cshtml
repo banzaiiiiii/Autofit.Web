@@ -3,17 +3,21 @@
 @{
     ViewBag.Title = "AutoFit Seidel";
 }
+<!--
 
 <div class="jumbotron">
     <h1>Herzlich Willkommen bei Autofit Seidel </h1>
     <img src="~/images/autofit.jpg" />
 </div>
 
-<div id="main_home_body" class="container">
+//-->
 
 
-    <div class="container" id="carView">@await Component.InvokeAsync("BurgstädtCaroussel")</div>
-    <hr id="GraueTrennlinie" />
+<div id="main_home_body">
+
+
+    <div id="carView">@await Component.InvokeAsync("BurgstädtCaroussel")</div>
+
     <div class="container" id="newsView">@await Html.PartialAsync("_news")</div>
     <hr id="GraueTrennlinie" />
     <div class="container" id="leistungenView">@await Html.PartialAsync("_leistungen")</div>

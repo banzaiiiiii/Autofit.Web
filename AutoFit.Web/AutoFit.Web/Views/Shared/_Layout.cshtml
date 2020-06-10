@@ -15,28 +15,21 @@
 
 </head>
 <body>
-    @*<a name="top"></a>*@
+  
     <partial name="_CookieConsentPartial" />
 
     <div class="container">
-        <div class="row">
+        <div id="main_navbar">
+            @await Html.PartialAsync("_navbar")
+        </div>
 
-
-            <div id="scroll_top_wrap" onclick="location.href = '#top';">
-                <div id="scroll_top_div">
-                    <span onclick="location.href = '#top';" class="scrtoptit"><br /><br /><br />TO TOP <i class="fas fa-angle-double-up"></i></span>
-                </div>
+        <div id="scroll_top_wrap" onclick="location.href = '#top';">
+            <div id="scroll_top_div">
+                <span onclick="location.href = '#top';" class="scrtoptit"><br /><br /><br />TO TOP <i class="fas fa-angle-double-up"></i></span>
             </div>
-
-            <div id="navbar">
-                @await Html.PartialAsync("_navbar")
-            </div>
-
         </div>
 
     </div>
-
-
 
     @RenderBody()
 

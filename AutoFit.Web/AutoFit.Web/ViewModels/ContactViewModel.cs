@@ -19,5 +19,10 @@ namespace AutoFit.Web.ViewModels
 	    [MaxLength(40)]
 		[DataType(DataType.EmailAddress)]
 		public string Email { get; set; }
+		[MaxLength(12)]
+		[DataType(DataType.PhoneNumber)]
+		public string TelefonNummer { get; set; }
+		[Required]
+		public bool IsChecked { get; set; }
 	}
 }

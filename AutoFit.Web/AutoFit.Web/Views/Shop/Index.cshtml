@@ -1,11 +1,7 @@
 ﻿@model AutoFit.Web.ViewModels.Files.FilesViewModel
 @{
     ViewData["Title"] = "Shop";
-
 }
-
-
-
 
 <div class="container">
     <h1>Shop</h1>
@@ -67,6 +63,7 @@
 
                         <td>
                             <h1>€@item.ContainerMetadata["Preis"]</h1>
+                            <a asp-controller="Shop" asp-action="Kaufabwicklung" class="btn btn-primary" role="button">Weiter zur Kaufsabwicklung!</a>
                         </td>
                     </tr>
                 }
