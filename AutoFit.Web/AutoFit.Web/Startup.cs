@@ -5,7 +5,7 @@ using AutoFit.Web.Data;
 using AutoFit.Web.Data.Abstractions;
 using AutoFit.Web.Services;
 using AutoFit.Web.ViewModels;
-
+using AutoFit.Web.ViewModels.Shop;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication.OpenIdConnect;
 using Microsoft.AspNetCore.Builder;
@@ -42,7 +42,7 @@ namespace AutoFit.Webf
 														=> options.UseSqlServer(Configuration.GetConnectionString("localDB")));
 			services.AddSingleton<IFileProvider>(new PhysicalFileProvider(Path.Combine(Directory.GetCurrentDirectory(), "wwwroot")));
 
-			services.AddScoped<IContact, ContactService>();
+			services.AddScoped<IProduct, ProductService>();
 	        services.AddScoped<IMail, MailService>();
 	        services.AddScoped<IFileService, AzureFileService>();
 			services.AddScoped<IShopService, PayPalService>();
@@ -90,6 +90,7 @@ namespace AutoFit.Webf
 			AutoMapper.Mapper.Initialize(cfg =>
 			{
 				cfg.CreateMap<ContactViewModel, Contact>();
+				cfg.CreateMap<ProductViewModel, Product>();
 
 			});
 

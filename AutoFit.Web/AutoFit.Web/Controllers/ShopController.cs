@@ -1,7 +1,10 @@
 ﻿using System.Threading.Tasks;
 using AutoFit.Web.Abstractions;
+using AutoFit.Web.Data;
+using AutoFit.Web.Data.Abstractions;
 using AutoFit.Web.ViewModels.Files;
 using AutoFit.Web.ViewModels.Shop;
+using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 
@@ -10,27 +13,36 @@ namespace AutoFit.Web.Controllers
     public class ShopController : BaseController
     {
         private readonly IFileService _fileService;
+        //sollte besser bezahlservice heißen
         private readonly IShopService _shopService;
-        public ShopController(IFileService fileService, IShopService shopService, ILoggerFactory loggerFactory) : base(loggerFactory)
+        private readonly IProduct _productService;
+
+        public ShopController(IFileService fileService, IProduct productService, IShopService shopService, ILoggerFactory loggerFactory) : base(loggerFactory)
         {
             _fileService = fileService;
             _shopService = shopService;
+            _productService = productService;
         }
 
         public IActionResult Index()
         {
-            var model = new FilesViewModel();
-            model.ContainerList = _fileService.ListContainersAsync();
-            foreach (var container in model.ContainerList)
-            {
-                model.ContainerDetailsList.Add(
-                                    new AzureContainerDetails()
-                                    {
-                                        ContainerMetadata = container.Metadata,
-                                        ContainerName = container.Name,
-                                        FileNameList = _fileService.GetBlobsFromContainer(container.Name)
-                                    });
-            }
+
+            //var model = new FilesViewModel();
+            //model.ContainerList = _fileService.ListContainersAsync();
+            //foreach (var container in model.ContainerList)
+            //{
+            //    model.ContainerDetailsList.Add(
+            //                        new AzureContainerDetails()
+            //                        {
+            //                            ContainerMetadata = container.Metadata,
+            //                            ContainerName = container.Name,
+            //                            FileNameList = _fileService.GetBlobsFromContainer(container.Name)
+            //                        });
+            //}
+
+            var model = new ProductViewModel();
+            model.Products = _productService.GetProducts();
+
 
             return View(model);
         }
@@ -97,6 +109,19 @@ namespace AutoFit.Web.Controllers
         public async Task<IActionResult> CancelPayment()
         {
             return NotFound("Ops something went wrong with your paypal payment");
+        }
+
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> AddProduct(ProductViewModel product)
+        {
+            if (ModelState.IsValid)
+            {
+                await _productService.Add(product.Name, product.Description, product.Value);
+                return RedirectToAction(nameof(Index));
+            }
+            return View();
         }
     }
 }

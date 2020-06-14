@@ -22,15 +22,14 @@ namespace AutoFit.Web.Controllers
     public class HomeController : BaseController
     {
 
-        private readonly IContact _contactService;
+        
         private readonly IMail _mailService;
         private readonly IFileService _fileService;
 
-        public HomeController(IFileService fileService, IContact contactService, IMail mailService, ILoggerFactory loggerFactory)
+        public HomeController(IFileService fileService, IMail mailService, ILoggerFactory loggerFactory)
             : base(loggerFactory)
         {
             _fileService = fileService ?? throw new ArgumentNullException(nameof(fileService));
-            _contactService = contactService ?? throw new ArgumentNullException(nameof(contactService));
             _mailService = mailService ?? throw new ArgumentNullException(nameof(mailService));
         }
 

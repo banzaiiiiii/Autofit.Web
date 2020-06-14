@@ -1,7 +1,5 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
 
-using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
 
 namespace AutoFit.Web.Data
 {
@@ -12,9 +10,8 @@ namespace AutoFit.Web.Data
 		{
 			//Database.Migrate();
 		}
-
-		
-		public DbSet<Contact> Contacts { get; set; }
+	
+		public DbSet<Product> Products { get; set; }
 
 	}
 }
