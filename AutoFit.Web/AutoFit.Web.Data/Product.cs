@@ -10,5 +10,8 @@ namespace AutoFit.Web.Data
         public string  Name { get; set; }
         public string Description { get; set; }
         public string Value { get; set; }
+
+        public ICollection<Stock> Stock { get; set; }
+        public ICollection<OrderProduct> OrderProducts { get; set; }
     }
 }

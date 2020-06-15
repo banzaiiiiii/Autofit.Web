@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using AutoFit.Web.Abstractions;
@@ -34,13 +35,13 @@ namespace AutoFit.Web.Controllers
             var model = new ProductViewModel
             {
                 Products = products.Select(x => new ProductViewModel
-            {
-                Id = x.Id,
-                Name = x.Name,
-                Description = x.Description,
-                Value = x.Value,
-                ProductImages = _fileService.GetBlobsFromContainer($"shopitem{x.Id}")
-            })
+                {
+                    Id = x.Id,
+                    Name = x.Name,
+                    Description = x.Description,
+                    Value = x.Value,
+                    ProductImages = _fileService.GetBlobsFromContainer($"shopitem{x.Id}")
+                })
             };
             return View(model);
         }
@@ -118,7 +119,7 @@ namespace AutoFit.Web.Controllers
             {
                 await _productService.Add(name, description, value);
             }
-            return View();
+            return RedirectToAction(nameof(Index));
         }
 
         public async Task<IActionResult> DeleteProduct(int id)
@@ -126,7 +127,17 @@ namespace AutoFit.Web.Controllers
             // if id is not 0, delete product
             if (!id.Equals(0))
             {
-                await _productService.Delete(id);
+                try
+                {
+                    await _productService.Delete(id);
+                    await _fileService.DeleteContainerAsync($"shopitem{id}");
+                }
+                catch (Exception ex)
+                {
+
+                    _logger.LogDebug(ex, "coudnt delete shop container");
+                }
+
             }
             return RedirectToAction(nameof(Index));
         }

@@ -42,12 +42,6 @@
                         <tr>
                             <th scope="row">
                                 <div id="carouselExample" class="carousel slide" data-ride="carousel">
-                                    <ul class="carousel-indicators">
-                                        <li data-target="#carouselExample" data-slide-to="0" class="active"></li>
-                                        <li data-target="#carouselExample" data-slide-to="1"></li>
-                                        <li data-target="#carouselExample" data-slide-to="2"></li>
-                                    </ul>
-
                                     <div class="carousel-inner">
                                         @{int i = 0;}
 
@@ -69,14 +63,14 @@
                                         <span class="sr-only">Next</span>
                                     </a>
                                 </div>
-                                <p>hier link zu weiteren bildern</p>
+                                <p>hier link zu detailansicht</p>
                             </th>
                             <td>
                                 <h1>@item.Name</h1>
                             </td>
 
                             <td>
-                                <h1>@item.Description</h1>
+                                <p>@item.Description</p>
                             </td>
 
                             <td>
