@@ -7,11 +7,12 @@ $(document).scroll(function () {
 });
 
 
-function HideShowFilesInContainer() {
-    if ($(".FolderFiles").is(":visible")){
-        $(".FolderFiles").hide();
+function HideShowFilesInContainer(className) {
+    console.log(className);
+    if ($(className).is(":visible")){
+        $(className).hide();
     } else {
-        $(".FolderFiles").show();
+        $(className).show();
     }
 }
 
