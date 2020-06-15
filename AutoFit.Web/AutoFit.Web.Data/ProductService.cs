@@ -33,7 +33,7 @@ namespace AutoFit.Web.Data
             return await _dbContext.Products.ToListAsync();
         }
 
-        public Product GetById(int id)
+        public Product GetProduct(int id)
         {
             return _dbContext.Products.Find(id);
         }

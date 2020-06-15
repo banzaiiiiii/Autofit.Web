@@ -8,6 +8,7 @@ using AutoFit.Web.Data.Abstractions;
 using AutoFit.Web.ViewModels.Files;
 using AutoFit.Web.ViewModels.Shop;
 using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 
@@ -36,7 +37,6 @@ namespace AutoFit.Web.Controllers
             {
                 Products = products.Select(x => new ProductViewModel
                 {
-                    Id = x.Id,
                     Name = x.Name,
                     Description = x.Description,
                     Value = x.Value,
@@ -46,17 +46,7 @@ namespace AutoFit.Web.Controllers
             return View(model);
         }
 
-        //this is shitty as fuck 
-        public IActionResult Kaufabwicklung(string productName, string productPrice)
-        {
-            var shoppingCart = new ShoppingCartModel
-            {
-                ProduktName = productName,
-                Currency = "EUR",
-                Value = productPrice
-            };
-            return View(shoppingCart);
-        }
+
 
 
         [HttpGet]
@@ -110,7 +100,7 @@ namespace AutoFit.Web.Controllers
             return NotFound("Ops something went wrong with your paypal payment");
         }
 
-
+        [Authorize]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> AddProduct(string name, string description, string value)
@@ -121,7 +111,23 @@ namespace AutoFit.Web.Controllers
             }
             return RedirectToAction(nameof(Index));
         }
+        [Authorize]
+        [HttpGet]
+        public IActionResult GetProduct(int id)
+        {
+            var product = _productService.GetProduct(id);
+            var model = new AdminProductViewModel
+            {
+                Name = product.Name,
+                Id = product.Id,
+                Description = product.Description,
+                Value = product.Value
+            };
+            return View(model);
+        }
 
+        [Authorize]
+        [HttpDelete]
         public async Task<IActionResult> DeleteProduct(int id)
         {
             // if id is not 0, delete product
@@ -139,7 +145,38 @@ namespace AutoFit.Web.Controllers
                 }
 
             }
-            return RedirectToAction(nameof(Index));
+            return RedirectToAction(nameof(AdminShop));
         }
+
+        //this is shitty as fuck 
+        public IActionResult Kaufabwicklung(string productName, string productPrice)
+        {
+            var shoppingCart = new ShoppingCartModel
+            {
+                ProduktName = productName,
+                Currency = "EUR",
+                Value = productPrice
+            };
+            return View(shoppingCart);
+        }
+
+        [Authorize]
+        public async Task<IActionResult> AdminShop()
+        {
+            var products = await _productService.GetProducts();
+            var model = new AdminProductViewModel
+            {
+                Products = products.Select(x => new AdminProductViewModel
+                {
+                    Id = x.Id,
+                    Name = x.Name,
+                    Description = x.Description,
+                    Value = x.Value,
+                })
+            };
+            return View("AdminShop", model);
+        }
+
+
     }
 }

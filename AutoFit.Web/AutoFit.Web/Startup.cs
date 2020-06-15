@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
 
 using AutoFit.Web.Abstractions;
 using AutoFit.Web.Data;
@@ -38,7 +39,11 @@ namespace AutoFit.Webf
         {
 			services.AddMvc();
 			services.AddAutoMapper(typeof(Startup));
-			services.AddSession();
+			services.AddSession(options =>
+			{
+				options.Cookie.Name = "ShoppingCart";
+				options.Cookie.MaxAge = TimeSpan.FromDays(365);
+			});
 
 			services.AddDbContext<WebsiteDbContext>(options
 														=> options.UseSqlServer(Configuration.GetConnectionString("localDB")));
@@ -91,7 +96,7 @@ namespace AutoFit.Webf
 
             app.UseStaticFiles();
 	        app.UseNodeModules(env.ContentRootPath);
-
+			app.UseSession();
 	        app.UseAuthentication();
 
             app.UseMvc(routes =>

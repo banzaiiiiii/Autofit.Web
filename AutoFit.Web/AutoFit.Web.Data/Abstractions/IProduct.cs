@@ -11,7 +11,7 @@ namespace AutoFit.Web.Data.Abstractions
 
         Task<Product> Update(Product product);
 
-        Product GetById(int id);
+        Product GetProduct(int id);
         Task<List<Product>> GetProducts();
 
     }

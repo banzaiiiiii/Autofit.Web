@@ -3,23 +3,7 @@
     ViewData["Title"] = "Shop";
 }
     <div class="container">
-        @if (User.Identity.IsAuthenticated)
-        {
-            <h1>Angebot hinzufügen: </h1>
-
-            <form method="post">
-                <label>Name: </label>
-                <input asp-for="Name" />
-                <label>Beschreibung: </label>
-                <input asp-for="Description" />
-                <label>Wert: </label>
-                <input asp-for="Value" />
-                <input asp-action="AddProduct" type="submit" value="Produkt speichern" />
-            </form>
-           
-        }
-
-
+        
 
         <h1>Shop</h1>
         <p>Hier finden sie unsere aktuellen Angebote!</p>
@@ -32,7 +16,6 @@
                     <th scope="col">Artikel Bezeichnung</th>
                     <th scope="col">Beschreibung</th>
                     <th scope="col">Preis und Bezahlung</th>
-                    <th scope="col">Angebot löschen oder Bilder hinzufügen</th>
                 </tr>
             </thead>
             <tbody>
@@ -78,29 +61,9 @@
                                 <a asp-controller="Shop" asp-action="Kaufabwicklung" asp-route-productName="@item.Name" asp-route-productPrice="@item.Value" class="btn btn-primary" role="button">Weiter zur Kaufsabwicklung!</a>
                                 <p>hier anstatt weiter zur ka, zum warenkorb hinzufügen button</p>
                             </td>
-                            <td>
-                                <a type="button" class="btn btn-primary" asp-action="DeleteProduct" asp-route-id="@item.Id">Angebot löschen!</a>
-
-                                <form asp-controller="Admin" asp-action="UploadShopImages" asp-route-containerName="@($"shopitem{item.Id}")" method="post"
-                                      enctype="multipart/form-data">
-
-                                    <input type="file" name="files" multiple />
-                                    <button type="submit">Ausgewählte Dateien hochladen!</button>
-                                </form>
-
-                            </td>
                         </tr>
                     }
                 }
             </tbody>
         </table>
     </div>
-@*<td>
-    <a type="button" class="btn btn-danger" id="btnDelete" asp-controller="Admin" asp-action="DeleteContainer"
-       asp-route-containerName="@container.ContainerName" onclick="return confirm('Sure?');">@container.ContainerName Löschen!</a>
-</td>*@
-@*<td>
-    <div class="uploadForm">
-        
-    </div>
-</td>*@
