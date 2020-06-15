@@ -1,4 +1,6 @@
-﻿using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 using AutoFit.Web.Abstractions;
 using AutoFit.Web.Data;
 using AutoFit.Web.Data.Abstractions;
@@ -16,34 +18,30 @@ namespace AutoFit.Web.Controllers
         //sollte besser bezahlservice heißen
         private readonly IShopService _shopService;
         private readonly IProduct _productService;
+        private readonly IMapper _mapper;
 
-        public ShopController(IFileService fileService, IProduct productService, IShopService shopService, ILoggerFactory loggerFactory) : base(loggerFactory)
+        public ShopController(IFileService fileService, IProduct productService, IShopService shopService, IMapper mapper, ILoggerFactory loggerFactory) : base(loggerFactory)
         {
             _fileService = fileService;
             _shopService = shopService;
             _productService = productService;
+            _mapper = mapper;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-
-            //var model = new FilesViewModel();
-            //model.ContainerList = _fileService.ListContainersAsync();
-            //foreach (var container in model.ContainerList)
-            //{
-            //    model.ContainerDetailsList.Add(
-            //                        new AzureContainerDetails()
-            //                        {
-            //                            ContainerMetadata = container.Metadata,
-            //                            ContainerName = container.Name,
-            //                            FileNameList = _fileService.GetBlobsFromContainer(container.Name)
-            //                        });
-            //}
-
-            var model = new ProductViewModel();
-            model.Products = _productService.GetProducts();
-
-
+            var products = await _productService.GetProducts();
+            var model = new ProductViewModel
+            {
+                Products = products.Select(x => new ProductViewModel
+            {
+                Id = x.Id,
+                Name = x.Name,
+                Description = x.Description,
+                Value = x.Value,
+                ProductImages = _fileService.GetBlobsFromContainer($"shopitem{x.Id}")
+            })
+            };
             return View(model);
         }
 
@@ -106,7 +104,7 @@ namespace AutoFit.Web.Controllers
 
         [HttpGet]
         [Route("cancel")]
-        public async Task<IActionResult> CancelPayment()
+        public IActionResult CancelPayment()
         {
             return NotFound("Ops something went wrong with your paypal payment");
         }
@@ -114,14 +112,23 @@ namespace AutoFit.Web.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> AddProduct(ProductViewModel product)
+        public async Task<IActionResult> AddProduct(string name, string description, string value)
         {
             if (ModelState.IsValid)
             {
-                await _productService.Add(product.Name, product.Description, product.Value);
-                return RedirectToAction(nameof(Index));
+                await _productService.Add(name, description, value);
             }
             return View();
+        }
+
+        public async Task<IActionResult> DeleteProduct(int id)
+        {
+            // if id is not 0, delete product
+            if (!id.Equals(0))
+            {
+                await _productService.Delete(id);
+            }
+            return RedirectToAction(nameof(Index));
         }
     }
 }

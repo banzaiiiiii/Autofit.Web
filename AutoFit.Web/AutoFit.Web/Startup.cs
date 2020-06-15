@@ -6,6 +6,7 @@ using AutoFit.Web.Data.Abstractions;
 using AutoFit.Web.Services;
 using AutoFit.Web.ViewModels;
 using AutoFit.Web.ViewModels.Shop;
+using AutoMapper;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication.OpenIdConnect;
 using Microsoft.AspNetCore.Builder;
@@ -36,6 +37,7 @@ namespace AutoFit.Webf
         public void ConfigureServices(IServiceCollection services)
         {
 			services.AddMvc();
+			services.AddAutoMapper(typeof(Startup));
 			services.AddSession();
 
 			services.AddDbContext<WebsiteDbContext>(options
@@ -48,7 +50,7 @@ namespace AutoFit.Webf
 			services.AddScoped<IShopService, PayPalService>();
 
 			//services.AddIdentity<IdentityUser, IdentityRole>();
-
+			
 			services.AddHttpsRedirection(options =>
 			{
 				options.HttpsPort = 443;
@@ -86,13 +88,6 @@ namespace AutoFit.Webf
             }
 			//app.UseSession();
 			app.UseCookiePolicy();
-
-			AutoMapper.Mapper.Initialize(cfg =>
-			{
-				cfg.CreateMap<ContactViewModel, Contact>();
-				cfg.CreateMap<ProductViewModel, Product>();
-
-			});
 
             app.UseStaticFiles();
 	        app.UseNodeModules(env.ContentRootPath);

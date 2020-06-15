@@ -1,161 +1,112 @@
-﻿@*@model AutoFit.Web.ViewModels.Files.FilesViewModel*@
-@model AutoFit.Web.ViewModels.Shop.ProductViewModel
+﻿@model AutoFit.Web.ViewModels.Shop.ProductViewModel
 @{
     ViewData["Title"] = "Shop";
 }
     <div class="container">
         @if (User.Identity.IsAuthenticated)
         {
-            <h1>ShopVerwaltung</h1>
-
+            <h1>Angebot hinzufügen: </h1>
 
             <form method="post">
-                <label>Name</label>
+                <label>Name: </label>
                 <input asp-for="Name" />
-                <label>Beschreibung</label>
+                <label>Beschreibung: </label>
                 <input asp-for="Description" />
-                <label>Wert</label>
+                <label>Wert: </label>
                 <input asp-for="Value" />
                 <input asp-action="AddProduct" type="submit" value="Produkt speichern" />
             </form>
-
+           
         }
 
 
-        <div class="container">
-            <h1>Shop</h1>
-            <p>Hier finden sie unsere aktuellen Angebote!</p>
-            <br />
 
+        <h1>Shop</h1>
+        <p>Hier finden sie unsere aktuellen Angebote!</p>
+        <br />
 
-
-            @*<table class="table">
-                <thead>
-                    <tr>
-                        <th scope="col"></th>
-                        <th scope="col">Artikel Bezeichnung</th>
-                        <th scope="col">Beschreibung</th>
-                        <th scope="col">Preis und Bezahlung</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach (var item in Model.ContainerDetailsList)
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col"></th>
+                    <th scope="col">Artikel Bezeichnung</th>
+                    <th scope="col">Beschreibung</th>
+                    <th scope="col">Preis und Bezahlung</th>
+                    <th scope="col">Angebot löschen oder Bilder hinzufügen</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.Products)
+                {
                     {
-                        if (item.ContainerName.Contains("shop"))
-                        {
-                            <tr>
-                                <th scope="row">
-                                    <div id="carouselExample" class="carousel slide" data-ride="carousel">
-                                        <ul class="carousel-indicators">
-                                            <li data-target="#carouselExample" data-slide-to="0" class="active"></li>
-                                            <li data-target="#carouselExample" data-slide-to="1"></li>
-                                            <li data-target="#carouselExample" data-slide-to="2"></li>
-                                        </ul>
+                        <tr>
+                            <th scope="row">
+                                <div id="carouselExample" class="carousel slide" data-ride="carousel">
+                                    <ul class="carousel-indicators">
+                                        <li data-target="#carouselExample" data-slide-to="0" class="active"></li>
+                                        <li data-target="#carouselExample" data-slide-to="1"></li>
+                                        <li data-target="#carouselExample" data-slide-to="2"></li>
+                                    </ul>
 
-                                        <div class="carousel-inner">
-                                            @{int i = 0;}
+                                    <div class="carousel-inner">
+                                        @{int i = 0;}
 
-                                            @foreach (var file in item.FileNameList)
-                                            {
-                                                i++;
-                                                var active = i == 1 ? "active" : "";
-                                                <div class="carousel-item @active">
-                                                    <img class="d-block img-fluid setImageSize" src="@file.Uri">
-                                                </div>
-                                            }
-                                        </div>
-                                        <a class="carousel-control-prev" href="#carouselExample" role="button" data-slide="prev">
-                                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                                            <span class="sr-only">Previous</span>
-                                        </a>
-                                        <a class="carousel-control-next" href="#carouselExample" role="button" data-slide="next">
-                                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                                            <span class="sr-only">Next</span>
-                                        </a>
+                                        @foreach (var file in item.ProductImages)
+                                        {
+                                            i++;
+                                            var active = i == 1 ? "active" : "";
+                                            <div class="carousel-item @active">
+                                                <img class="d-block img-fluid setImageSize" src="@file.Uri">
+                                            </div>
+                                        }
                                     </div>
-                                    <p>hier link zu weiteren bildern</p>
-                                </th>
-                                <td>
-                                    <h1>@item.ContainerName.Replace("shop", "")</h1>
-                                </td>
+                                    <a class="carousel-control-prev" href="#carouselExample" role="button" data-slide="prev">
+                                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                        <span class="sr-only">Previous</span>
+                                    </a>
+                                    <a class="carousel-control-next" href="#carouselExample" role="button" data-slide="next">
+                                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                        <span class="sr-only">Next</span>
+                                    </a>
+                                </div>
+                                <p>hier link zu weiteren bildern</p>
+                            </th>
+                            <td>
+                                <h1>@item.Name</h1>
+                            </td>
 
-                                <td>
-                                    <h1>@item.ContainerMetadata["Name"]</h1>
-                                </td>
+                            <td>
+                                <h1>@item.Description</h1>
+                            </td>
 
-                                <td>
-                                    <h1>€@item.ContainerMetadata["Preis"]</h1>
-                                    <a asp-controller="Shop" asp-action="Kaufabwicklung" asp-route-productName="@item.ContainerName.Replace("shop", "")" asp-route-productPrice="@item.ContainerMetadata["Preis"]" class="btn btn-primary" role="button">Weiter zur Kaufsabwicklung!</a>
-                                    <p>hier anstatt weiter zur ka, zum warenkorb hinzufügen button</p>
-                                </td>
-                            </tr>
-                        }
+                            <td>
+                                <h1>€@item.Value</h1>
+                                <a asp-controller="Shop" asp-action="Kaufabwicklung" asp-route-productName="@item.Name" asp-route-productPrice="@item.Value" class="btn btn-primary" role="button">Weiter zur Kaufsabwicklung!</a>
+                                <p>hier anstatt weiter zur ka, zum warenkorb hinzufügen button</p>
+                            </td>
+                            <td>
+                                <a type="button" class="btn btn-primary" asp-action="DeleteProduct" asp-route-id="@item.Id">Angebot löschen!</a>
+
+                                <form asp-controller="Admin" asp-action="UploadShopImages" asp-route-containerName="@($"shopitem{item.Id}")" method="post"
+                                      enctype="multipart/form-data">
+
+                                    <input type="file" name="files" multiple />
+                                    <button type="submit">Ausgewählte Dateien hochladen!</button>
+                                </form>
+
+                            </td>
+                        </tr>
                     }
-                </tbody>
-            </table>*@
-
-            <table class="table">
-                <thead>
-                    <tr>
-                        <th scope="col"></th>
-                        <th scope="col">Artikel Bezeichnung</th>
-                        <th scope="col">Beschreibung</th>
-                        <th scope="col">Preis und Bezahlung</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach (var item in Model.Products)
-                    {
-                        {
-                            <tr>
-                                <th scope="row">
-                                    <div id="carouselExample" class="carousel slide" data-ride="carousel">
-                                        @*  <ul class="carousel-indicators">
-                                                                        <li data-target="#carouselExample" data-slide-to="0" class="active"></li>
-                                                                        <li data-target="#carouselExample" data-slide-to="1"></li>
-                                                                        <li data-target="#carouselExample" data-slide-to="2"></li>
-                                                                    </ul>
-
-                                                                    <div class="carousel-inner">
-                                            @{int i = 0;}
-
-                                            @foreach (var file in item.FileNameList)
-                                            {
-                                                i++;
-                                                var active = i == 1 ? "active" : "";
-                                                <div class="carousel-item @active">
-                                                    <img class="d-block img-fluid setImageSize" src="@file.Uri">
-                                                </div>
-                                            }
-                                        </div>
-                                        <a class="carousel-control-prev" href="#carouselExample" role="button" data-slide="prev">
-                                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                                            <span class="sr-only">Previous</span>
-                                        </a>
-                                        <a class="carousel-control-next" href="#carouselExample" role="button" data-slide="next">
-                                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                                            <span class="sr-only">Next</span>
-                                        </a>*@
-                                    </div>
-                                    <p>hier link zu weiteren bildern</p>
-                                </th>
-                                <td>
-                                    <h1>@item.Name</h1>
-                                </td>
-
-                                <td>
-                                    <h1>@item.Description</h1>
-                                </td>
-
-                                <td>
-                                    <h1>€@item.Value</h1>
-                                    <a asp-controller="Shop" asp-action="Kaufabwicklung" asp-route-productName="@item.Name" asp-route-productPrice="@item.Value" class="btn btn-primary" role="button">Weiter zur Kaufsabwicklung!</a>
-                                    <p>hier anstatt weiter zur ka, zum warenkorb hinzufügen button</p>
-                                </td>
-                            </tr>
-                        }
-                    }
-                </tbody>
-            </table>
-        </div>
+                }
+            </tbody>
+        </table>
     </div>
+@*<td>
+    <a type="button" class="btn btn-danger" id="btnDelete" asp-controller="Admin" asp-action="DeleteContainer"
+       asp-route-containerName="@container.ContainerName" onclick="return confirm('Sure?');">@container.ContainerName Löschen!</a>
+</td>*@
+@*<td>
+    <div class="uploadForm">
+        
+    </div>
+</td>*@

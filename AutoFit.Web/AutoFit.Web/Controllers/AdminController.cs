@@ -169,6 +169,15 @@ namespace AutoFit.Web.Controllers
             return View(model);
         }
 
+        public async Task<IActionResult> UploadShopImages(List<IFormFile> files, string containerName)
+        {
+
+           await CreateContainer(containerName);
+           await UploadFiles(files, containerName);
+
+            return RedirectToAction("Index");
+        }
+
         //public async Task<IActionResult> GetUrls(string containerName)
         //{
         // var list = await _fileService.GetBlobsFromContainer(containerName);

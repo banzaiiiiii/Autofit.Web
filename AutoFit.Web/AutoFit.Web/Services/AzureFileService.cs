@@ -58,24 +58,37 @@ namespace AutoFit.Web.Services
             BlobContinuationToken blobContinuationToken = null;
 
             var containerName = ResolveCloudBlobContainer(containername);
-
-            do
-            {
-                var response =  containerName.ListBlobsSegmented(blobContinuationToken);
-                blobContinuationToken = response.ContinuationToken;
-                foreach (var blob in response.Results.OfType<CloudBlockBlob>())
+            BlobResultSegment response = null;
+            
+                do
                 {
-                    blob.FetchAttributes();
-                    yield return blob;
-                }
-            } while (blobContinuationToken != null);
+                    try
+                    {
+                         response = containerName.ListBlobsSegmented(blobContinuationToken);
+                    }
+                    catch (Exception ex)
+                    {
+
+                    _logger.LogDebug(ex, "no container found");
+                    yield break;
+                    }
+                    
+                    
+                    blobContinuationToken = response.ContinuationToken;
+                    foreach (var blob in response.Results.OfType<CloudBlockBlob>())
+                    {
+                        blob.FetchAttributes();
+                        yield return blob;
+                    }
+                } while (blobContinuationToken != null);
+            
         }
 
 
         public IEnumerable<CloudBlobContainer> ListContainersAsync()
         {
             BlobContinuationToken continuationToken = null;
-          
+
             do
             {
                 var storageAccount = GetCloudStorageAccount();
@@ -84,14 +97,14 @@ namespace AutoFit.Web.Services
                 var response = blobClient.ListContainersSegmented(continuationToken);
                 continuationToken = response.ContinuationToken;
                 //results.AddRange(response.Results);
-                foreach(var container in response.Results.OfType<CloudBlobContainer>())
+                foreach (var container in response.Results.OfType<CloudBlobContainer>())
                 {
                     container.FetchAttributes();
                     yield return container;
                 }
             }
             while (continuationToken != null);
-          
+
         }
 
         public async Task DeleteAsync(string containerName, string fileName)
@@ -134,7 +147,7 @@ namespace AutoFit.Web.Services
         {
             var container = ResolveCloudBlobContainer(containerName);
             var blockBlob = container.GetBlockBlobReference(fileName);
-            
+
 
             return blockBlob;
         }
@@ -178,7 +191,7 @@ namespace AutoFit.Web.Services
                 cloudBlockBlob.Metadata.Add("Preis", preis);
 
             }
-          
+
             cloudBlockBlob.SetMetadata();
         }
 
@@ -186,7 +199,7 @@ namespace AutoFit.Web.Services
         {
             var container = ResolveCloudBlobContainer(containerName);
 
-            container.Metadata["LastUpdated"] =DateTime.Now.ToString();
+            container.Metadata["LastUpdated"] = DateTime.Now.ToString();
             if (containerName != null)
             {
                 container.Metadata.Remove("Name");
@@ -202,7 +215,7 @@ namespace AutoFit.Web.Services
             container.SetMetadata();
         }
 
-        
+
 
     }
 }

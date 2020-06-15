@@ -28,9 +28,9 @@ namespace AutoFit.Web.Data
            await _dbContext.SaveChangesAsync();
         }
 
-        public IEnumerable<Product> GetProducts()
+        public async Task<List<Product>> GetProducts()
         {
-            return _dbContext.Products;
+            return await _dbContext.Products.ToListAsync();
         }
 
         public Product GetById(int id)

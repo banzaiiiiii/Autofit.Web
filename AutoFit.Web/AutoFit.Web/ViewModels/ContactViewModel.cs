@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.ComponentModel.DataAnnotations;
 
 namespace AutoFit.Web.ViewModels
 {
@@ -24,5 +25,6 @@ namespace AutoFit.Web.ViewModels
 		public string TelefonNummer { get; set; }
 		[Required]
 		public bool IsChecked { get; set; }
+		public DateTime? TimeStamp { get; set; }
 	}
 }

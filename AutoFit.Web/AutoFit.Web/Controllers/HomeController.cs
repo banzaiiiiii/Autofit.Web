@@ -44,7 +44,7 @@ namespace AutoFit.Web.Controllers
         {
             if (ModelState.IsValid)
             {
-                var newContact = Mapper.Map<Contact>(contactViewModel);
+                var newContact = contactViewModel;
                 newContact.TimeStamp = DateTime.Now;
 
 
