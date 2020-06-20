@@ -14,6 +14,7 @@ namespace AutoFit.Web.ViewModels.Shop
         public string Value { get; set; }
         public IEnumerable<ProductViewModel> Products { get; set; }
         public IEnumerable<CloudBlockBlob> ProductImages { get; set; }
+        public CloudBlockBlob ProductThumbnail { get; set; }
     }
    
 }

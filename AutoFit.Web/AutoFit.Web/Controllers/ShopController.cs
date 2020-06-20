@@ -40,7 +40,8 @@ namespace AutoFit.Web.Controllers
                     Name = x.Name,
                     Description = x.Description,
                     Value = x.Value,
-                    ProductImages = _fileService.GetBlobsFromContainer($"shopitem{x.Id}")
+                    ProductImages = _fileService.GetBlobsFromContainer($"shopitem{x.Id}"),
+                    ProductThumbnail = _fileService.GetThumbnailFromContainer($"shopitem{x.Id}")
                 })
             };
             return View(model);
@@ -113,9 +114,9 @@ namespace AutoFit.Web.Controllers
         }
         [Authorize]
         [HttpGet]
-        public IActionResult GetProduct(int id)
+        public async Task<IActionResult> GetProduct(string name)
         {
-            var product = _productService.GetProduct(id);
+            var product = await _productService.GetProduct(name);
             var model = new AdminProductViewModel
             {
                 Name = product.Name,
@@ -177,6 +178,21 @@ namespace AutoFit.Web.Controllers
             return View("AdminShop", model);
         }
 
-
+        [Authorize]
+        public async Task<IActionResult> ProductDetails(string name)
+        {
+            var product = await _productService.GetProduct(name);
+            var model = new ProductViewModel
+            {
+                
+                    Name = product.Name,
+                    Description = product.Description,
+                    Value = product.Value,
+                    ProductImages = _fileService.GetBlobsFromContainer($"shopitem{product.Id}"),
+                    ProductThumbnail = _fileService.GetThumbnailFromContainer($"shopitem{product.Id}")
+               
+            };
+            return View(model);
+        }
     }
 }

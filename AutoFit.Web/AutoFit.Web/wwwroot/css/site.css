@@ -70,23 +70,22 @@ body {
 /* Carousel Styling */
 .setImageSize {
     width: 1250px;
-    height: 500px;
-    max-height: 500px;
+    height: 800px;
+    max-height: 700px;
     left:50%;
 }
 
+.setShopImageSize{
+    max-height: 300px;
+    width:300px;
+   /*max-width: 200px;*/ 
+}
 /*Naturkinder Styles*/
-
 #autofitFooter {
     background-color: #1C1C1C;
     color: white;
 }
 
-/* tried to remove padding from navbar bottom to first content- didnt work 
-#main_navbar {
-    padding: 0,0,0,0;
-}
-*/
 #naturkinderNavbar {
     background-color: #81F781;
 }

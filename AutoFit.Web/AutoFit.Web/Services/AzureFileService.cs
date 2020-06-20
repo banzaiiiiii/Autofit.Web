@@ -31,28 +31,6 @@ namespace AutoFit.Web.Services
             container.CreateIfNotExists(BlobContainerPublicAccessType.Blob);
         }
 
-
-
-        //public async Task<List<IListBlobItem>> GetBlobsFromContainer(string containername)
-        //{
-
-        //    List<IListBlobItem> blobs = new List<IListBlobItem>();
-
-        //    BlobContinuationToken blobContinuationToken = null;
-
-        //    var containerName = ResolveCloudBlobContainer(containername);
-
-        //    do
-        //    {
-        //        var response = await containerName.ListBlobsSegmentedAsync(blobContinuationToken);
-        //        blobContinuationToken = response.ContinuationToken;
-        //        blobs.AddRange(response.Results);
-
-        //    } while (blobContinuationToken != null);
-
-        //    return blobs;
-        //}
-
         public IEnumerable<CloudBlockBlob> GetBlobsFromContainer(string containername)
         {
             BlobContinuationToken blobContinuationToken = null;
@@ -84,7 +62,14 @@ namespace AutoFit.Web.Services
             
         }
 
+        public CloudBlockBlob GetThumbnailFromContainer (string containername)
+        {
+            var containerName = ResolveCloudBlobContainer(containername);
 
+
+            var blob = containerName.GetBlockBlobReference("thumbnail.jpg");
+            return blob;
+        }
         public IEnumerable<CloudBlobContainer> ListContainersAsync()
         {
             BlobContinuationToken continuationToken = null;

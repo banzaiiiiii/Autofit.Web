@@ -8,7 +8,6 @@ $(document).scroll(function () {
 
 
 function HideShowFilesInContainer(className) {
-    console.log(className);
     if ($(className).is(":visible")){
         $(className).hide();
     } else {

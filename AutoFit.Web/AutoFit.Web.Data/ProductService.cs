@@ -33,9 +33,9 @@ namespace AutoFit.Web.Data
             return await _dbContext.Products.ToListAsync();
         }
 
-        public Product GetProduct(int id)
+        public async Task<Product> GetProduct(string name)
         {
-            return _dbContext.Products.Find(id);
+            return await _dbContext.Products.FromSql($"SELECT * FROM dbo.Products WHERE Name = {name}").FirstOrDefaultAsync();
         }
 
 

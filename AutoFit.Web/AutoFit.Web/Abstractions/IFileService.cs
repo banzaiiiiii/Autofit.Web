@@ -16,6 +16,8 @@ namespace AutoFit.Web.Abstractions
         Task DeleteContainerAsync(string containerName);
         IEnumerable<CloudBlockBlob> GetBlobsFromContainer(string containername);
 
+        CloudBlockBlob GetThumbnailFromContainer(string containername);
+
         IEnumerable<CloudBlobContainer> ListContainersAsync();
         Task CreateFolder(string containername);
         void SetMetaBlobMetaData(string fileName, string containerName, string itemName, string preis);

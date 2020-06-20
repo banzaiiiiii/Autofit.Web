@@ -48,12 +48,15 @@ namespace AutoFit.Web.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> UploadFile(IFormFile file, string containerName)
+        public async Task<IActionResult> UploadThumbnail(IFormFile file, string containerName)
         {
+
             if (file == null || file.Length == 0)
                 return Content("file not selected");
 
-            var fileName = file.FileName;
+            await CreateContainer(containerName);
+            var fileName = "thumbnail.jpg";
+                //file.FileName;
 
             using (var stream = new MemoryStream())
             {
@@ -85,6 +88,8 @@ namespace AutoFit.Web.Controllers
 
             return RedirectToAction("Index");
         }
+
+
 
         public async Task<IActionResult> Download(string filename, string containerName)
         {
@@ -172,8 +177,8 @@ namespace AutoFit.Web.Controllers
         public async Task<IActionResult> UploadShopImages(List<IFormFile> files, string containerName)
         {
 
-           await CreateContainer(containerName);
-           await UploadFiles(files, containerName);
+            await CreateContainer(containerName);
+            await UploadFiles(files, containerName);
 
             return RedirectToAction("Index");
         }

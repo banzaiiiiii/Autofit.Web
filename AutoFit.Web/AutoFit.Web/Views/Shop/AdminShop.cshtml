@@ -34,6 +34,7 @@
                     <th scope="col">Preis</th>
                     <th scope="col">Bearbeitung</th>
                     <th scope="col">Bilder Upload</th>
+                    <th scope="col">Thumbnail Upload</th>
                 </tr>
             </thead>
             <tbody>
@@ -61,8 +62,18 @@
                                     <input type="file" name="files" multiple />
                                     <button type="submit">Ausgewählte Dateien hochladen!</button>
                                 </form>
-
                             </td>
+                            <td>
+                                <form asp-controller="Admin" asp-action="UploadThumbnail" asp-route-containerName="@($"shopitem{item.Id}")" method="post"
+                                      enctype="multipart/form-data">
+
+                                    <input type="file" name="file" />
+                                    <button type="submit">Thumbnail hochladen!</button>
+                                </form>
+                            </td>
+
+
+                            
                         </tr>
                     }
                 }
