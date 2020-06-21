@@ -1,6 +1,6 @@
 ﻿@model AutoFit.Web.ViewModels.Shop.AdminProductViewModel
 @{
-    ViewData["Title"] = "ShopAdminView";
+    ViewData["Title"] = "Admin Shop";
 }
 
 <div class="container">
@@ -52,8 +52,8 @@
                                 <h1>€@item.Value</h1>
                             </td>
                             <td>
-                                <a type="button" class="btn btn-danger" asp-action="DeleteProduct" asp-route-id="@item.Id">Angebot löschen!</a>
-                                <a type="button" class="btn btn-primary" asp-action="UpdateProduct" asp-route-id="@item.Id">Angebot bearbeiten!</a>
+                                <a type="button" class="btn btn-danger" asp-controller="Shop" asp-action="DeleteProduct" asp-route-id="@item.Id">Angebot löschen!</a>
+                                <a type="button" class="btn btn-primary" asp-controller="Shop" asp-action="UpdateProduct" asp-route-id="@item.Id">Angebot bearbeiten!</a>
                             </td>
                             <td>
                                 <form asp-controller="Admin" asp-action="UploadShopImages" asp-route-containerName="@($"shopitem{item.Id}")" method="post"

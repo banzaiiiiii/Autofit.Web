@@ -41,7 +41,7 @@ namespace AutoFit.Webf
 			services.AddAutoMapper(typeof(Startup));
 			services.AddSession(options =>
 			{
-				options.Cookie.Name = "ShoppingCart";
+				options.Cookie.Name = "Cart";
 				options.Cookie.MaxAge = TimeSpan.FromDays(365);
 			});
 
@@ -53,6 +53,7 @@ namespace AutoFit.Webf
 	        services.AddScoped<IMail, MailService>();
 	        services.AddScoped<IFileService, AzureFileService>();
 			services.AddScoped<IShopService, PayPalService>();
+			services.AddScoped<CartService>();
 
 			//services.AddIdentity<IdentityUser, IdentityRole>();
 			

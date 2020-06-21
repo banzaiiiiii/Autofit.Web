@@ -26,7 +26,7 @@
                             <th scope="row">
                                 <img class="d-block img-fluid setShopImageSize" src="@item.ProductThumbnail.Uri">
                             
-                                <a asp-controller="Shop" asp-action="ProductDetails" asp-route-name="@item.Name">Produkt Details</a>
+                               <a asp-controller="Shop" asp-action="ProductDetails" asp-route-name="@item.Name">Produkt Details</a>
                             </th>
                             <td>
                                 <h1>@item.Name</h1>
@@ -38,8 +38,8 @@
 
                             <td>
                                 <h1>€@item.Value</h1>
-                                <a asp-controller="Shop" asp-action="Kaufabwicklung" asp-route-productName="@item.Name" asp-route-productPrice="@item.Value" class="btn btn-primary" role="button">Weiter zur Kaufsabwicklung!</a>
-                                <p>hier anstatt weiter zur ka, zum warenkorb hinzufügen button</p>
+                                <a asp-controller="Shop" asp-action="Kaufabwicklung" asp-route-productName="@item.Name" asp-route-productPrice="@item.Value" class="btn btn-primary" role="button">Sofort kaufen!</a>
+                                <a asp-controller="Cart" asp-action="AddToCart" asp-route-productname="@item.Name" class="btn btn-primary" role="button">Zum Warenkorb hinzufügen!</a>
                             </td>
                         </tr>
                     }

@@ -110,7 +110,7 @@ namespace AutoFit.Web.Controllers
             {
                 await _productService.Add(name, description, value);
             }
-            return RedirectToAction(nameof(Index));
+            return RedirectToAction(nameof(AdminShop));
         }
         [Authorize]
         [HttpGet]
@@ -128,7 +128,6 @@ namespace AutoFit.Web.Controllers
         }
 
         [Authorize]
-        [HttpDelete]
         public async Task<IActionResult> DeleteProduct(int id)
         {
             // if id is not 0, delete product

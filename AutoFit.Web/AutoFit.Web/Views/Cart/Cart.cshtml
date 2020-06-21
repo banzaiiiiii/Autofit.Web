@@ -1,0 +1,17 @@
+﻿@model IEnumerable<AutoFit.Web.ViewModels.Shop.CartViewModel>
+@{
+}
+
+<div class="container">
+    <h1>Warenkorb</h1>
+
+    @foreach (var item in Model)
+    {
+        <p>@item.Name</p> <p> für @item.Value €</p>
+        
+
+    }
+
+
+</div>
+
