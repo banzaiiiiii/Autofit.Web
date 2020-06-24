@@ -7,12 +7,12 @@ using System.Threading.Tasks;
 namespace AutoFit.Web.ViewComponents
 {
 
-    public class BurgstädtCarousselViewComponent : ViewComponent
+    public class MainCarousselViewComponent : ViewComponent
     {
 
         private readonly IFileService _fileService;
 
-        public BurgstädtCarousselViewComponent(IFileService fileService)
+        public MainCarousselViewComponent(IFileService fileService)
         {
             _fileService = fileService ?? throw new ArgumentNullException(nameof(fileService));
         }
@@ -29,7 +29,7 @@ namespace AutoFit.Web.ViewComponents
                 ContainerName = model.RochlitzCarousselContainer.Name,
                 FileNameList = _fileService.GetBlobsFromContainer(model.RochlitzCarousselContainer.Name)
             });
-            return View("_burgstädtCaroussel", model);
+            return View("_mainCaroussel", model);
         }
 
     }

@@ -14,6 +14,7 @@ using Microsoft.Extensions.Logging;
 
 namespace AutoFit.Web.Controllers
 {
+    [Authorize]
     public class ShopController : BaseController
     {
         private readonly IFileService _fileService;

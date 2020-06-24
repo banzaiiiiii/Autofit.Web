@@ -29,14 +29,15 @@
             @*<a class="nav-item nav-link">Leipziger Straße 51, 09306 Rochlitz & Goethestraße 2, 09217 Burgstädt </a>*@
         </div>
         <div class="navbar-nav">
-            <a class="nav-item nav-link" asp-controller="Shop" asp-action="Index">Shop</a>
-            <a class="nav-item nav-link" asp-controller="Cart" asp-action="Index">Warenkorb</a>
             @if (User.Identity.IsAuthenticated)
             {
+                <a class="nav-item nav-link" asp-controller="Shop" asp-action="Index">Shop</a>
+                <a class="nav-item nav-link" asp-controller="Cart" asp-action="Index">Warenkorb</a>
+
 
                 <a class="nav-item nav-link" asp-controller="Admin" asp-action="Index">Admin</a>
                 <a class="nav-item nav-link" asp-controller="Shop" asp-action="AdminShop">AdminShop</a>
-                
+
 
                 <form class="form-inline " method="post" asp-controller="Account" asp-action="Logout">
                     <button type="submit" class="btn btn-primary">Sign Out</button>

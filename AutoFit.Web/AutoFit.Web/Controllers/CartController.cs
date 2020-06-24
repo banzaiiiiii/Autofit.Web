@@ -4,12 +4,14 @@ using System.Linq;
 using System.Threading.Tasks;
 using AutoFit.Web.Data;
 using AutoFit.Web.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 
 namespace AutoFit.Web.Controllers
 {
+    [Authorize]
     public class CartController : Controller
     {
         
