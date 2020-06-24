@@ -17,8 +17,6 @@ namespace AutoFit.Web.Controllers
 
         public CartController(CartService cartService)
         {
-           
-           
             _cartService = cartService;
         }
 
@@ -35,6 +33,5 @@ namespace AutoFit.Web.Controllers
 
             return RedirectToAction(nameof(Index));
         }
-    
     }
 }

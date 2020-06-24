@@ -13,17 +13,17 @@
 //-->
 
 
-<div id="main_home_body">
+    <div id="main_home_body">
 
+        <div id="carView">@await Component.InvokeAsync("BurgstädtCaroussel")</div>
+        <div class="container" id="newsView">@await Html.PartialAsync("_news_rochlitz")</div>
+        <hr id="GraueTrennlinie" />
+        <div class="container" id="newsView">@await Html.PartialAsync("_news_burgstädt")</div>
+        <hr id="GraueTrennlinie" />
+        <div class="container" id="leistungenView">@await Html.PartialAsync("_leistungen")</div>
+        <hr id="GraueTrennlinie" />
+        <div class="container" id="jobsView">@await Html.PartialAsync("_jobs")</div>
+        <hr id="GraueTrennlinie" />
+        <div class="container" id="carView">@await Component.InvokeAsync("Cars")</div>
 
-    <div id="carView">@await Component.InvokeAsync("BurgstädtCaroussel")</div>
-
-    <div class="container" id="newsView">@await Html.PartialAsync("_news")</div>
-    <hr id="GraueTrennlinie" />
-    <div class="container" id="leistungenView">@await Html.PartialAsync("_leistungen")</div>
-    <hr id="GraueTrennlinie" />
-    <div class="container" id="jobsView">@await Html.PartialAsync("_jobs")</div>
-    <hr id="GraueTrennlinie" />
-    <div class="container" id="carView">@await Component.InvokeAsync("Cars")</div>
-
-</div>
+    </div>

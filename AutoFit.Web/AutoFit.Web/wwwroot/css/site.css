@@ -216,4 +216,15 @@ i {
 
 a {
     color:black;
-}   
+}
+
+#mainpage_contact{
+    padding-top: 20px;
+    
+}
+
+.mainpage_contact_text{
+    text-indent: 50px;
+    font-size:larger;
+    text-align:center;
+}
