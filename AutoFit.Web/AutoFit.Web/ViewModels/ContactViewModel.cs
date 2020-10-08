@@ -26,5 +26,7 @@ namespace AutoFit.Web.ViewModels
 		[Required]
 		public bool IsChecked { get; set; }
 		public DateTime? TimeStamp { get; set; }
+		[Required]
+		public string MailReceiver { get; set; }
 	}
 }

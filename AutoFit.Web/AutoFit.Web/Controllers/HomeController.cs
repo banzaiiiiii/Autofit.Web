@@ -51,14 +51,13 @@ namespace AutoFit.Web.Controllers
                 string emailBody = "Neue Email von: " + newContact.FirstName + newContact.LastName + " mit der Adresse: " + newContact.Email
                                  + " die hinterlassene Nachricht lautet: " + newContact.Message;
 
-
                 try
                 {
                     //_contactService.Add(newContact);
                     //await _contactService.SaveAsync();
-                    await _mailService.SendEmailAsync(newContact.Subject, emailBody);
+                    await _mailService.SendEmailAsync(newContact, emailBody);
 
-                    return View("MessageSendSuccessView");
+                    return View("MessageSendSuccess");
                 }
                 catch (Exception ex)
                 {
@@ -66,7 +65,7 @@ namespace AutoFit.Web.Controllers
                 }
             }
 
-            return View("MessageSendFailedView");
+            return View("MessageSendFailed");
 
         }
 

@@ -228,3 +228,10 @@ a {
     font-size:larger;
     text-align:center;
 }
+
+.leistungen{
+    background-color:white;
+    text-align:left;
+    
+    height:700px;
+}

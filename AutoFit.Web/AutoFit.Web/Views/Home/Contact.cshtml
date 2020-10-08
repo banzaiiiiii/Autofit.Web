@@ -13,13 +13,13 @@
                     <br />
                 </div>
             </div>
-            <div class="row">
+            @*<div class="row">
                 <div class="col">
                     <h3>Wichtig!</h3>
                     <p> hier Bitte Nachricht hinterlassen und noch irgendeinen text</p>
                     <hr>
                 </div>
-            </div>
+            </div>*@
             <div class="row">
                 <div class="col">
                     <h3>AutoFit Seidel Rochlitz</h3>
@@ -48,6 +48,15 @@
 
         <div class="container">
             <form method="post">
+                <div class="form-group">
+                    <label class="mr-sm-2" asp-for="MailReceiver">Wohin senden?</label>
+                    <select class="custom-select mr-sm-2" asp-for="MailReceiver">
+                        <option selected>Wählen Sie...</option>
+                        <option asp-for="MailReceiver">Autofit Rochlitz</option>
+                        <option asp-for="MailReceiver">Autofit Burgstädt</option>
+                    </select>
+                    <span asp-validation-for="MailReceiver"></span>
+                </div>
                 <div class="form-group">
                     <label asp-for="FirstName">Vorname</label>
                     <input asp-for="FirstName" class="form-control" placeholder="Vorname">
@@ -83,10 +92,10 @@
                 <div class="form-group">
                     <input type="checkbox" data-val="true" data-val-required="The IsChecked field is required." name="IsChecked" value="true">
                     <input asp-for="IsChecked" type="hidden" value="false">
-                    
-                        Ich willige darin ein, dass Autofit Seidel die von mir überreichten Informationen und Kontaktdaten dazu verwendet um mit mir anlässlich meiner Kontaktaufnahme in Verbindung zu treten, hierüber zu kommunizieren und meine Anfrage abzuwickeln. Dies gilt insbesondere für die Verwendung der E-Mail-Adresse und der Telefonnummer zum vorgenannten Zweck.
-                        Die Einwilligung kann jederzeit mit Wirkung für die Zukunft per E-Mail an info@autofitseidel.com widerrufen werden.
-                   
+
+                    Ich willige darin ein, dass Autofit Seidel die von mir überreichten Informationen und Kontaktdaten dazu verwendet um mit mir anlässlich meiner Kontaktaufnahme in Verbindung zu treten, hierüber zu kommunizieren und meine Anfrage abzuwickeln. Dies gilt insbesondere für die Verwendung der E-Mail-Adresse und der Telefonnummer zum vorgenannten Zweck.
+                    Die Einwilligung kann jederzeit mit Wirkung für die Zukunft per E-Mail an info@autofitseidel.com widerrufen werden.
+
 
                 </div>
                 <button type="submit" class="btn btn-primary">Senden</button>
