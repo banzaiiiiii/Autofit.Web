@@ -102,12 +102,10 @@ namespace AutoFit.Webf
 
             app.UseMvc(routes =>
             {
-                routes.MapRoute(
-                    name: "default",
-                    template: "{controller=Home}/{action=Index}/{id?}")
-                    .MapRoute("AutoFit", "AutoFit/{controller=AutoFit}/{action=Index}/{id?}")
-		           .MapRoute("AutoService", "AutoFit/{controller=AutoService}/{action=Index}/{id?}")
-		           .MapRoute("NaturKinder", "AutoFit/{controller=NaturKinder}/{action=Index}/{id?}");
+				routes.MapRoute(
+					name: "default",
+					template: "{controller=Home}/{action=Index}/{id?}")
+					.MapRoute("AutoFit", "AutoFit/{controller=AutoFit}/{action=Index}/{id?}");  
             });
 			
         }

@@ -25,6 +25,7 @@ namespace AutoFit.Web.Services
             var senderPassword = _configuration.GetSection("Email").GetSection("SenderPasswort").Value;
             var autofitRochlitz = _configuration.GetSection("Email").GetSection("AutoFitRochlitz").Value;
             var autofitBurgstädt = _configuration.GetSection("Email").GetSection("AutoFitBurgstädt").Value;
+            var autoGlas = _configuration.GetSection("Email").GetSection("AutoGlas").Value;
             var receivingMail = ""; 
 
             if (string.Equals(contact.MailReceiver, "Autofit Rochlitz"))
@@ -34,6 +35,10 @@ namespace AutoFit.Web.Services
             if (string.Equals(contact.MailReceiver, "Autofit Burgstädt"))
             {
                  receivingMail = autofitBurgstädt;
+            }
+            if (string.Equals(contact.MailReceiver, "KS Autoglas Burgstädt"))
+            {
+                receivingMail = autoGlas;
             }
 
             using (var client = new SmtpClient("smtp.gmail.com", 587))

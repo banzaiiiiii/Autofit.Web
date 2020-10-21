@@ -49,11 +49,11 @@
         <div class="container">
             <form method="post">
                 <div class="form-group">
-                    <label class="mr-sm-2" asp-for="MailReceiver">Wohin senden?</label>
+                    <label class="mr-sm-2" asp-for="MailReceiver">Anfrage wird gesendet an?</label>
                     <select class="custom-select mr-sm-2" asp-for="MailReceiver">
-                        <option selected>Wählen Sie...</option>
-                        <option asp-for="MailReceiver">Autofit Rochlitz</option>
+                        <option selected asp-for="MailReceiver">Autofit Rochlitz</option>
                         <option asp-for="MailReceiver">Autofit Burgstädt</option>
+                        <option asp-for="MailReceiver">KS Autoglas Burgstädt</option>
                     </select>
                     <span asp-validation-for="MailReceiver"></span>
                 </div>

@@ -174,16 +174,16 @@ i {
 }
 
 #centeredTextInImage {
-    font-size: 30px;
-    -moz-transform: rotate(30deg);
+    font-size: 40px;
+    /*-moz-transform: rotate(30deg);
     -ms-transform: rotate(30deg);
     -o-transform: rotate(30deg);
     -webkit-transform: rotate(30deg);
-    transform: rotate(30deg);
+    transform: rotate(30deg);*/
     color: white;
     position: absolute;
-    top: 50%;
-    left: 50%;
+    top: 10%;
+    left: 30%;
     /*transform: translate(-50%, -50%);*/
 }
 
