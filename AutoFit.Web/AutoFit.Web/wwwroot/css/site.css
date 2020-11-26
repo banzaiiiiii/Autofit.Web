@@ -3,11 +3,26 @@
     min-height: 100%;
 }
 
+* {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    outline: 0;
+    font-size: 100%;
+    vertical-align: baseline;
+    background: transparent;
+}
 
 body {
     margin-bottom: 60px;
-    padding-top: 70px;
+    padding-top: 50px;
     background-color: #6E6E6E;
+    font-family: 'Quicksand', sans-serif;
+    font-weight: 300;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-weight: 500;
 }
 
 #bodyNaturkinder {
@@ -69,10 +84,10 @@ body {
 
 /* Carousel Styling */
 .setImageSize {
-    width: 1250px;
-    height: 800px;
-    max-height: 700px;
-    left:50%;
+    width: 5115px;
+    height: 3410px;
+    /*max-height: 700px;
+    left: 50%;*/
 }
 
 .setShopImageSize{
@@ -134,8 +149,8 @@ body {
 }
 
 #main_home_body {
-   padding-top:0;
-   padding-bottom:5px;
+   /*padding-top:0;
+   padding-bottom:5px;*/
    
 }
 
@@ -174,13 +189,14 @@ i {
 }
 
 #centeredTextInImage {
-    font-size: 40px;
+    font-size: 50px;
+    font-weight: 500;
     /*-moz-transform: rotate(30deg);
     -ms-transform: rotate(30deg);
     -o-transform: rotate(30deg);
     -webkit-transform: rotate(30deg);
     transform: rotate(30deg);*/
-    color: white;
+    color: red;
     position: absolute;
     top: 10%;
     left: 30%;
@@ -214,8 +230,14 @@ i {
     height: 100%;
 }
 
-a {
-    color:black;
+a { 
+    color: black;
+    text-decoration: none;
+}
+
+a:hover{
+    color: hotpink;
+    text-decoration: none;
 }
 
 #mainpage_contact{

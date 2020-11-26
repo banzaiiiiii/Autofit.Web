@@ -23,7 +23,7 @@ namespace AutoFit.Web.ViewComponents
 
             var model = new FilesViewModel();
 
-            model.RochlitzCarousselContainer = _fileService.ResolveCloudBlobContainer("carousselburgstaedt");
+            model.RochlitzCarousselContainer = _fileService.ResolveCloudBlobContainer("diashow");
             model.ContainerDetailsList.Add(new AzureContainerDetails()
             {
                 ContainerName = model.RochlitzCarousselContainer.Name,

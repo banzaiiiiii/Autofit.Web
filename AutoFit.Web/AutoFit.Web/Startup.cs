@@ -57,10 +57,10 @@ namespace AutoFit.Webf
 
 			//services.AddIdentity<IdentityUser, IdentityRole>();
 			
-			services.AddHttpsRedirection(options =>
-			{
-				options.HttpsPort = 443;
-			});
+			//services.AddHttpsRedirection(options =>
+			//{
+			//	options.HttpsPort = 443;
+			//});
 
 			services.Configure<CookiePolicyOptions>(options =>
 			{

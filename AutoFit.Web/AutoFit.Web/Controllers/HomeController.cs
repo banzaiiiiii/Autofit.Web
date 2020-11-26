@@ -35,8 +35,8 @@ namespace AutoFit.Web.Controllers
 
         public IActionResult Index()
         {
-            //return View("IndexTest");
-           return View("UnderDevelopment");
+            return View("Index");
+           //return View("UnderDevelopment");
         }
 
         [HttpPost]

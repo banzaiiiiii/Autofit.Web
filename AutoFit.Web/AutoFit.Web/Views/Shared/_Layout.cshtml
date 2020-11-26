@@ -12,16 +12,19 @@
     <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
     <link href="~/node_modules/font-awesome/css/font-awesome.css" rel="stylesheet" />
     <link href="~/css/site.css" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css?family=Quicksand:300,500" rel="stylesheet">
 
 </head>
 <body>
-  
+
     <partial name="_CookieConsentPartial" />
 
-    <div class="container">
+    <div>
+        <!--class="container" -->
         <div id="main_navbar">
             @await Html.PartialAsync("_navbar")
         </div>
+
 
         <div id="scroll_top_wrap" onclick="location.href = '#top';">
             <div id="scroll_top_div">
@@ -30,8 +33,12 @@
         </div>
 
     </div>
-
-    @RenderBody()
+    
+    <div >
+        @RenderBody()
+    </div>
+ 
+   
 
     <footer class="footer">
         <div class="container-fluid " id="autofitFooter">

@@ -148,7 +148,15 @@ namespace AutoFit.Web.Controllers
 
         public async Task<IActionResult> DeleteFile(string containerName, string fileName)
         {
-            await _fileService.DeleteAsync(containerName, fileName);
+            try
+            {
+                await _fileService.DeleteAsync(containerName, fileName);
+            }
+            catch (Exception exception)
+            {
+                _logger.LogError(exception, "file does not exist");
+            }
+           
 
             return RedirectToAction("Index");
         }
