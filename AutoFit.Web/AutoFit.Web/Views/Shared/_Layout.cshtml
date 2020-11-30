@@ -21,14 +21,14 @@
 
     <div>
         <!--class="container" -->
-        <div id="main_navbar">
+        <div id="main_header">
             @await Html.PartialAsync("_navbar")
         </div>
-
+        
 
         <div id="scroll_top_wrap" onclick="location.href = '#top';">
             <div id="scroll_top_div">
-                <span onclick="location.href = '#top';" class="scrtoptit"><br /><br /><br />TO TOP <i class="fas fa-angle-double-up"></i></span>
+                <span onclick="location.href = '#top';" class="scrtoptit"><br /><br /><br /> <i class="fas fa-angle-double-up"></i></span>
             </div>
         </div>
 
@@ -42,34 +42,26 @@
 
     <footer class="footer">
         <div class="container-fluid " id="autofitFooter">
-            <div class="row">
-                <div class="col-4">
-                    <i class="fas fa-car"></i>
-                </div>
-                <div class="col-4">
-                    <i class="fas fa-biohazard"></i>
-                </div>
-                <div class="col-4">
-                    <i class="fas fa-car"></i>
-                </div>
-            </div>
 
-            <hr id="FooterDivider" />
+
+            @*<hr id="FooterDivider" />*@
 
             <div class="row">
                 <div class=col-4>
-                    <p>Service Hotline</p>
+                    <p>Service Hotline  <i class="fas fa-phone-volume"></i> </p>
                     <hr width="60%" align="left" id="FooterRedline" />
-                    <span> Tel: 123123213213213123</span>
+                    <span>  Autofit Rochlitz | +49 (0)3737 42580 |  service@autofitseidel.de </span> <br />
+                    <span>  Autofit Burgstädt | +49 (0)3724 6692424 |  info@autofitseidel.de </span>
+                    <span>  </span>
                 </div>
                 <div class="col-4">
-                    <p>Öffnungszeiten</p>
+                    <p>Öffnungszeiten    <i class="fas fa-biohazard"></i> </p>
                     <hr width="60%" align="left" id="FooterRedline" />
                     <p>Mo. - Fr. | 8:00 - 18:00 Uhr</p>
                     <p>Sa.       | 8:00 - 12:00 Uhr</p>
                 </div>
                 <div class="col-4">
-                    <p>Informationen</p>
+                    <p>Informationen   <i class="fas fa-car"></i> </p>
                     <hr width="60%" align="left" id="FooterRedline" />
                     <a asp-controller="Home" asp-action="Impressum" class="badge badge-light">Impressum</a>
                     <a asp-controller="Home" asp-action="Contact" class="badge badge-light">Kontakt</a>

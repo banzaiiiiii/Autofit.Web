@@ -91,6 +91,15 @@ namespace AutoFit.Web.Controllers
             return View();
         }
 
+        public IActionResult AutofitRochlitz()
+        {
+            return View("_news_rochlitz");
+        }
+
+        public IActionResult AutofitBurgstädt()
+        {
+            return View("_news_burgstädt");
+        }
 
     }
 }

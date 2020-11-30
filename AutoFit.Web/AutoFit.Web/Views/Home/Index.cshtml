@@ -3,28 +3,28 @@
 @{
     ViewBag.Title = "AutoFit Seidel";
 }
-<!--
-
-<div class="jumbotron">
-    <h1>Herzlich Willkommen bei Autofit Seidel </h1>
-    <img src="~/images/autofit.jpg" />
-</div>
-
-//-->
 
 
-<div style="display:block;"  id="main_home_body">
+<!--<div class="jumbotron">
+    <h1>Willkommen bei Autofit Seidel </h1>
+</div> -->
 
 
-    <div id="carView">@await Component.InvokeAsync("MainCaroussel")</div>
-    <div class="container" id="newsView">@await Html.PartialAsync("_news_rochlitz")</div>
-    <hr id="GraueTrennlinie" />
-    <div class="container" id="newsView">@await Html.PartialAsync("_news_burgstädt")</div>
-    <hr id="GraueTrennlinie" />
-    <div class="container" id="leistungenView">@await Html.PartialAsync("_leistungen")</div>
-    <hr id="GraueTrennlinie" />
-    <div class="container" id="jobsView">@await Html.PartialAsync("_jobs")</div>
-    <hr id="GraueTrennlinie" />
-    <div class="container" id="carView">@await Component.InvokeAsync("Cars")</div>
 
-</div>
+
+    <div style="display:block;" id="main_home_body">
+
+
+        <div id="carView">@await Component.InvokeAsync("MainCaroussel")</div>
+        <div class="mainpage_news" id="newsView">@await Html.PartialAsync("_newsMain")</div>
+     
+        @*   <hr id="GraueTrennlinie" />
+             <div class="container" id="leistungenView">@await Html.PartialAsync("_leistungen")</div>
+        <hr id="GraueTrennlinie" />
+        <div class="container" id="jobsView">@await Html.PartialAsync("_jobs")</div>
+        <hr id="GraueTrennlinie" />
+        <div class="container" id="carView">@await Component.InvokeAsync("Cars")</div>
+        *@
+       
+
+    </div>

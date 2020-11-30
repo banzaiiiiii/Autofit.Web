@@ -1,4 +1,12 @@
-﻿html {
+﻿/* Hide/rearrange for smaller screens */
+@media screen and (max-width: 767px) {
+    /* Hide captions */
+    .carousel-caption {
+        display: inline;
+    }
+}
+
+html {
     position: relative;
     min-height: 100%;
 }
@@ -16,7 +24,7 @@
 body {
     margin-bottom: 60px;
     padding-top: 50px;
-    background-color: #6E6E6E;
+    background-color: white;
     font-family: 'Quicksand', sans-serif;
     font-weight: 300;
 }
@@ -25,8 +33,34 @@ h1, h2, h3, h4, h5, h6 {
     font-weight: 500;
 }
 
-#bodyNaturkinder {
-    background-image: url('../images/leaves.png');
+
+a {
+    color: black;
+    text-decoration: none;
+}
+
+
+
+    a:hover {
+        color: #BC1818;
+        text-decoration: none;
+    }
+
+.red_links {
+    color: #BC1818;
+}
+
+#main_header {
+    background-color: #292828;
+}
+
+.header_links{
+    color:snow;
+}
+
+#autofitFooter {
+    background-color: #292828;
+    color: snow;
 }
 
 .footer {
@@ -44,11 +78,41 @@ h1, h2, h3, h4, h5, h6 {
 
 
 #FooterRedline {
-    background-color: red;
+    background-color: #BC1818;
 }
 
-#GraueTrennlinie{
+#GraueTrennlinie {
     background-color: darkslategray;
+}
+
+#scroll_top_div {
+    position: fixed;
+    background-color: #292828;
+    color: snow;
+    top: 0px;
+    bottom: 0px;
+    left: 0px;
+    width: 70px;
+    font-weight: bold;
+}
+
+
+
+
+#scroll_top_wrap {
+    display: none;
+    position: fixed;
+    top: 0px;
+    bottom: 0px;
+    left: 0px;
+    right: 50%;
+    width: 5px; /*not sure, why but fixed that to top doesnt trigger everywhere*/
+}
+
+.scrtoptit {
+    display: inline-block;
+    font-size: 15px;
+    margin-left: 8px;
 }
 /* Carousel */
 .carousel-caption p {
@@ -62,26 +126,10 @@ h1, h2, h3, h4, h5, h6 {
     width: 100%;
 }
 
-/* QR code generator */
-#qrCode {
-    margin: 15px;
+.carousel-item .img-fluid {
+    width: 100%;
+    height: 100%;
 }
-
-/* Hide/rearrange for smaller screens */
-@media screen and (max-width: 767px) {
-    /* Hide captions */
-    .carousel-caption {
-        display: inline;
-    }
-}
-
-.jumbotron {
-    text-align: center;
-    color: #fff;
-    padding: 5em inherit;
-    background-color: #990000;
-}
-
 /* Carousel Styling */
 .setImageSize {
     width: 5115px;
@@ -90,20 +138,14 @@ h1, h2, h3, h4, h5, h6 {
     left: 50%;*/
 }
 
-.setShopImageSize{
+
+.setShopImageSize {
     max-height: 300px;
-    width:300px;
-   /*max-width: 200px;*/ 
+    width: 300px;
+    /*max-width: 200px;*/
 }
 /*Naturkinder Styles*/
-#autofitFooter {
-    background-color: #1C1C1C;
-    color: white;
-}
 
-#naturkinderNavbar {
-    background-color: #81F781;
-}
 
 #fahrzeugsBestandlisteIMG {
     width: inherit;
@@ -118,68 +160,7 @@ h1, h2, h3, h4, h5, h6 {
     background-color: aliceblue;
 }
 
-#scroll_top_div {
-    position: fixed;
-    background: #171719;
-    top: 0px;
-    bottom: 0px;
-    left: 0px;
-    width: 100px;
-    color: #A5A9B3;
-    font-weight: bold;
-}
 
-
-
-
-#scroll_top_wrap {
-    display: none;
-    position: fixed;
-    top: 0px;
-    bottom: 0px;
-    left: 0px;
-    right: 50%;
-    width: 5px;  /*not sure, why but fixed that to top doesnt trigger everywhere*/
-}
-
-.scrtoptit {
-    display: inline-block;
-    font-size: 15px;
-    margin-left: 8px;
-}
-
-#main_home_body {
-   /*padding-top:0;
-   padding-bottom:5px;*/
-   
-}
-
-#leistungs_div{
-    background-color:aliceblue;
-    padding-top:10px;
-    padding-left:20px;
-    padding-right:10px;
-    padding-bottom:5px;
-   opacity:0.6;
-
-}
-
-#überschrift{
-    text-align:center;
-
-}
-
-i {
-    font-size: 30px;
-}
-
-/*bootstrap containers have padding, this should overwrite it, so container fluid is always 100% width
-.container-fluid {
-    padding-right: 0;
-    padding-left: 0;
-    margin-right: auto;
-    margin-left: auto
-}*/
 
 #images_centered {
     display: block;
@@ -196,64 +177,85 @@ i {
     -o-transform: rotate(30deg);
     -webkit-transform: rotate(30deg);
     transform: rotate(30deg);*/
-    color: red;
+    color: #B30D35;
     position: absolute;
     top: 10%;
     left: 30%;
     /*transform: translate(-50%, -50%);*/
 }
 
-#viewbagErrorMessage{
-    color:#ff0000;
+#leistungs_div {
+    background-color: darkslategrey;
+    padding-top: 10px;
+    padding-left: 20px;
+    padding-right: 10px;
+    padding-bottom: 5px;
+    opacity: 0.6;
+}
+
+.leistungen {
+    text-align: left;
+    height: 700px;
+}
+
+.überschrift {
+    text-align: center;
+}
+
+i {
+    font-size: 30px;
+}
+
+
+#viewbagErrorMessage {
+    color: #ff0000;
 }
 
 #azureMetadata {
     padding-top: 10px;
-    padding-bottom : 5px;
+    padding-bottom: 5px;
     font-family: Arial, Helvetica, sans-serif;
     font-weight: bold;
-    color: white;
+    color: black;
 }
 
 /*Dateien aus Ordnern werden erst durch button function angezeigt*/
-.FolderFiles{
+.FolderFiles {
     display: none;
 }
 
-#contaxtViewBody{
-    background-color:white;
+
+
+.mainpage_news {
+    padding-top: 40px;
+    display: grid;
+    justify-content: center;
+   
 }
 
-
-.carousel-item .img-fluid {
-    width: 100%;
-    height: 100%;
-}
-
-a { 
-    color: black;
-    text-decoration: none;
-}
-
-a:hover{
-    color: hotpink;
-    text-decoration: none;
-}
-
-#mainpage_contact{
-    padding-top: 20px;
-    
-}
-
-.mainpage_contact_text{
+.autofit_contact_text {
     text-indent: 50px;
-    font-size:larger;
-    text-align:center;
+    font-weight: 400;
 }
 
-.leistungen{
-    background-color:white;
-    text-align:left;
-    
-    height:700px;
+.autofit_contact_div{
+    padding-top:60px;
 }
+
+/*
+    .jumbotron {
+    text-align: center;
+    color: dimgrey;
+    background-color: white;
+    height: 20px;
+}
+*/
+
+
+.slideShowImage{
+    height: 600px;
+    width: 100%;
+
+}
+
+
