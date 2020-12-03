@@ -101,6 +101,16 @@ namespace AutoFit.Web.Controllers
             return View("_news_burgstädt");
         }
 
+        public IActionResult Jobs()
+        {
+            return View("_jobs");
+        }
+
+        public IActionResult Fahrzeuge()
+        {
+            return View("Fahrzeuge");
+        }
+
     }
 }
 

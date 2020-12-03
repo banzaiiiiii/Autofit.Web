@@ -3,7 +3,7 @@
 }
 
 <nav id="main_header" class="navbar fixed-top navbar-expand-lg ">
-    <a  class="navbar-brand header_links" href="#">AutoFit Seidel</a>
+    <a  class="navbar-brand header_links" asp-controller="Home" asp-action="Index">AutoFit Seidel</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
@@ -13,20 +13,24 @@
             <a class="nav-link dropdown-toggle header_links" asp-controller="Home" asp-action="Index" asp-fragment="leistungenView" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
                 Leistungen
             </a>
-            <div class="dropdown">
+            <div  class="dropdown">
                 <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                    <a class="dropdown-item header_links" asp-controller="Home" asp-action="Index" asp-fragment="leistungenView">Gebrauchtwagen</a>
-                    <a class="dropdown-item header_links" asp-controller="Home" asp-action="Index" asp-fragment="leistungenView">Autopflge</a>
-                    <a class="dropdown-item header_links" asp-controller="Home" asp-action="Index" asp-fragment="leistungenView">Reparaturen aller Art</a>
-                    <a class="dropdown-item header_links" asp-controller="Home" asp-action="Index" asp-fragment="leistungenView">Service Arbeiten</a>
-                    <a class="dropdown-item header_links" asp-controller="Home" asp-action="Index" asp-fragment="leistungenView">Glasreparaturen</a>
-                    <a class="dropdown-item header_links" asp-controller="Home" asp-action="Index" asp-fragment="leistungenView">bla</a>
+                    <a class="dropdown-item " asp-controller="Leistungen" asp-action="Autoglas">Autoglas</a>
+                    <a class="dropdown-item " asp-controller="Leistungen" asp-action="Autopflege">Autopflege</a>
+                    <a class="dropdown-item " asp-controller="Leistungen" asp-action="Gebrauchtwagen">Gebrauchtwagen An- und Verkauf</a>
+                    <a class="dropdown-item " asp-controller="Leistungen" asp-action="Reparaturen">Reparaturen aller Art</a>
+                    <a class="dropdown-item " asp-controller="Leistungen" asp-action="Fehlerdiagnose">Fehlerdiagnose</a>
+                    <a class="dropdown-item " asp-controller="Leistungen" asp-action="HU_AU">Abgas- und Hauptuntersuchungen</a>
+                    <a class="dropdown-item " asp-controller="Leistungen" asp-action="Inspektionen">Inspektionen</a>
+                    <a class="dropdown-item " asp-controller="Leistungen" asp-action="Reifenservice">Reifenservice</a>
+                    <a class="dropdown-item" asp-controller="Leistungen" asp-action="Klimaservice">Klimaservice</a>
                 </div>
             </div>
-            <a class="nav-item nav-link header_links" asp-controller="Home" asp-action="Index" asp-fragment="jobsView">Stellenangebote</a>
-            <a class="nav-item nav-link header_links" asp-controller="Home" asp-action="Index" asp-fragment="carView">Fahrzeuge</a>
+            <a class="nav-item nav-link header_links" asp-controller="Home" asp-action="Jobs" >Stellenangebote</a>
+            <a class="nav-item nav-link header_links" asp-controller="Home" asp-action="Fahrzeuge">Fahrzeuge</a>
             <a class="nav-item nav-link header_links" asp-controller="Home" asp-action="Contact">Kontakt</a>
-            @*<a class="nav-item nav-link">Leipziger Straße 51, 09306 Rochlitz & Goethestraße 2, 09217 Burgstädt </a>*@
+
+        
         </div>
         <div class="navbar-nav">
             @if (User.Identity.IsAuthenticated)
