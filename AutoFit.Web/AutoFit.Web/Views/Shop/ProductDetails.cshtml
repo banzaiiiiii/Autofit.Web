@@ -33,8 +33,23 @@
         </div>
 
         <div class="col">
-            <p>weitere infos & beschreibung & mal sehen</p>
+            <h1>@Model.Name</h1>
+            <h4>Beschreibung: @Model.Description</h4>
+            <h4>Preis: @Model.Value €</h4>
+            <a asp-controller="Shop" asp-action="Kaufabwicklung" asp-route-productName="@Model.Name" asp-route-productPrice="@Model.Value" class="btn btn-primary" role="button">Sofort kaufen!</a>
+            <a asp-controller="Cart" asp-action="AddToCart" asp-route-productname="@Model.Name" class="btn btn-primary" role="button">Zum Warenkorb hinzufügen!</a>
         </div>
 
     </div>
 </div>
+
+@*  
+                            <h1>€@item.Value</h1>
+                           
+                        </td>
+                    </tr>
+                }
+            }
+        </tbody>
+    </table>**@
+

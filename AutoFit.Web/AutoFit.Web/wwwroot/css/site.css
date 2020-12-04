@@ -139,6 +139,19 @@ a {
 
 }
 
+.shopItemsContainer{
+    display:flex;
+    flex-wrap: wrap;
+
+}
+
+.shopItems {
+    padding-left: 50px;
+    padding-top: 20px;
+    text-align: center;
+    width: calc(100% * (1/4) - 10px - 1px);
+   
+}
 
 .setShopImageSize {
     max-height: 300px;
@@ -156,11 +169,21 @@ a {
 }
 
 #cookieConsent {
-    height: 200px;
+    height: 100px;
     position: sticky;
-    background-color: aliceblue;
+    background-color: #c8c9cc;
+    color: black;
 }
 
+#cookieBtn {
+    background-color: black;
+    color: white;
+    position: absolute;
+    top: 50%;
+    -webkit-transform: translateY(-50%);
+    -ms-transform: translateY(-50%);
+    transform: translateY(-50%);
+}
 
 
 #images_centered {

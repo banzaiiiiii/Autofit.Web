@@ -2,14 +2,24 @@
 @{
     ViewData["Title"] = "Shop";
 }
-    <div class="container">
-        
+    <div class="d-flex justify-content-center  container top_padding">
+        <hr id="GraueTrennlinie" />
+            <h1>AutoFit Shop</h1>
+            <hr id="GraueTrennlinie" />
+    </div>
 
-        <h1>Shop</h1>
-        <p>Hier finden sie unsere aktuellen Angebote!</p>
-        <br />
+    <div class="d-flex flex-row shopItemsContainer ">
+        @foreach (var item in Model.Products)
+        {
+        <div class="shopItems">
+            <img class="d-block img-fluid setShopImageSize" src="@item.ProductThumbnail.Uri">
+            <h1>@item.Name</h1>
+          <p><a asp-controller="Shop" asp-action="ProductDetails" asp-route-name="@item.Name"> <span class="red_links"> > </span>Hier geht es zu den Produkt Details..</a></p>  
+        </div>
+        }
+    </div>
 
-        <table class="table">
+        @*  <table class="table">
             <thead>
                 <tr>
                     <th scope="col"></th>
@@ -25,8 +35,8 @@
                         <tr>
                             <th scope="row">
                                 <img class="d-block img-fluid setShopImageSize" src="@item.ProductThumbnail.Uri">
-                            
-                               <a asp-controller="Shop" asp-action="ProductDetails" asp-route-name="@item.Name">Produkt Details</a>
+
+                                <a asp-controller="Shop" asp-action="ProductDetails" asp-route-name="@item.Name">Produkt Details</a>
                             </th>
                             <td>
                                 <h1>@item.Name</h1>
@@ -45,5 +55,6 @@
                     }
                 }
             </tbody>
-        </table>
-    </div>
+        </table>**@
+
+  

@@ -10,9 +10,9 @@
 @if (showBanner)
 {
     <div id="cookieConsent" class="alert alert-info alert-dismissible fade show" role="alert">
-        <p>Um Ihnen ein optimales Websiteerlebnis zu bieten, werden Cookies zu Technischen-, Performance- und Marketingzwecken verwendet. <br />  Mit einem schnellen Klick auf „Akzeptieren“ stimmen Sie der Verwendung von Cookies zu.</p> <a asp-controller="Home" asp-action="Datenschutz">Learn More</a>.
-        <button type="button" class="accept-policy close" data-dismiss="alert" aria-label="Close" data-cookie-string="@cookieString">
-            <span aria-hidden="true">Akzeptieren</span>
+        <p>Für ein optimales Websiteerlebnis, werden Cookies zu Technischen-, Performance- und Marketingzwecken verwendet. <br />  Mit dem Klick auf „Ja, ich will Kekse“ stimmen Sie der Verwendung von Cookies zu... <a asp-controller="Home" asp-action="Datenschutz">Learn More</a>.</p>
+        <button type="button" id="cookieBtn" class="accept-policy close" data-dismiss="alert" aria-label="Close" data-cookie-string="@cookieString">
+            <span aria-hidden="true">Ja, ich will Kekse <i class="fas fa-cookie-bite"></i></span>
         </button>
     </div>
     <script>

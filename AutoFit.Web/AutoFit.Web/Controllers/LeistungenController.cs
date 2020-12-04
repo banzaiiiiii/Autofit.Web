@@ -58,5 +58,10 @@ namespace AutoFit.Web.Controllers
         {
             return View();
         }
+
+        public IActionResult Ölwechsel()
+        {
+            return View("Ölservice");
+        }
     }
 }
