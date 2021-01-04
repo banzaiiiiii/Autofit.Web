@@ -66,6 +66,7 @@ namespace AutoFit.Webf
 			{
 				options.CheckConsentNeeded = context => true;
 				options.MinimumSameSitePolicy = SameSiteMode.None;
+				
 			});
 			services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme).AddCookie(cookieOptions =>
 			{
@@ -107,7 +108,6 @@ namespace AutoFit.Webf
 					template: "{controller=Home}/{action=Index}/{id?}")
 					.MapRoute("AutoFit", "AutoFit/{controller=AutoFit}/{action=Index}/{id?}");  
             });
-			
         }
     }
 }
