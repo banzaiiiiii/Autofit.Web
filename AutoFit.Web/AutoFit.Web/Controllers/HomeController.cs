@@ -16,6 +16,7 @@ using AutoMapper;
 
 using Microsoft.Extensions.Logging;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Authorization;
 
 namespace AutoFit.Web.Controllers
 {
@@ -32,13 +33,18 @@ namespace AutoFit.Web.Controllers
             _fileService = fileService ?? throw new ArgumentNullException(nameof(fileService));
             _mailService = mailService ?? throw new ArgumentNullException(nameof(mailService));
         }
-
+        [Authorize]
         public IActionResult Index()
         {
             return View("Index");
-          // return View("UnderDevelopment");
+        }
+        public IActionResult UnderDev()
+        {
+            // return View("Index");
+            return View("UnderDevelopment");
         }
 
+        [Authorize]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Contact(ContactViewModel contactViewModel)
@@ -69,7 +75,7 @@ namespace AutoFit.Web.Controllers
             return View("MessageSendFailed");
 
         }
-
+        [Authorize]
         [HttpGet]
         public IActionResult Contact()
         {
@@ -80,32 +86,32 @@ namespace AutoFit.Web.Controllers
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
-
+        [Authorize]
         public IActionResult Datenschutz()
         {
-            return View();
+            return View("DatenschutzV2");
         }
-
+        [Authorize]
         public IActionResult Impressum()
         {
             return View();
         }
-
+        [Authorize]
         public IActionResult AutofitRochlitz()
         {
             return View("_news_rochlitz");
         }
-
+        [Authorize]
         public IActionResult AutofitBurgstädt()
         {
             return View("_news_burgstädt");
         }
-
+        [Authorize]
         public IActionResult Jobs()
         {
             return View("_jobs");
         }
-
+        [Authorize]
         public IActionResult Fahrzeuge()
         {
             return View("Fahrzeuge");

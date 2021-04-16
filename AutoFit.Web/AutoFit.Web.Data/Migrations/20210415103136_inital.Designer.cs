@@ -9,8 +9,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AutoFit.Web.Data.Migrations
 {
     [DbContext(typeof(WebsiteDbContext))]
-    [Migration("20200615164258_shopmodel")]
-    partial class shopmodel
+    [Migration("20210415103136_inital")]
+    partial class inital
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {

@@ -5,11 +5,13 @@ using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
 
-using AutoFit.Webf;
-
+using AutoFit.Web;
+using AutoFit.Web.Data;
 using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 
 namespace AutoFit.Web
@@ -19,6 +21,15 @@ namespace AutoFit.Web
         public static void Main(string[] args)
         {
 	        var host = BuildWebHost(args);
+
+            // bad practice for production, only testing 
+            // apply migrations and create db on startup 
+            using(var scope = host.Services.CreateScope())
+            {
+                var db = scope.ServiceProvider.GetRequiredService<WebsiteDbContext>();
+                db.Database.Migrate();
+
+            }
 
 	        host.Run();
         }
@@ -32,6 +43,8 @@ namespace AutoFit.Web
         {
             var builder = new WebHostBuilder()
 
+
+              
                 .UseSetting("https_port", "443")
 
                 .UseKestrel()

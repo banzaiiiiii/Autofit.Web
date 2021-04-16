@@ -24,7 +24,7 @@ using Microsoft.Extensions.Logging;
 
 
 
-namespace AutoFit.Webf
+namespace AutoFit.Web
 {
     public class Startup
     {
@@ -75,6 +75,7 @@ namespace AutoFit.Webf
 
 			//services.Configure<PayPal>(Configuration.GetSection("PayPal"));
 
+		
 		}
 
 	    // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -94,6 +95,7 @@ namespace AutoFit.Webf
 				app.UseHttpsRedirection();
             }
 			//app.UseSession();
+			
 			app.UseCookiePolicy();
 
             app.UseStaticFiles();
@@ -105,7 +107,7 @@ namespace AutoFit.Webf
             {
 				routes.MapRoute(
 					name: "default",
-					template: "{controller=Home}/{action=Index}/{id?}")
+					template: "{controller=Home}/{action=UnderDev}/{id?}")
 					.MapRoute("AutoFit", "AutoFit/{controller=AutoFit}/{action=Index}/{id?}");  
             });
         }

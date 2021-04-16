@@ -6,12 +6,15 @@ using System.Threading.Tasks;
 using AutoFit.Web.ViewModels;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 
 namespace AutoFit.Web.Controllers
 {
+
+ 
     public class AccountController : Controller
     {
         private readonly IConfiguration _configuration;

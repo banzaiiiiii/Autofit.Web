@@ -30,7 +30,16 @@ namespace AutoFit.Web.Data
 
         public async Task<List<Product>> GetProducts()
         {
-            return await _dbContext.Products.ToListAsync();
+            try
+            {
+ return await _dbContext.Products.ToListAsync();
+            }
+            catch (Exception ex)
+            {
+
+                throw ex ;
+            }
+           
         }
 
         public async Task<Product> GetProduct(string name)
