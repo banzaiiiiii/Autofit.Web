@@ -24,12 +24,12 @@ namespace AutoFit.Web
 
             // bad practice for production, only testing 
             // apply migrations and create db on startup 
-            using(var scope = host.Services.CreateScope())
-            {
-                var db = scope.ServiceProvider.GetRequiredService<WebsiteDbContext>();
-                db.Database.Migrate();
+            //using(var scope = host.Services.CreateScope())
+            //{
+            //    var db = scope.ServiceProvider.GetRequiredService<WebsiteDbContext>();
+            //    db.Database.Migrate();
 
-            }
+            //}
 
 	        host.Run();
         }

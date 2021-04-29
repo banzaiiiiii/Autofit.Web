@@ -68,10 +68,11 @@ namespace AutoFit.Web.Controllers
                 }
                 catch (Exception ex)
                 {
+                    ViewData["Message"] = $"Error: + {ex}";
                     _logger.LogError(ex, "Failed sending or saving contact");
                 }
             }
-
+            
             return View("MessageSendFailed");
 
         }

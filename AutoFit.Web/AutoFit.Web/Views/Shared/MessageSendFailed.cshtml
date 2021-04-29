@@ -1,5 +1,5 @@
 ﻿@{
-
+    var msg = ViewData["Message"];
 }
 <div container>
     <h1>Oops, Ihre Nachricht konnte nicht zugestellt werden!</h1>
@@ -8,4 +8,6 @@
     <p>
         <a class="btn btn-success" asp-controller="Home" asp-action="Index" role="button">Home</a>
     </p>
+
+    <span class="error">@msg</span>
 </div>
