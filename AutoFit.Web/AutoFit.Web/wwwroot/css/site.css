@@ -55,8 +55,8 @@ a {
     background-color: #292828;
 }
 
-.header_links{
-    color:snow;
+.header_links {
+    color: snow;
 }
 
 #autofitFooter {
@@ -136,13 +136,11 @@ a {
     width: 100%;
     height: 100%;
     max-height: 600px;
-
 }
 
-.shopItemsContainer{
-    display:flex;
+.shopItemsContainer {
+    display: flex;
     flex-wrap: wrap;
-
 }
 
 .shopItems {
@@ -150,7 +148,6 @@ a {
     padding-top: 20px;
     text-align: center;
     width: calc(100% * (1/4) - 10px - 1px);
-   
 }
 
 .setShopImageSize {
@@ -209,11 +206,12 @@ a {
 }
 
 .leistungs_div {
+    margin-top: 50px;
+    margin-bottom: 50px;
     background-color: #2b2b2b;
-    color:white;
-    height:200px;
+    color: white;
+    height: 200px;
     opacity: 0.5;
-   
 }
 
 .leistungen {
@@ -221,7 +219,7 @@ a {
     height: 700px;
 }
 
-.top_padding{
+.top_padding {
     padding-top: 20px;
 }
 
@@ -263,7 +261,6 @@ i {
     padding-top: 40px;
     display: grid;
     justify-content: center;
-   
 }
 
 .autofit_contact_text {
@@ -271,15 +268,14 @@ i {
     font-weight: 400;
 }
 
-.autofit_contact_div{
-    padding-top:60px;
+.autofit_contact_div {
+    padding-top: 60px;
 }
 
-.slideShowImage{
- 
-    width: 100%;  
-   height: 100%;
-   max-height:700px;
+.slideShowImage {
+    width: 100%;
+    height: 100%;
+    max-height: 700px;
 }
 
 
@@ -295,7 +291,21 @@ i {
 
 
 
-.leistungsImage{
+.leistungsImage {
     max-width: 100%;
     height: auto;
 }
+
+#partner_div {
+    background-color: #2b2b2b;
+    color: white;
+}
+
+
+
+
+/*
+    test carousel
+
+
+*/
