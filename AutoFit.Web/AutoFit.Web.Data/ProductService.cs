@@ -16,30 +16,30 @@ namespace AutoFit.Web.Data
             _dbContext = dbContext;
         }
         public async Task Add(string name, string description, string value)
-        {     
-            
+        {
+
             _dbContext.Add(new Product
             {
-               
+
                 Name = name,
                 Description = description,
                 Value = value
             });
-           await _dbContext.SaveChangesAsync();
+            await _dbContext.SaveChangesAsync();
         }
 
         public async Task<List<Product>> GetProducts()
         {
             try
             {
- return await _dbContext.Products.ToListAsync();
+                return await _dbContext.Products.ToListAsync();
             }
             catch (Exception ex)
             {
 
-                throw ex ;
+                throw ex;
             }
-           
+
         }
 
         public async Task<Product> GetProduct(string name)
@@ -51,7 +51,7 @@ namespace AutoFit.Web.Data
         public async Task<Product> Update(Product product)
         {
             _dbContext.Attach(product).State = EntityState.Modified;
-           await _dbContext.SaveChangesAsync();
+            await _dbContext.SaveChangesAsync();
             return product;
         }
 
@@ -59,8 +59,8 @@ namespace AutoFit.Web.Data
         {
             var car = _dbContext.Products.Find(id);
             _dbContext.Products.Remove(car);
-           await _dbContext.SaveChangesAsync();
+            await _dbContext.SaveChangesAsync();
         }
-        
+
     }
 }

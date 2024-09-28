@@ -1,28 +1,19 @@
-﻿using System;
-using System.IO;
-
-using AutoFit.Web.Abstractions;
+﻿using AutoFit.Web.Abstractions;
 using AutoFit.Web.Data;
 using AutoFit.Web.Data.Abstractions;
 using AutoFit.Web.Services;
-using AutoFit.Web.ViewModels;
-using AutoFit.Web.ViewModels.Shop;
 using AutoMapper;
 using Microsoft.AspNetCore.Authentication.Cookies;
-using Microsoft.AspNetCore.Authentication.OpenIdConnect;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Rewrite;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.FileProviders;
 using Microsoft.Extensions.Logging;
-
-
-
+using System;
+using System.IO;
 
 namespace AutoFit.Web
 {
